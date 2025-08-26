@@ -1,0 +1,34 @@
+---
+# id of your service, used for slugs and references in EventCatalog.
+id: core-template-rendering
+
+# Display name of the Service, rendered in EventCatalog
+name: Template Rendering Service
+
+# Version of the Service
+version: 0.0.1
+
+# Short summary of your Service
+summary: |
+  Service that contains order related information
+
+# Optional messages this service sends and it's version
+receives:
+  - id: template-drafted
+    version: 0.0.3
+  - id: template-created
+    version: 0.0.3
+  - id: template-deleted
+    version: 0.0.3
+# Optional badges, rendered to UI by EventCatalog
+badges:
+    - content: New service
+      backgroundColor: blue
+      textColor: blue
+---
+
+## Overview
+
+This orders service gives API consumers the ability to produce orders in the systems. Events are raised from this system for downstream consumption.
+
+<NodeGraph />
