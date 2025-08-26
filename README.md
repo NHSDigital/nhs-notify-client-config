@@ -8,6 +8,10 @@ This repository contains code and schemas for NHS Notify configuration managemen
 - **Event Schemas:** Publishes configuration changes as events to an event bus for consumption by other system components.
 - **Onboarding Automation:** Automates and streamlines the onboarding of new integrators, supporting self-serve and admin-driven workflows.
 
+## Event Schema Catalogue
+
+[Event Catalogue](eventcatalogue/README.md)
+
 ## Design
 
 ### Configuration Management
