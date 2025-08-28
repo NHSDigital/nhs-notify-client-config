@@ -1,16 +1,12 @@
 import { z } from 'zod';
 import { $EventMetadata } from './base-metadata-schemas';
-import { $Client, $SupplierQuota, $ChannelSupplier, $FeatureFlag, $Campaign } from '../domain';
+import { $SupplierQuota, $ChannelSupplier, $FeatureFlag, $Campaign } from '../domain';
 import { $Specification } from '../domain/specification';
 import { $ClientSubscription } from '../domain/clientSubscription';
 import { $Queue } from '../domain/queue';
 import { $SpecificationSupplier } from '../domain/specificationSupplier';
 
 export const $ConfigChangedEventData = z.discriminatedUnion('configType', [
-    z.object({
-      configType: z.literal('client'),
-      record: $Client,
-    }),
     z.object({
       configType: z.literal('campaign'),
       record: $Campaign,
