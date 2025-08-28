@@ -1,6 +1,7 @@
 import { $Version } from '../common';
 import { $SpecificationSupplier, SpecificationSupplier } from '../specificationSupplier';
-import { $Specification, Specification } from '../specification';
+import { EnvelopeId, Specification } from '../specification';
+import { LayoutId } from '../layout';
 
 describe('SpecificationSupplier schema validation', () => {
 
@@ -11,6 +12,18 @@ describe('SpecificationSupplier schema validation', () => {
     createdAt: new Date(),
     updatedAt: new Date(),
     version: $Version.parse('1.0.0'),
+    layout: 'standard' as LayoutId,
+    postage: {
+      tariff: 'economy',
+      size: 'letter',
+      deliverySLA: 4,
+      maxSheets: 5
+    },
+    pack: {
+      envelope: 'nhs-economy' as EnvelopeId,
+      printColour: 'BLACK',
+      features: ['MAILMARK']
+    }
   };
 
   const testSpecificationSupplier: SpecificationSupplier = {
