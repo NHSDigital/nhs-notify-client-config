@@ -22,7 +22,7 @@ erDiagram
         string tariff
         string size
         number deliverySLA
-        number maxPages
+        number maxSheets
         number maxWeight
         number maxThickness
     }

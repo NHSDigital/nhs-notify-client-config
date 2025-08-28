@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "ClientMutatedEvent",
+  "type": "object",
+  "properties": {
+    "dataschema": {
+      "type": "string",
+      "pattern": "^https:\\/\\/notify\\.nhs\\.uk\\/events\\/schemas\\/client-mutated-1.\\d+\\.\\d+\\.json$"
+    },
+    "dataschemaversion": {
+      "type": "string",
+      "pattern": "^1\\.\\d+\\.\\d+$"
+    },
+    "type": {
+      "type": "string",
+      "const": "uk.nhs.notify.config.ClientMutated"
+    },
+    "id": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "specversion": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "time": {
+      "type": "string"
+    },
+    "datacontenttype": {
+      "type": "string",
+      "const": "application/json"
+    },
+    "plane": {
+      "type": "string",
+      "const": "control"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "senderOdsCode": {
+          "type": "string"
+        },
+        "quota": {
+          "description": "ClientQuota",
+          "type": "object",
+          "properties": {
+            "tps": {
+              "type": "number"
+            },
+            "periodSeconds": {
+              "type": "number"
+            },
+            "initialQuota": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "tps",
+            "periodSeconds",
+            "initialQuota"
+          ],
+          "additionalProperties": false
+        },
+        "meshMailbox": {
+          "description": "MeshMailbox",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "mailboxId": {
+              "type": "string"
+            },
+            "workflowIdSuffix": {
+              "type": "string"
+            },
+            "workflowIdReceiveRequestAck": {
+              "type": "string"
+            },
+            "workflowIdCompletedRequestItemsReport": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "mailboxId"
+          ],
+          "additionalProperties": false
+        },
+        "apimApplication": {
+          "description": "ApimApplication",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "apimId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "apimId"
+          ],
+          "additionalProperties": false
+        },
+        "govuknotifyAccount": {
+          "description": "GovuknotifyAccount",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "default": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "default"
+          ],
+          "additionalProperties": false
+        },
+        "featureFlags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rfrCodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "suppressionFilters": {
+          "type": "array",
+          "items": {
+            "description": "SuppressionFilter",
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "pattern": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "pattern"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "featureFlags",
+        "rfrCodes",
+        "suppressionFilters"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "dataschema",
+    "dataschemaversion",
+    "type",
+    "id",
+    "source",
+    "specversion",
+    "subject",
+    "time",
+    "datacontenttype",
+    "plane",
+    "data"
+  ],
+  "additionalProperties": false
+}

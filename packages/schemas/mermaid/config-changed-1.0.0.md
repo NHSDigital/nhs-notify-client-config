@@ -16,45 +16,7 @@ erDiagram
         Data data
     }
     Data {
-        string configType "enum: client, campaign, client-subscription, channel-supplier, queue, supplier-quota, feature-flag, specification, specification-supplier"
-    }
-    Data_client {
-        Client record
-    }
-    Client {
-        string id
-        string name
-        string senderOdsCode
-        ClientQuota quota
-        MeshMailbox meshMailbox
-        ApimApplication apimApplication
-        GovuknotifyAccount govuknotifyAccount
-        string[] featureFlags "ref: FeatureFlag"
-        string[] rfrCodes
-        SuppressionFilter[] suppressionFilters
-    }
-    ClientQuota {
-        number tps
-        number periodSeconds
-        number initialQuota
-    }
-    MeshMailbox {
-        string id
-        string mailboxId
-        string workflowIdSuffix
-        string workflowIdReceiveRequestAck
-        string workflowIdCompletedRequestItemsReport
-    }
-    ApimApplication {
-        string id
-        string apimId
-    }
-    GovuknotifyAccount {
-        string id
-        string name
-        boolean default
-    }
-    FeatureFlag {
+        string configType "enum: campaign, client-subscription, channel-supplier, queue, supplier-quota, feature-flag, specification, specification-supplier"
     }
     Data_campaign {
         Campaign record
@@ -154,7 +116,7 @@ erDiagram
         string tariff
         string size
         number deliverySLA
-        number maxPages
+        number maxSheets
         number maxWeight
         number maxThickness
     }
@@ -185,12 +147,6 @@ erDiagram
     ChannelSupplier {
     }
     ConfigChangedEvent ||--|| Data : "data"
-    Data_client ||--|| Client : "record"
-    Client ||--o{ ClientQuota : "quota"
-    Client ||--|| MeshMailbox : "meshMailbox"
-    Client ||--|| ApimApplication : "apimApplication"
-    Client ||--|| GovuknotifyAccount : "govuknotifyAccount"
-    Client }o--o{ FeatureFlag : "featureFlags"
     Data_campaign ||--|| Campaign : "record"
     Campaign }o--|| Client : "clientId"
     Campaign ||--|| GovuknotifyAccount : "govuknotifyAccount"
@@ -214,7 +170,6 @@ erDiagram
     Data_specification-supplier ||--|| SpecificationSupplier : "record"
     SpecificationSupplier }o--|| Specification : "specificationId"
     SpecificationSupplier }o--|| ChannelSupplier : "supplierId"
-    Data ||--|| Data_client : "client"
     Data ||--|| Data_campaign : "campaign"
     Data ||--|| Data_client-subscription : "client-subscription"
     Data ||--|| Data_channel-supplier : "channel-supplier"
