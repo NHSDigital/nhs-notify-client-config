@@ -1,67 +1,98 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
   "description": "ClientMutatedEvent",
-  "type": "object",
   "properties": {
-    "dataschema": {
-      "type": "string",
-      "pattern": "^https:\\/\\/notify\\.nhs\\.uk\\/events\\/schemas\\/client-mutated-1.\\d+\\.\\d+\\.json$"
-    },
-    "dataschemaversion": {
-      "type": "string",
-      "pattern": "^1\\.\\d+\\.\\d+$"
-    },
-    "type": {
-      "type": "string",
-      "const": "uk.nhs.notify.config.ClientMutated"
-    },
-    "id": {
-      "type": "string"
-    },
-    "source": {
-      "type": "string"
-    },
-    "specversion": {
-      "type": "string",
-      "const": "1.0"
-    },
-    "subject": {
-      "type": "string"
-    },
-    "time": {
-      "type": "string"
-    },
-    "datacontenttype": {
-      "type": "string",
-      "const": "application/json"
-    },
-    "plane": {
-      "type": "string",
-      "const": "control"
-    },
     "data": {
-      "type": "object",
+      "additionalProperties": false,
       "properties": {
+        "apimApplication": {
+          "additionalProperties": false,
+          "description": "ApimApplication",
+          "properties": {
+            "apimId": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "apimId"
+          ],
+          "type": "object"
+        },
+        "featureFlags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "govuknotifyAccount": {
+          "additionalProperties": false,
+          "description": "GovuknotifyAccount",
+          "properties": {
+            "default": {
+              "type": "boolean"
+            },
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "default"
+          ],
+          "type": "object"
+        },
         "id": {
           "type": "string"
+        },
+        "meshMailbox": {
+          "additionalProperties": false,
+          "description": "MeshMailbox",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "mailboxId": {
+              "type": "string"
+            },
+            "workflowIdCompletedRequestItemsReport": {
+              "type": "string"
+            },
+            "workflowIdReceiveRequestAck": {
+              "type": "string"
+            },
+            "workflowIdSuffix": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "mailboxId"
+          ],
+          "type": "object"
         },
         "name": {
           "type": "string"
         },
-        "senderOdsCode": {
-          "type": "string"
-        },
         "quota": {
+          "additionalProperties": false,
           "description": "ClientQuota",
-          "type": "object",
           "properties": {
-            "tps": {
+            "initialQuota": {
               "type": "number"
             },
             "periodSeconds": {
               "type": "number"
             },
-            "initialQuota": {
+            "tps": {
               "type": "number"
             }
           },
@@ -70,89 +101,21 @@
             "periodSeconds",
             "initialQuota"
           ],
-          "additionalProperties": false
-        },
-        "meshMailbox": {
-          "description": "MeshMailbox",
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "mailboxId": {
-              "type": "string"
-            },
-            "workflowIdSuffix": {
-              "type": "string"
-            },
-            "workflowIdReceiveRequestAck": {
-              "type": "string"
-            },
-            "workflowIdCompletedRequestItemsReport": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "id",
-            "mailboxId"
-          ],
-          "additionalProperties": false
-        },
-        "apimApplication": {
-          "description": "ApimApplication",
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "apimId": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "id",
-            "apimId"
-          ],
-          "additionalProperties": false
-        },
-        "govuknotifyAccount": {
-          "description": "GovuknotifyAccount",
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "default": {
-              "type": "boolean"
-            }
-          },
-          "required": [
-            "id",
-            "name",
-            "default"
-          ],
-          "additionalProperties": false
-        },
-        "featureFlags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "object"
         },
         "rfrCodes": {
-          "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "type": "array"
+        },
+        "senderOdsCode": {
+          "type": "string"
         },
         "suppressionFilters": {
-          "type": "array",
           "items": {
+            "additionalProperties": false,
             "description": "SuppressionFilter",
-            "type": "object",
             "properties": {
               "id": {
                 "type": "string"
@@ -165,8 +128,9 @@
               "id",
               "pattern"
             ],
-            "additionalProperties": false
-          }
+            "type": "object"
+          },
+          "type": "array"
         }
       },
       "required": [
@@ -176,7 +140,43 @@
         "rfrCodes",
         "suppressionFilters"
       ],
-      "additionalProperties": false
+      "type": "object"
+    },
+    "datacontenttype": {
+      "const": "application/json",
+      "type": "string"
+    },
+    "dataschema": {
+      "pattern": "^https:\\/\\/notify\\.nhs\\.uk\\/events\\/schemas\\/client-mutated-1.\\d+\\.\\d+\\.json$",
+      "type": "string"
+    },
+    "dataschemaversion": {
+      "pattern": "^1\\.\\d+\\.\\d+$",
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "plane": {
+      "const": "control",
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "specversion": {
+      "const": "1.0",
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "time": {
+      "type": "string"
+    },
+    "type": {
+      "const": "uk.nhs.notify.config.ClientMutated",
+      "type": "string"
     }
   },
   "required": [
@@ -192,5 +192,5 @@
     "plane",
     "data"
   ],
-  "additionalProperties": false
+  "type": "object"
 }
