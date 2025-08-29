@@ -1,0 +1,34 @@
+{
+  "id": "23f1f09c-a555-4d9b-8405-0b33490bc920",
+  "source": "//notify.nhs.uk/app/nhs-notify-config-dev/main",
+  "specversion": "1.0",
+  "subject": "00f3b388-bbe9-41c9-9e76-052d37ee8988",
+  "time": "2025-08-28T08:45:00.000Z",
+  "datacontenttype": "application/json",
+  "plane": "control",
+  "type": "uk.nhs.notify.config.ClientMutated",
+  "dataschema": "https://notify.nhs.uk/events/schemas/client-mutated-1.0.0.json",
+  "dataschemaversion": "1.0.0",
+  "data": {
+    "id": "00f3b388-bbe9-41c9-9e76-052d37ee8988",
+    "name": "Test Client",
+    "senderOdsCode": "X26",
+    "quota": {
+      "tps": 5,
+      "periodSeconds": 60,
+      "initialQuota": 300
+    },
+    "apimApplication": {
+      "id": "255adc65-fb02-4570-b8f7-d99198eb0b49",
+      "apimId": "test-apim-id"
+    },
+    "govuknotifyAccount": {
+      "id":"70a4c0fc-c9d4-4917-849d-2554e83af13a",
+      "name": "Test Client (INT)",
+      "default": true
+    },
+    "featureFlags": [],
+    "rfrCodes": [],
+    "suppressionFilters": []
+  }
+}
