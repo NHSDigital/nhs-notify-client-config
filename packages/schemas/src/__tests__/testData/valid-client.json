@@ -1,11 +1,10 @@
 {
   "data": {
-    "featureFlags": [],
-    "govuknotifyAccount": {
-      "default": true,
-      "id": "70a4c0fc-c9d4-4917-849d-2554e83af13a",
-      "name": "Test Client (INT)"
+    "apimApplication": {
+      "apimId": "test-apim-id",
+      "id": "255adc65-fb02-4570-b8f7-d99198eb0b49"
     },
+    "featureFlags": [],
     "id": "00f3b388-bbe9-41c9-9e76-052d37ee8988",
     "name": "Test Client",
     "quota": {
@@ -26,5 +25,5 @@
   "specversion": "1.0",
   "subject": "00f3b388-bbe9-41c9-9e76-052d37ee8988",
   "time": "2025-08-28T08:45:00.000Z",
-  "type": "uk.nhs.notify.config.ClientMutated"
+  "type": "uk.nhs.notify.config.ClientMutated.V1"
 }

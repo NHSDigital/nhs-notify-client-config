@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { $ChannelType } from './channel';
-import { idRef } from 'zod-mermaid';
+import { idRef } from '../helpers/id-ref';
 import { $Campaign } from './campaign';
 import { ConfigBase } from './common';
 

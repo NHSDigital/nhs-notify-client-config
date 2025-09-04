@@ -1,9 +1,9 @@
 import { z } from 'zod';
 import { $Client } from './client';
-import { $ChannelSupplier } from './channelSupplier';
-import { $SupplierQuota } from './supplierQuota';
+import { $ChannelSupplier } from './channel-supplier';
+import { $SupplierQuota } from './supplier-quota';
 import { $Queue } from './queue';
-import { $FeatureFlag } from './featureFlag';
+import { $FeatureFlag } from './feature-flag';
 import { $RoutingConfig } from './routing';
 
 export const $Audit = z.object({

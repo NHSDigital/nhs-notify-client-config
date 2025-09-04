@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { idRef } from 'zod-mermaid';
+import { idRef } from '../helpers/id-ref';
 import { $Client } from './client';
 import { ConfigBase } from './common';
 

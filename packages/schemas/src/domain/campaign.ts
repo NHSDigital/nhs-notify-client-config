@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { $GovuknotifyAccount } from './govuknotifyAccount';
-import { idRef } from 'zod-mermaid';
+import { idRef } from '../helpers/id-ref';
+import { $GovuknotifyAccount } from './govuknotify-account';
 import { $Client } from './client';
 import { ConfigBase } from './common';
 

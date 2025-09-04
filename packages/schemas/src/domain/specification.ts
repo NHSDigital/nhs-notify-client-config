@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { $Version, ConfigBase } from './common';
-import { idRef } from 'zod-mermaid';
+import { idRef } from '../helpers/id-ref';
 import { $Layout } from './layout';
 
 export const $SpecificationFeature = z.enum(['SAME_DAY', 'BRAILLE', 'AUDIO_CD', 'MAILMARK']);

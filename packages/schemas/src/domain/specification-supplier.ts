@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { idRef } from 'zod-mermaid';
-import { $ChannelSupplier } from './channelSupplier';
+import { idRef } from '../helpers/id-ref';
+import { $ChannelSupplier } from './channel-supplier';
 import { $Specification } from './specification';
 import { ConfigBase } from './common';
 

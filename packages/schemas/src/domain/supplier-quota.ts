@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { idRef } from 'zod-mermaid';
+import { idRef } from '../helpers/id-ref';
 import { $Queue } from './queue';
-import { $ChannelSupplier } from './channelSupplier';
+import { $ChannelSupplier } from './channel-supplier';
 import { ConfigBase } from './common';
 
 export const $DayOfWeek = z.enum([

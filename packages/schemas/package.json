@@ -10,8 +10,7 @@
     "jest": "^30.0.4",
     "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.7.3",
-    "zod-mermaid": "^1.0.4"
+    "typescript": "^5.7.3"
   },
   "main": "src/index.ts",
   "name": "@nhsdigital/nhs-notify-config-schemas",
@@ -23,9 +22,9 @@
     "build": "tsc",
     "dev": "ts-node src/index.ts",
     "json": "ts-node src/cli/generate-json.ts",
-    "mermaid": "ts-node src/cli/generate-mermaid.ts",
     "start": "node dist/index.js",
-    "test": "jest"
+    "test": "jest",
+    "test:unit": "jest"
   },
   "version": "1.0.0"
 }

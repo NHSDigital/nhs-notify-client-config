@@ -4,143 +4,246 @@
   "description": "ClientMutatedEvent",
   "properties": {
     "data": {
-      "additionalProperties": false,
-      "properties": {
-        "apimApplication": {
+      "anyOf": [
+        {
           "additionalProperties": false,
-          "description": "ApimApplication",
           "properties": {
-            "apimId": {
-              "type": "string"
+            "apimApplication": {
+              "additionalProperties": false,
+              "description": "ApimApplication",
+              "properties": {
+                "apimId": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "apimId"
+              ],
+              "type": "object"
+            },
+            "featureFlags": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
             },
             "id": {
               "type": "string"
-            }
-          },
-          "required": [
-            "id",
-            "apimId"
-          ],
-          "type": "object"
-        },
-        "featureFlags": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "govuknotifyAccount": {
-          "additionalProperties": false,
-          "description": "GovuknotifyAccount",
-          "properties": {
-            "default": {
-              "type": "boolean"
             },
-            "id": {
-              "type": "string"
+            "meshMailbox": {
+              "additionalProperties": false,
+              "description": "MeshMailbox",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "mailboxId": {
+                  "type": "string"
+                },
+                "workflowIdCompletedRequestItemsReport": {
+                  "type": "string"
+                },
+                "workflowIdReceiveRequestAck": {
+                  "type": "string"
+                },
+                "workflowIdSuffix": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "mailboxId"
+              ],
+              "type": "object"
             },
             "name": {
               "type": "string"
+            },
+            "quota": {
+              "additionalProperties": false,
+              "description": "ClientQuota",
+              "properties": {
+                "initialQuota": {
+                  "type": "number"
+                },
+                "periodSeconds": {
+                  "type": "number"
+                },
+                "tps": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "tps",
+                "periodSeconds",
+                "initialQuota"
+              ],
+              "type": "object"
+            },
+            "rfrCodes": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "senderOdsCode": {
+              "type": "string"
+            },
+            "suppressionFilters": {
+              "items": {
+                "additionalProperties": false,
+                "description": "SuppressionFilter",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "pattern": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "pattern"
+                ],
+                "type": "object"
+              },
+              "type": "array"
             }
           },
           "required": [
             "id",
             "name",
-            "default"
+            "apimApplication",
+            "featureFlags",
+            "rfrCodes",
+            "suppressionFilters"
           ],
           "type": "object"
         },
-        "id": {
-          "type": "string"
-        },
-        "meshMailbox": {
+        {
           "additionalProperties": false,
-          "description": "MeshMailbox",
           "properties": {
+            "apimApplication": {
+              "additionalProperties": false,
+              "description": "ApimApplication",
+              "properties": {
+                "apimId": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "apimId"
+              ],
+              "type": "object"
+            },
+            "featureFlags": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
             "id": {
               "type": "string"
             },
-            "mailboxId": {
+            "meshMailbox": {
+              "additionalProperties": false,
+              "description": "MeshMailbox",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "mailboxId": {
+                  "type": "string"
+                },
+                "workflowIdCompletedRequestItemsReport": {
+                  "type": "string"
+                },
+                "workflowIdReceiveRequestAck": {
+                  "type": "string"
+                },
+                "workflowIdSuffix": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "mailboxId"
+              ],
+              "type": "object"
+            },
+            "name": {
               "type": "string"
             },
-            "workflowIdCompletedRequestItemsReport": {
+            "quota": {
+              "additionalProperties": false,
+              "description": "ClientQuota",
+              "properties": {
+                "initialQuota": {
+                  "type": "number"
+                },
+                "periodSeconds": {
+                  "type": "number"
+                },
+                "tps": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "tps",
+                "periodSeconds",
+                "initialQuota"
+              ],
+              "type": "object"
+            },
+            "rfrCodes": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "senderOdsCode": {
               "type": "string"
             },
-            "workflowIdReceiveRequestAck": {
-              "type": "string"
-            },
-            "workflowIdSuffix": {
-              "type": "string"
+            "suppressionFilters": {
+              "items": {
+                "additionalProperties": false,
+                "description": "SuppressionFilter",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "pattern": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "pattern"
+                ],
+                "type": "object"
+              },
+              "type": "array"
             }
           },
           "required": [
             "id",
-            "mailboxId"
+            "name",
+            "meshMailbox",
+            "featureFlags",
+            "rfrCodes",
+            "suppressionFilters"
           ],
           "type": "object"
-        },
-        "name": {
-          "type": "string"
-        },
-        "quota": {
-          "additionalProperties": false,
-          "description": "ClientQuota",
-          "properties": {
-            "initialQuota": {
-              "type": "number"
-            },
-            "periodSeconds": {
-              "type": "number"
-            },
-            "tps": {
-              "type": "number"
-            }
-          },
-          "required": [
-            "tps",
-            "periodSeconds",
-            "initialQuota"
-          ],
-          "type": "object"
-        },
-        "rfrCodes": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "senderOdsCode": {
-          "type": "string"
-        },
-        "suppressionFilters": {
-          "items": {
-            "additionalProperties": false,
-            "description": "SuppressionFilter",
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "pattern": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "id",
-              "pattern"
-            ],
-            "type": "object"
-          },
-          "type": "array"
         }
-      },
-      "required": [
-        "id",
-        "name",
-        "featureFlags",
-        "rfrCodes",
-        "suppressionFilters"
-      ],
-      "type": "object"
+      ]
     },
     "datacontenttype": {
       "const": "application/json",
@@ -175,7 +278,7 @@
       "type": "string"
     },
     "type": {
-      "const": "uk.nhs.notify.config.ClientMutated",
+      "const": "uk.nhs.notify.config.ClientMutated.V1",
       "type": "string"
     }
   },

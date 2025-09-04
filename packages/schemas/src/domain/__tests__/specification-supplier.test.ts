@@ -1,5 +1,5 @@
 import { $Version } from '../common';
-import { $SpecificationSupplier, SpecificationSupplier } from '../specificationSupplier';
+import { $SpecificationSupplier, SpecificationSupplier } from '../specification-supplier';
 import { EnvelopeId, Specification } from '../specification';
 import { LayoutId } from '../layout';
 
