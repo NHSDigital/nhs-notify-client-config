@@ -17,7 +17,7 @@ export const buildEvent = (input: ClientInput): ClientMutatedEvent => {
     subject: input.clientId,
     type: "uk.nhs.notify.config.ClientMutated.V1",
     dataschema:
-      "https://notify.nhs.uk/events/schemas/client-mutated-1.0.0.json",
+      "https://notify.nhs.uk/events/schemas/client-mutated/1.0.0.json",
     dataschemaversion: "1.0.0",
     data: {
       id: input.clientId,
