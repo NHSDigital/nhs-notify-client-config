@@ -17,7 +17,7 @@
     "suppressionFilters": []
   },
   "datacontenttype": "application/json",
-  "dataschema": "https://notify.nhs.uk/events/schemas/client-mutated-1.0.0.json",
+  "dataschema": "https://notify.nhs.uk/events/schemas/client-mutated/1.0.0.json",
   "dataschemaversion": "1.0.0",
   "id": "23f1f09c-a555-4d9b-8405-0b33490bc920",
   "plane": "control",
