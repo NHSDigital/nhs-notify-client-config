@@ -6,7 +6,7 @@ import {
 import { ClientInput } from "./input";
 import { eventSource } from "./config";
 
-const buildEvent = (input: ClientInput): ClientMutatedEvent => {
+export const buildEvent = (input: ClientInput): ClientMutatedEvent => {
   return $ClientMutatedEvent.parse({
     id: randomUUID(),
     datacontenttype: "application/json",
@@ -32,5 +32,3 @@ const buildEvent = (input: ClientInput): ClientMutatedEvent => {
     },
   });
 };
-
-export default buildEvent;

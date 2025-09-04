@@ -1,4 +1,4 @@
-import buildEvent from "../event-builder";
+import { buildEvent } from "../event-builder";
 
 describe("test clientMutatedEvent builder function", () => {
   it("should successfully build a clientMutatedEvent", () => {
