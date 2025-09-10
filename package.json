@@ -1,5 +1,9 @@
 {
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.0.0",
+    "@stylistic/eslint-plugin": "^3.1.0",
+    "@stylistic/eslint-plugin-ts": "^4.4.1",
     "@tsconfig/node22": "^22.0.2",
     "@types/jest": "^29.5.14",
     "@typescript-eslint/eslint-plugin": "^8.27.0",
@@ -39,16 +43,11 @@
     "react": "^19.0.0"
   },
   "scripts": {
-    "generate-dependencies": "npm run generate-dependencies --workspaces --if-present",
-    "lint": "npm run lint --workspaces",
-    "lint:fix": "npm run lint:fix --workspaces",
-    "start": "npm run start --workspace frontend",
-    "test:unit": "npm run test:unit --workspaces",
-    "typecheck": "npm run typecheck --workspaces"
+    "generate-dependencies": "pnpm -r --if-present generate-dependencies",
+    "lint": "pnpm -r --if-present lint",
+    "lint:fix": "pnpm -r --if-present lint:fix",
+    "test:unit": "pnpm -r test:unit",
+    "typecheck": "pnpm -r typecheck"
   },
-  "version": "1.0.0",
-  "workspaces": [
-    "lambdas/example-lambda",
-    "packages/schema"
-  ]
+  "version": "1.0.0"
 }
