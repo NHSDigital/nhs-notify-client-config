@@ -1,13 +1,12 @@
 import fs from "fs";
 import path from "path";
 import { parse } from "csv-parse/sync";
-import { ClientInput } from 'nhs-notify-config-event-builder/src/input'
+import { ClientInput } from './input'
 
 const columns = [
   "Client ID",
   "Client Name",
-  "APIM ID",
-  "Notify Account"
+  "APIM ID"
 ]
 
 export const convertCSV = (filePath: string): ClientInput => {
@@ -35,7 +34,7 @@ export const convertCSV = (filePath: string): ClientInput => {
 }
 
 const validateInput = (input: ClientInput): boolean => {
-  if (Object.values(input).some(v => v === undefined)) {
+  if (Object.values(input).some(v => v === undefined || v === "")) {
     return false;
   }
   return true;

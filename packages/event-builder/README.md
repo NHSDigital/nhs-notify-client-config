@@ -5,5 +5,13 @@
 From the `event-builder` folder, run:
 
 ```bash
-npm run cli -- generate-event --csv-file <<path to csv file>>
+pnpm --filter @nhs-notify-config/event-builder dev generate-event --csv-file <<path to file>>
+```
+
+## Example
+
+With valid CSV:
+
+```bash
+pnpm --filter @nhs-notify-config/event-builder dev generate-event --csv-file ../inputs/sample.csv
 ```
