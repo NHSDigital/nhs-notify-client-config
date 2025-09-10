@@ -10,7 +10,7 @@
     "typescript": "^5.7.3"
   },
   "main": "src/index.ts",
-  "name": "@nhsdigital/nhs-notify-config-schemas",
+  "name": "@nhs-notify-config/schemas",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
