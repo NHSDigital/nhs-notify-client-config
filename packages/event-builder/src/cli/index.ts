@@ -1,0 +1,69 @@
+import { hideBin } from 'yargs/helpers';
+import yargs from 'yargs/yargs';
+import { convertCSV } from '../csv-to-client-input';
+import { buildEvent } from '../event-builder'
+
+type PrintFormat = 'json' | 'table';
+type PrintFunction = (value: unknown) => void;
+
+function getPrinter(format: PrintFormat): PrintFunction {
+  /* eslint-disable no-console */
+  if (format === 'json') {
+    return (value) => console.log(JSON.stringify(value, null, 2));
+  }
+
+  return (value) => console.table(Array.isArray(value) ? value : [value]);
+  /* eslint-enable no-console */
+}
+
+async function main() {
+  let print: PrintFunction;
+
+  function setGlobals(argv: { format: string }) {
+    print = getPrinter(argv.format as PrintFormat);
+  }
+
+  await yargs(hideBin(process.argv))
+    .option('format', {
+      type: 'string',
+      choices: ['json'],
+      default: 'json',
+      global: true,
+      demandOption: false,
+    })
+    .middleware(setGlobals)
+    .command(
+      'generate-event',
+      'generates the client mutated event and saved onto a queue',
+      {
+        'csv-file': {
+          type: 'string',
+          demandOption: true,
+        },
+      },
+      async (argv) => {
+        try {
+          const clientDetails = convertCSV(argv.csvFile);
+          const event = buildEvent(clientDetails);
+          print(event);
+        } catch (err) {
+          console.error((err as Error).message); // eslint-disable-line no-console
+          process.exit(1);
+        }
+      }
+    )
+    .demandCommand(1)
+    .fail((msg, err) => {
+      const e = err ?? new Error(msg);
+      console.error(e.message);
+      process.exit(1);
+    })
+    .parseAsync();
+}
+
+if (require.main === module) {
+  main().catch((err) => {
+    console.error(err); // eslint-disable-line no-console
+    process.exitCode = 1;
+  });
+}
