@@ -2,6 +2,7 @@ import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs/yargs';
 import { convertCSV } from '../csv-to-client-input';
 import { buildEvent } from '../event-builder'
+import { ClientMutatedEvent } from '@nhs-notify-config/schemas/src/schemas/client-mutated-event';
 
 type PrintFormat = 'json' | 'table';
 type PrintFunction = (value: unknown) => void;
@@ -42,10 +43,18 @@ async function main() {
         },
       },
       async (argv) => {
+        const results: ClientMutatedEvent[] = [];
+
         try {
-          const clientDetails = convertCSV(argv.csvFile);
-          const event = buildEvent(clientDetails);
-          print(event);
+          const clientsDetails = convertCSV(argv.csvFile);
+
+          clientsDetails.forEach(client => {
+            const event = buildEvent(client);
+            results.push(event);
+          })
+
+          print(results);
+
         } catch (err) {
           console.error((err as Error).message); // eslint-disable-line no-console
           process.exit(1);
