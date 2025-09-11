@@ -2,7 +2,7 @@ import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs/yargs';
 import { convertCSV } from '../csv-to-client-input';
 import { buildEvent } from '../event-builder'
-import { ClientMutatedEvent } from '@nhs-notify-config/schemas/src/schemas/client-mutated-event';
+import { ClientMutatedEvent } from '@nhsdigital/nhs-notify-config-schemas/src/schemas/client-mutated-event';
 
 type PrintFormat = 'json' | 'table';
 type PrintFunction = (value: unknown) => void;

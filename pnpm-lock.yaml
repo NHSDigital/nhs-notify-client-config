@@ -141,7 +141,7 @@ importers:
 
   packages/event-builder:
     dependencies:
-      '@nhs-notify-config/schemas':
+      '@nhsdigital/nhs-notify-config-schemas':
         specifier: workspace:1.0.0
         version: link:../schemas
       csv-parse:
