@@ -18,8 +18,8 @@ cd "$(git rev-parse --show-toplevel)"
 # tasks in scripts/test.mk.
 
 # run tests
-npm ci
-npm run test:unit --workspaces
+pnpm install --frozen-lockfile
+pnpm -r test:unit
 
 # merge coverage reports
 mkdir -p .reports
