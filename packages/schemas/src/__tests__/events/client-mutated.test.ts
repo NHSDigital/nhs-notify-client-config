@@ -1,10 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { $ClientMutatedEvent } from '../../schemas/client-mutated-event';
+import { $ClientChangedEvent } from '../../schemas/client-mutated-event';
 
-describe('ClientMutatedEvent validations', () => {
+describe('ClientChangedEvent validations', () => {
 
-  it('should validate a clientMutated event with all required', () => {
+  it('should validate a clientChanged event with all required', () => {
     const filePath = path.resolve(
       __dirname,
       '../testData/valid-client.json'
@@ -14,10 +14,10 @@ describe('ClientMutatedEvent validations', () => {
       fs.readFileSync(filePath, 'utf8')
     );
 
-    expect(() => $ClientMutatedEvent.parse(event)).not.toThrow();
+    expect(() => $ClientChangedEvent.parse(event)).not.toThrow();
   });
 
-  it('should throw error for clientMutated event with missing MESH and APIM ID', () => {
+  it('should throw error for clientChanged event with missing MESH and APIM ID', () => {
     const filePath = path.resolve(
       __dirname,
       '../testData/client-with-missing-apim-mesh.json'
@@ -27,7 +27,7 @@ describe('ClientMutatedEvent validations', () => {
       fs.readFileSync(filePath, 'utf8')
     );
 
-    expect(() => $ClientMutatedEvent.parse(event)).toThrow();
+    expect(() => $ClientChangedEvent.parse(event)).toThrow();
   });
 
 });

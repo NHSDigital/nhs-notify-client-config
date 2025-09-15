@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
-  "description": "ClientMutatedEvent",
+  "description": "ClientChangedEvent",
   "properties": {
     "data": {
       "anyOf": [
@@ -278,7 +278,7 @@
       "type": "string"
     },
     "type": {
-      "const": "uk.nhs.notify.config.ClientMutated.v1",
+      "const": "uk.nhs.notify.config.ClientChanged.v1",
       "type": "string"
     }
   },

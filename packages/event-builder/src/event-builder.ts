@@ -1,13 +1,13 @@
 import { randomUUID } from "node:crypto";
 import {
-  $ClientMutatedEvent,
-  ClientMutatedEvent,
+  $ClientChangedEvent,
+  ClientChangedEvent,
 } from "@nhsdigital/nhs-notify-config-schemas/src/schemas/client-mutated-event";
 import { ClientInput } from "./input";
 import { eventSource } from "./config";
 
-export const buildEvent = (input: ClientInput): ClientMutatedEvent => {
-  return $ClientMutatedEvent.parse({
+export const buildEvent = (input: ClientInput): ClientChangedEvent => {
+  return $ClientChangedEvent.parse({
     id: randomUUID(),
     datacontenttype: "application/json",
     time: new Date().toISOString(),
@@ -15,7 +15,7 @@ export const buildEvent = (input: ClientInput): ClientMutatedEvent => {
     plane: "control",
     source: eventSource,
     subject: input.clientId,
-    type: "uk.nhs.notify.config.ClientMutated.v1",
+    type: "uk.nhs.notify.config.ClientChanged.v1",
     dataschema:
       "https://notify.nhs.uk/events/schemas/client-mutated/1.0.0.json",
     dataschemaversion: "1.0.0",

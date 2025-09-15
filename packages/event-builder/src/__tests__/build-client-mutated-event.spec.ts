@@ -1,7 +1,7 @@
 import { buildEvent } from "../event-builder";
 
-describe("test clientMutatedEvent builder function", () => {
-  it("should successfully build a clientMutatedEvent", () => {
+describe("test clientChangedEvent builder function", () => {
+  it("should successfully build a clientChangedEvent", () => {
     const testInput = {
       clientId: "test-client-id",
       clientName: "Test Client",
@@ -12,7 +12,7 @@ describe("test clientMutatedEvent builder function", () => {
 
     expect(event).toHaveProperty(
       "type",
-      "uk.nhs.notify.config.ClientMutated.v1",
+      "uk.nhs.notify.config.ClientChanged.v1",
     );
     expect(event.data.id).toBe("test-client-id");
     expect(event.data.name).toBe("Test Client");
