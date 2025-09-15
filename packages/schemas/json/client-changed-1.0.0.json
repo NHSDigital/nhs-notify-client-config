@@ -250,7 +250,7 @@
       "type": "string"
     },
     "dataschema": {
-      "pattern": "^https:\\/\\/notify\\.nhs\\.uk\\/events\\/schemas\\/client-mutated\\/1.\\d+\\.\\d+\\.json$",
+      "pattern": "^https:\\/\\/notify\\.nhs\\.uk\\/events\\/schemas\\/client-changed\\/1.\\d+\\.\\d+\\.json$",
       "type": "string"
     },
     "dataschemaversion": {
