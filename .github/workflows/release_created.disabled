@@ -1,0 +1,39 @@
+name: Github Release Created
+
+on:
+  release:
+    types: ["published"] # Inherits all input defaults
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy-main:
+    name: Deploy changes to main in nonprod AWS Account
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    strategy:
+      max-parallel: 1
+      matrix:
+        component: [ccapp]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5.0.0
+
+      - name: Deploy Nonprod Environment
+        env:
+          PR_TRIGGER_PAT: ${{ secrets.PR_TRIGGER_PAT }}
+        run: |
+          bash .github/scripts/dispatch_internal_repo_workflow.sh \
+            --releaseVersion "${{ github.event.release.tag_name }}" \
+            --targetWorkflow "dispatch-deploy-static-notify-client-config-env.yaml" \
+            --targetEnvironment "main" \
+            --targetAccountGroup "nhs-notify-client-config-nonprod" \
+            --targetComponent "${{ matrix.component }}" \
+            --terraformAction "apply"

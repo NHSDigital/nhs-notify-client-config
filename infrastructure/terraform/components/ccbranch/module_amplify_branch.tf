@@ -1,0 +1,22 @@
+module "amplify_branch" {
+  source = "https://github.com/NHSDigital/nhs-notify-shared-modules/releases/download/v2.0.20/terraform-amp_branch.zip"
+
+  name         = local.normalised_branch_name
+  display_name = local.normalised_branch_name
+  description  = "Amplify branch for ${local.normalised_branch_name}"
+
+  aws_account_id = var.aws_account_id
+  component      = local.component
+  environment    = var.environment
+  project        = var.project
+  region         = var.region
+  group          = var.group
+
+  amplify_app_id    = local.ccapp.amplify["id"]
+  branch            = var.branch_name
+  enable_auto_build = true
+
+  environment_variables = {
+    NEXT_PUBLIC_BASE_PATH = "/client-config~${local.normalised_branch_name}"
+  }
+}

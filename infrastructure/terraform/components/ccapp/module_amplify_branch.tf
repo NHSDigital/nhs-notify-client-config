@@ -1,0 +1,21 @@
+module "amplify_branch" {
+  source = "git::https://github.com/NHSDigital/nhs-notify-shared-modules.git//infrastructure/modules/amp_branch?ref=v1.0.8"
+
+  name              = var.branch_name
+  display_name      = var.url_prefix
+  aws_account_id    = var.aws_account_id
+  component         = local.component
+  environment       = var.environment
+  project           = var.project
+  region            = var.region
+  group             = var.group
+  description       = "Amplify branch for production branch (${var.branch_name})"
+  amplify_app_id    = aws_amplify_app.main.id
+  branch            = var.branch_name
+  stage             = "PRODUCTION"
+  enable_auto_build = false
+
+  environment_variables = {
+    NEXT_PUBLIC_BASE_PATH = "/client-config"
+  }
+}
