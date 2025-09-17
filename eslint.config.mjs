@@ -169,20 +169,6 @@ export default defineConfig([
     plugins: { html },
   },
 
-  // Next.js
-  ...compat.config({
-    extends: ['next', 'next/core-web-vitals', 'next/typescript'],
-    settings: {
-      next: {
-        rootDir: 'frontend',
-      },
-    },
-    rules: {
-      // needed because next lint rules look for a pages directory
-      '@next/next/no-html-link-for-pages': 0,
-    },
-  }),
-
   // json
   {
     files: ['**/*.json'],
