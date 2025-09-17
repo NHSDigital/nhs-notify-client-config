@@ -1,4 +1,8 @@
 import { z } from 'zod';
+import { idRef } from '../helpers/id-ref';
+import { $Queue } from './queue';
+import { $ChannelSupplier } from './channel-supplier';
+import { ConfigBase } from './common';
 
 export const $DayOfWeek = z.enum([
   'Mon',
@@ -23,10 +27,9 @@ export const $Schedule = z.object({
 
 export type Schedule = z.infer<typeof $Schedule>;
 
-export const $SupplierQuota = z.object({
-  id: z.string(),
-  channelSupplierId: z.string(),
-  inputQueueIds: z.array(z.string()),
+export const $SupplierQuota = ConfigBase('SupplierQuota').extend({
+  channelSupplierId: idRef($ChannelSupplier),
+  inputQueueIds: z.array(idRef($Queue)),
   tps: z.preprocess((val) => {
     if (typeof val === 'string') {
       return Number.parseInt(val);
@@ -38,6 +41,6 @@ export const $SupplierQuota = z.object({
   priority: z.number(),
   weight: z.number(),
   schedule: $Schedule.optional(),
-});
+}).describe('SupplierQuota');
 
 export type SupplierQuota = z.infer<typeof $SupplierQuota>;

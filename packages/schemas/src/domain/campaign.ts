@@ -1,12 +1,14 @@
 import { z } from 'zod';
-import { $GovuknotifyAccount } from './govuknotifyAccount';
+import { idRef } from '../helpers/id-ref';
+import { $GovuknotifyAccount } from './govuknotify-account';
+import { $Client } from './client';
+import { ConfigBase } from './common';
 
-export const $Campaign = z.object({
-  id: z.string(),
+export const $Campaign = ConfigBase('Campaign').extend({
   name: z.string(),
-  clientId: z.string(),
+  clientId: idRef($Client),
   default: z.boolean(),
   govuknotifyAccount: $GovuknotifyAccount
-});
+}).describe('Campaign');
 
 export type Campaign = z.infer<typeof $Campaign>;
