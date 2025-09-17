@@ -12,4 +12,8 @@ resource "aws_amplify_domain_association" "domain" {
     branch_name = var.branch_name
     prefix      = var.url_prefix
   }
+
+  depends_on = [
+    module.amplify_branch
+  ]
 }
