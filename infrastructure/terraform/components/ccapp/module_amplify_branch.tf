@@ -16,6 +16,7 @@ module "amplify_branch" {
   enable_auto_build = false
 
   environment_variables = {
+    NOTIFY_SUBDOMAIN      = var.environment
     NEXT_PUBLIC_BASE_PATH = "/client-config"
   }
 }

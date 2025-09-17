@@ -27,6 +27,7 @@ resource "aws_amplify_app" "main" {
   ]
 
   environment_variables = {
+    ACCOUNT_ID                           = var.aws_account_id
     AMPLIFY_MONOREPO_APP_ROOT            = "frontend"
     NOTIFY_GROUP                         = var.group
     NOTIFY_ENVIRONMENT                   = var.environment
