@@ -32,4 +32,6 @@ jobs:
             --targetEnvironment "pr${{ github.event.number }}" \
             --targetComponent "ccbranch" \
             --targetAccountGroup "nhs-notify-client-config-dev" \
-            --terraformAction "destroy"
+            --terraformAction "destroy" \
+            --overrideProjectName "nhs" \
+            --overrideRoleName "nhs-main-acct-client-config-github-deploy"

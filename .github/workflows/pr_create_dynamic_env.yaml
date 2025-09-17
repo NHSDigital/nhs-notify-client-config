@@ -34,4 +34,6 @@ jobs:
             --targetComponent "ccbranch" \
             --targetAccountGroup "nhs-notify-client-config-dev" \
             --terraformAction "apply" \
-            --overrides "branch_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
+            --overrides "branch_name=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" \
+            --overrideProjectName "nhs" \
+            --overrideRoleName "nhs-main-acct-client-config-github-deploy"
