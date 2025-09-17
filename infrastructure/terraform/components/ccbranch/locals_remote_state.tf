@@ -9,7 +9,7 @@ data "terraform_remote_state" "ccapp" {
     bucket = local.terraform_state_bucket
 
     key = format(
-      "%s/%s/%s/%s/app.tfstate",
+      "%s/%s/%s/%s/ccapp.tfstate",
       var.project,
       var.aws_account_id,
       "eu-west-2",
