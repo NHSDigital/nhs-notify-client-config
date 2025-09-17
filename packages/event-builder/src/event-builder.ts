@@ -15,7 +15,7 @@ export const buildEvent = (input: ClientInput): ClientChangedEvent => {
     plane: "control",
     source: eventSource,
     subject: input.clientId,
-    type: "uk.nhs.notify.config.ClientChanged.v1",
+    type: "uk.nhs.notify.client-config.ClientChanged.v1",
     dataschema:
       "https://notify.nhs.uk/events/schemas/client-changed/1.0.0.json",
     dataschemaversion: "1.0.0",
