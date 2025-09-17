@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const $EventMetadataVersionInformation = z.object({
+const $EventMetadataVersionInformation = z.strictObject({
   dataschema: z.string(),
   dataschemaversion: z.string(),
   type: z.string(),

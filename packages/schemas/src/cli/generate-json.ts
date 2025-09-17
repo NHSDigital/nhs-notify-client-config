@@ -1,14 +1,15 @@
-import { $ConfigChangedEvent } from '../schemas/config-changed-event';
 import { z } from 'zod';
 import * as fs from 'node:fs';
-import { $ConfigRemovedEvent } from '../schemas/config-removed-event';
+import packageJson from '../../package.json';
+import { $ClientChangedEvent } from '../schemas/client-changed-event';
+
+const version = packageJson.version;
 
 for (const [key, schema] of Object.entries({
-  'config-changed': $ConfigChangedEvent,
-  'config-removed': $ConfigRemovedEvent
+  'client-changed': $ClientChangedEvent
 })) {
   const json = z.toJSONSchema(schema);
-  const file = `json/${key}-${schema.shape.dataschemaversion.value}.json`;
+  const file = `json/${key}-${version}.json`;
   fs.writeFileSync(file, JSON.stringify(json, null, 2));
   console.info(`Wrote JSON schema for ${key} to ${file}`);
 }
