@@ -2,15 +2,25 @@
 
 ## Usage
 
-- Place the CSV file in the `event-builder/inputs` folder
-- From the `event-builder` folder, run:
+1. Place the CSV file in the `event-builder/inputs` folder e.g `sample.csv`. All headers must be provided with values:
+    - `Client ID` - the ID of the client you want to create. This can be generated with an online UUID generator.
+    - `Client Name` - the name of the client
+    - `APIM ID` - the APIM Application ID for the client
+
+    Multiple rows can be added to process more than one client.
+
+2. From the `event-builder` folder, run:
 
 ```bash
-pnpm --filter @nhs-notify-config/event-builder cli generate-event --csv-file <<path to file>>
+pnpm --filter @nhs-notify-config/event-builder cli generate-event \
+  --csv-file <path to file> \
+  --environment <<env>>
 ```
 
 ## Example
 
 ```bash
-pnpm --filter @nhs-notify-config/event-builder cli generate-event --csv-file ../inputs/sample.csv
+pnpm --filter @nhs-notify-config/event-builder cli generate-event \
+  --csv-file ../inputs/sample.csv \
+  --environment de2-aiyu1
 ```

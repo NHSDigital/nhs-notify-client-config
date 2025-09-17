@@ -1,8 +1,9 @@
 import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs/yargs';
+import { ClientChangedEvent } from '@nhsdigital/nhs-notify-config-schemas/src/schemas/client-changed-event';
 import { convertCSV } from '../csv-to-client-input';
 import { buildEvent } from '../event-builder'
-import { ClientChangedEvent } from '@nhsdigital/nhs-notify-config-schemas/src/schemas/client-changed-event';
+import { sendSQSBatchMessages } from '../send-event-to-queue';
 
 type PrintFormat = 'json' | 'table';
 type PrintFunction = (value: unknown) => void;
@@ -20,14 +21,20 @@ function getPrinter(format: PrintFormat): PrintFunction {
 async function main() {
   let print: PrintFunction;
 
-  function setGlobals(argv: { format: string }) {
+  function setGlobals(argv: { format: string, environment: string }) {
     print = getPrinter(argv.format as PrintFormat);
+    process.env.ENVIRONMENT = argv.environment;
   }
 
   await yargs(hideBin(process.argv))
+    .option('environment', {
+      type: 'string',
+      global: true,
+      demandOption: true,
+    })
     .option('format', {
       type: 'string',
-      choices: ['json'],
+      choices: ['json', 'table'],
       default: 'json',
       global: true,
       demandOption: false,
@@ -53,7 +60,10 @@ async function main() {
             results.push(event);
           })
 
-          print(results);
+          sendSQSBatchMessages(results)
+          .then(() => {
+            print("Event(s) successfully sent to queue");
+          })
 
         } catch (err) {
           console.error((err as Error).message); // eslint-disable-line no-console
