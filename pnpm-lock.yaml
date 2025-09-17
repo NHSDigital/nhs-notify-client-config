@@ -144,7 +144,7 @@ importers:
       '@aws-sdk/client-sqs':
         specifier: ^3.888.0
         version: 3.888.0
-      '@nhsdigital/nhs-notify-config-schemas':
+      '@nhsdigital/nhs-notify-client-config-schemas':
         specifier: workspace:1.0.0
         version: link:../schemas
       csv-parse:

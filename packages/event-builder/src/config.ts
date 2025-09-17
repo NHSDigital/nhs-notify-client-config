@@ -9,4 +9,4 @@ export const loadConfig = () => {
 };
 
 //TO-DO: needs to be updated to use the loadConfig and use correct event source once app/bounded context is set up
-export const eventSource = "//notify.nhs.uk/app/nhs-notify-config-dev/main";
+export const eventSource = "//notify.nhs.uk/app/nhs-notify-client-config-dev/main";

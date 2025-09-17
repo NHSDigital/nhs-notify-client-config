@@ -12,7 +12,7 @@
 2. From the `event-builder` folder, run:
 
 ```bash
-pnpm --filter @nhs-notify-config/event-builder cli generate-event \
+pnpm --filter @nhs-notify-client-config/event-builder cli generate-event \
   --csv-file <path to file> \
   --environment <<env>>
 ```
@@ -20,7 +20,7 @@ pnpm --filter @nhs-notify-config/event-builder cli generate-event \
 ## Example
 
 ```bash
-pnpm --filter @nhs-notify-config/event-builder cli generate-event \
+pnpm --filter @nhs-notify-client-config/event-builder cli generate-event \
   --csv-file ../inputs/sample.csv \
   --environment de2-aiyu1
 ```

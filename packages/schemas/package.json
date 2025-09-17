@@ -13,11 +13,11 @@
     "typescript": "^5.7.3"
   },
   "main": "src/index.ts",
-  "name": "@nhsdigital/nhs-notify-config-schemas",
+  "name": "@nhsdigital/nhs-notify-client-config-schemas",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
-  "repository": "git@github.com:NHSDigital/nhs-notify-config.git",
+  "repository": "git@github.com:NHSDigital/nhs-notify-client-config.git",
   "scripts": {
     "build": "tsc",
     "dev": "ts-node src/index.ts",

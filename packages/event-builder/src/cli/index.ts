@@ -1,6 +1,6 @@
 import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs/yargs';
-import { ClientChangedEvent } from '@nhsdigital/nhs-notify-config-schemas/src/schemas/client-changed-event';
+import { ClientChangedEvent } from '@nhsdigital/nhs-notify-client-config-schemas/src/schemas/client-changed-event';
 import { convertCSV } from '../csv-to-client-input';
 import { buildEvent } from '../event-builder'
 import { sendSQSBatchMessages } from '../send-event-to-queue';
