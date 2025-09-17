@@ -64,10 +64,22 @@ variable "parent_acct_environment" {
   default     = "main"
 }
 
+variable "shared_infra_account_id" {
+  type        = string
+  description = "The AWS Account ID of the shared infrastructure account"
+  default     = "000000000000"
+}
+
 variable "enable_amplify_branch_auto_build" {
   type        = bool
   description = "Enable automatic building of branches"
   default     = false
+}
+
+variable "enable_amplify_basic_auth" {
+  type        = bool
+  description = "Enable a basic set of credentials in the form of a dynamically generated username and password for the amplify app branches. Not intended for production use"
+  default     = true
 }
 
 variable "AMPLIFY_BASIC_AUTH_SECRET" {

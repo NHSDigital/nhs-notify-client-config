@@ -52,7 +52,6 @@
   },
   "version": "1.0.0",
   "workspaces": [
-    "lambdas/example-lambda",
     "packages/schema",
     "frontend"
   ],
