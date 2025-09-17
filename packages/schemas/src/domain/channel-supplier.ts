@@ -1,11 +1,10 @@
 import { z } from 'zod';
 import { $ChannelType } from './channel';
+import { ConfigBase } from './common';
 
-export const $ChannelSupplier = z.object({
-  id: z.string(),
-  supplierName: z.string().optional(),
+export const $ChannelSupplier = ConfigBase('ChannelSupplier').extend({
   channelType: $ChannelType,
   outputQueue: z.string(),
-});
+}).describe('ChannelSupplier');
 
 export type ChannelSupplier = z.infer<typeof $ChannelSupplier>;
