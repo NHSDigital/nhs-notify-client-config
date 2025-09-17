@@ -16,6 +16,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@aws-amplify/adapter-nextjs": "^1.6.9",
+    "aws-amplify": "^6.15.6",
     "next": "^15.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
