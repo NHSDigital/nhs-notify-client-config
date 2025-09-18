@@ -19,5 +19,3 @@ data "terraform_remote_state" "ccapp" {
     region = "eu-west-2"
   }
 }
-
-

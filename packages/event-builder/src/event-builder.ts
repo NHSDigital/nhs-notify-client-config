@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import {
   $ClientChangedEvent,
   ClientChangedEvent,
-} from "@nhsdigital/nhs-notify-config-schemas/src/schemas/client-changed-event";
+} from "@nhsdigital/nhs-notify-client-config-schemas/src/schemas/client-changed-event";
 import { ClientInput } from "./input";
 import { eventSource } from "./config";
 
