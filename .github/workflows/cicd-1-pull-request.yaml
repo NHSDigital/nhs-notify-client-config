@@ -6,10 +6,14 @@ on:
   push:
     branches:
       - "**"
-  pull_request:
-    types: [opened, reopened]
-    branches:
-      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: false
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   metadata:
