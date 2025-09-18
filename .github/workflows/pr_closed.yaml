@@ -60,6 +60,4 @@ jobs:
             --targetEnvironment "main" \
             --targetAccountGroup "nhs-notify-client-config-dev" \
             --targetComponent "${{ matrix.component }}" \
-            --terraformAction "apply" \
-            --overrideProjectName "nhs" \
-            --overrideRoleName "nhs-main-acct-client-config-github-deploy"
+            --terraformAction "apply"
