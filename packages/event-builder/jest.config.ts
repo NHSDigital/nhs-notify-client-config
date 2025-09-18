@@ -6,7 +6,7 @@ const config: Config = {
   testMatch: ["**/__tests__/**/*.ts", "**/?(*.)+(spec|test).ts"],
   moduleFileExtensions: ["ts", "js", "json", "node"],
   moduleNameMapper: {
-    "@nhsdigital/nhs-notify-config-schemas$":
+    "@nhsdigital/nhs-notify-client-config-schemas$":
       "<rootDir>/../../packages/schemas/src",
   },
 };
