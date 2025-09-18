@@ -10,9 +10,9 @@ publish:
 	ver=$$(head -n 1 ../../.version 2> /dev/null || echo unknown); \
 	verb=$$(echo $$ver | sed 's/\+.*//'); \
 	echo "version: $$verb"; \
-	docker image tag ghcr.io/nhsdigital/nhs-notify-template-repository:$$verb ghcr.io/nhsdigital/nhs-notify-template-repository:latest; \
-	docker push "ghcr.io/nhsdigital/nhs-notify-template-repository:$$verb"; \
-	docker push "ghcr.io/nhsdigital/nhs-notify-template-repository:latest"
+	docker image tag ghcr.io/nhsdigital/nhs-notify-client-config:$$verb ghcr.io/nhsdigital/nhs-notify-client-config:latest; \
+	docker push "ghcr.io/nhsdigital/nhs-notify-client-config:$$verb"; \
+	docker push "ghcr.io/nhsdigital/nhs-notify-client-config:latest"
 
 debug:
 	devcontainer up --workspace-folder ./src
