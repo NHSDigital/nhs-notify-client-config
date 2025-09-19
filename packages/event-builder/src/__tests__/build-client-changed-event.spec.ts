@@ -12,7 +12,7 @@ describe("test clientChangedEvent builder function", () => {
 
     expect(event).toHaveProperty(
       "type",
-      "uk.nhs.notify.config.ClientChanged.v1",
+      "uk.nhs.notify.client-config.ClientChanged.v1",
     );
     expect(event.data.id).toBe("test-client-id");
     expect(event.data.name).toBe("Test Client");

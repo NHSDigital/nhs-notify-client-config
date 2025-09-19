@@ -1,6 +1,5 @@
 auditability
 auditable
-[A-Z]+s
 Bitwarden
 bot
 [Cc]onfig
