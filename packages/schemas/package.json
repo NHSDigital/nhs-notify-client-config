@@ -3,7 +3,7 @@
   "dependencies": {
     "zod": "^4.0.5"
   },
-  "description": "Schemas for NHS Notify configuration",
+  "description": "Schemas for NHS Notify client configuration",
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/node": "^22.13.4",
