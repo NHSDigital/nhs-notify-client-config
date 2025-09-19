@@ -28,7 +28,7 @@ export const convertCSV = (filePath: string): ClientInput[] => {
 const generateInputs = (input: string): ClientInput[] => {
   const clients: ClientInput[] = [];
 
-  const fileData = parse(input, { columns: true, trim: true, skip_empty_lines: true });
+  const fileData: csvRow[] = parse(input, { columns: true, trim: true, skip_empty_lines: true });
 
   if (fileData.length < 1) {
     throw new Error("No client data provided.");
