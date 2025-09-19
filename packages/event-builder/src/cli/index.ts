@@ -41,7 +41,7 @@ async function main() {
     })
     .middleware(setGlobals)
     .command(
-      'generate-event',
+      'create-client',
       'generates the client mutated event and saved onto a queue',
       {
         'csv-file': {

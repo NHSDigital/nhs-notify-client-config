@@ -1,18 +1,38 @@
-# CSV to Event Generator CLI
+# About
 
-## Usage
+CLI tool for client configuration using events.
 
-1. Place the CSV file in the `event-builder/inputs` folder e.g `sample.csv`. All headers must be provided with values:
-    - `Client ID` - the ID of the client you want to create. This can be generated with an online UUID generator.
-    - `Client Name` - the name of the client
-    - `APIM ID` - the APIM Application ID for the client
+## Global Options
 
-    Multiple rows can be added to process more than one client.
+- --environment - The name of the environment to run the command on e.g 'de2-', 'int'. Required.
+- --format - print data in JSON or tabular format. Default is JSON.
 
-2. From the `event-builder` folder, run:
+## Client Config Commands
+
+- Create Client
+
+## Create Client
+
+- creates client using the most minimal client details required and defaults.
+
+### Options
+
+`--csv-file`: the path to the CSV file containing client details
+
+**Note:** All headers in the CSV file must be provided with values:
+
+- `Client ID` - the ID of the client you want to create. This can be generated with an online UUID generator.
+- `Client Name` - the name of the client.
+- `APIM ID` - the APIM Application ID for the client.
+
+Multiple rows can be added to process more than one client.
+
+### Usage
+
+From the root folder i.e `nhs-notify-client-config`, run:
 
 ```bash
-npm run --workspace=nhs-notify-client-config-event-builder cli -- generate-event \
+npm run --workspace=nhs-notify-client-config-event-builder cli -- create-client \
   --csv-file <path to file> \
   --environment <<env>>
 ```
@@ -20,7 +40,7 @@ npm run --workspace=nhs-notify-client-config-event-builder cli -- generate-event
 ## Example
 
 ```bash
-npm run --workspace=nhs-notify-client-config-event-builder cli -- generate-event \
-  --csv-file ../inputs/sample.csv \
+npm run --workspace=nhs-notify-client-config-event-builder cli -- create-client \
+  --csv-file inputs/sample.csv \
   --environment de2-aiyu1
 ```

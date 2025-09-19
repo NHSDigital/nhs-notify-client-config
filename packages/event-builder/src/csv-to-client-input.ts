@@ -1,5 +1,4 @@
 import fs from "fs";
-import path from "path";
 import { parse } from "csv-parse/sync";
 import { ClientInput } from './input'
 
@@ -16,7 +15,7 @@ const csvHeaders = [
 ]
 
 export const convertCSV = (filePath: string): ClientInput[] => {
-  const csvFile = fs.readFileSync(path.join(__dirname, filePath), "utf-8");
+  const csvFile = fs.readFileSync(filePath, "utf-8");
 
   if(!validateHeaders(csvFile, csvHeaders)) {
     throw new Error("CSV headers do not match expected.");
