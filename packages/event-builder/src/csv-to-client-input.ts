@@ -3,13 +3,11 @@ import { parse } from "csv-parse/sync";
 import { ClientInput } from './input'
 
 type csvRow = {
-  'Client ID': string;
   'Client Name': string;
   'APIM ID': string;
 };
 
 const csvHeaders = [
-  "Client ID",
   "Client Name",
   "APIM ID"
 ]
@@ -35,11 +33,10 @@ const generateInputs = (input: string): ClientInput[] => {
 
   fileData.forEach((row: csvRow) => {
     if(!validateRow(row)) {
-      throw new Error(`Missing data in row for client ID: ${row["Client ID"]}.`)
+      throw new Error(`Missing data in row for client: ${row["Client Name"]}.`)
     }
 
     clients.push({
-      clientId: row["Client ID"],
       clientName: row["Client Name"],
       apimId: row["APIM ID"]
     });

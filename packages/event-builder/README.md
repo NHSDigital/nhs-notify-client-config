@@ -21,7 +21,6 @@ CLI tool for client configuration using events.
 
 **Note:** All headers in the CSV file must be provided with values:
 
-- `Client ID` - the ID of the client you want to create. This can be generated with an online UUID generator.
 - `Client Name` - the name of the client.
 - `APIM ID` - the APIM Application ID for the client.
 
