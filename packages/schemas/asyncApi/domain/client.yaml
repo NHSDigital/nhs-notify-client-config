@@ -1,0 +1,37 @@
+type: "object"
+additionalProperties: false
+properties:
+  id:
+    type: "string"
+  name:
+    type: "string"
+  environment:
+    type: "string"
+    example: "int"
+
+  apimApplication:
+    $ref: "./apim-application.yaml"
+  featureFlags:
+    items:
+      type: "string"
+    type: "array"
+  meshMailbox:
+    $ref: "./mesh-mailbox.yaml"
+  quota:
+    $ref: "./client-quota.yaml"
+
+  rfrCodes:
+    items:
+      type: "string"
+    type: "array"
+  senderOdsCode:
+    type: "string"
+  suppressionFilters:
+    items:
+      $ref: "./suppression-filter.yaml"
+    type: "array"
+
+required:
+  - "id"
+  - "name"
+  - "environment"

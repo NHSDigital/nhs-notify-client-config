@@ -1,0 +1,11 @@
+additionalProperties: false
+description: "ApimApplication"
+properties:
+  apimId:
+    type: "string"
+  id:
+    type: "string"
+required:
+  - "id"
+  - "apimId"
+type: "object"

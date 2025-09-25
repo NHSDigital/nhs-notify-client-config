@@ -9,24 +9,17 @@ import { $FeatureFlag } from './feature-flag';
 
 export const $Client = ConfigBase('Client').extend({
   name: z.string(),
+  environment: z.string(),
   senderOdsCode: z.string().optional(),
   quota: $ClientQuota.optional(),
   meshMailbox: $MeshMailbox.optional(),
   apimApplication: $ApimApplication.optional(),
 
-  featureFlags: z.array(idRef($FeatureFlag)),
-  rfrCodes: z.array(z.string()),
-  suppressionFilters: z.array($SuppressionFilter),
+  featureFlags: z.array(idRef($FeatureFlag)).optional(),
+  rfrCodes: z.array(z.string()).optional(),
+  suppressionFilters: z.array($SuppressionFilter).optional(),
 })
 .strict()
 .describe('Client');
-
-export const $ClientWithAPIM = $Client.extend({
-  apimApplication: $ApimApplication
-});
-
-export const $ClientWithMESH = $Client.extend({
-  meshMailbox: $MeshMailbox
-});
 
 export type Client = z.infer<typeof $Client>;

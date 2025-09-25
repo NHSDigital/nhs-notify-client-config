@@ -5,6 +5,8 @@
   },
   "description": "Schemas for NHS Notify client configuration",
   "devDependencies": {
+    "@asyncapi/cli": "^2.16.7",
+    "@stoplight/spectral-cli": "^6.15.0",
     "@types/jest": "^30.0.0",
     "@types/node": "^22.13.4",
     "jest": "^30.1.3",
@@ -20,11 +22,13 @@
   "repository": "git@github.com:NHSDigital/nhs-notify-client-config.git",
   "scripts": {
     "build": "tsc",
+    "asyncapi": "mkdir -p ./dist/asyncApi && asyncapi bundle ./asyncApi/asyncAPI.yaml --output ./dist/asyncApi/asyncAPI.yaml",
     "dev": "ts-node src/index.ts",
     "json": "ts-node src/cli/generate-json.ts",
     "start": "node dist/index.js",
     "test": "jest",
-    "test:unit": "jest"
+    "test:unit": "jest",
+    "lint:schema": "spectral lint asyncApi/asyncAPI.yaml"
   },
   "version": "1.0.0"
 }
