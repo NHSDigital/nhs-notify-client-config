@@ -5,6 +5,10 @@
       "path": "."
     },
     {
+      "name": "Event Catalogue",
+      "path": "./eventcatalogue"
+    },
+    {
       "name": "Application Source Code",
       "path": "./src"
     },
