@@ -1,0 +1,112 @@
+{
+  "properties": {
+    "apimApplication": {
+      "description": "ApimApplication",
+      "properties": {
+        "apimId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "apimId"
+      ],
+      "type": "object"
+    },
+    "environment": {
+      "examples": [
+        "dev",
+        "int",
+        "prod"
+      ],
+      "type": "string"
+    },
+    "featureFlags": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "id": {
+      "type": "string"
+    },
+    "meshMailbox": {
+      "description": "MeshMailbox",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "mailboxId": {
+          "type": "string"
+        },
+        "workflowIdCompletedRequestItemsReport": {
+          "type": "string"
+        },
+        "workflowIdReceiveRequestAck": {
+          "type": "string"
+        },
+        "workflowIdSuffix": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "mailboxId"
+      ],
+      "type": "object"
+    },
+    "name": {
+      "type": "string"
+    },
+    "quota": {
+      "description": "ClientQuota",
+      "properties": {
+        "tps": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "tps"
+      ],
+      "type": "object"
+    },
+    "rfrCodes": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "senderOdsCode": {
+      "type": "string"
+    },
+    "suppressionFilters": {
+      "items": {
+        "description": "SuppressionFilter",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "pattern": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "pattern"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "environment"
+  ],
+  "title": "Client",
+  "type": "object"
+}

@@ -4,7 +4,7 @@ additionalProperties: false
 description: "Client configuration published event schema v1.0.0"
 properties:
   data:
-    $ref: "../domain/client.yaml"
+    $ref: "../../json/client-1.0.0.json"
   dataschema:
     pattern: "^https:\\/\\/notify\\.nhs\\.uk\\/events\\/client-config\\/client-published\\/1.\\d+\\.\\d+\\.json$"
     type: "string"

@@ -1,8 +1,0 @@
-additionalProperties: false
-description: "ClientQuota"
-properties:
-  tps:
-    type: "number"
-required:
-  - "tps"
-type: "object"
