@@ -11,6 +11,8 @@ channels:
     messages:
       client-published:
         $ref: '#/components/messages/client-published'
+      campagin-published:
+        $ref: '#/components/messages/campaign-published'
 
 components:
   messages:
@@ -20,10 +22,24 @@ components:
       summary: "A client configuration has been published for a given environment."
       contentType: application/json
       payload:
-        $ref: '#/components/schemas/client-published-event'
-
-  schemas:
-    client-published-event:
-      allOf:
-        - $ref: './cloud-events-envelope-1.0.yaml'
-        - $ref: './events/client-published-1.0.0.yaml'
+        allOf:
+          - $ref: './cloud-events-envelope-1.0.yaml'
+          - $ref: './events/client-published-1.0.0.yaml'
+    campaign-published:
+      name: campaign-published
+      title: Campaign Published
+      summary: "A campaign configuration has been published for a given environment."
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: './cloud-events-envelope-1.0.yaml'
+          - $ref: './events/campaign-published-1.0.0.yaml'
+    client-subscription-published:
+      name: client-subscription-published
+      title: Client Subscription Published
+      summary: "The configuration for a client subscription in a given environment has been published."
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: './cloud-events-envelope-1.0.yaml'
+          - $ref: './events/client-subscription-published-1.0.0.yaml'

@@ -6,8 +6,6 @@ export { MeshMailbox } from './mesh-mailbox';
 export { GovuknotifyAccount } from './govuknotify-account';
 export { Queue } from './queue';
 export { ClientQuota, $ClientQuota } from './client-quota';
-export { $ActivePeriod, Schedule, SupplierQuota, $SupplierQuota } from './supplier-quota';
-export { ChannelSupplier, $ChannelSupplier } from './channel-supplier';
 export { RfrCoding } from './rfr-coding';
 export { ApimApplication } from './apim-application';
 export { SuppressionFilter } from './suppression-filter';

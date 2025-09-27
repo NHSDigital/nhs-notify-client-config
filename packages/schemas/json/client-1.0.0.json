@@ -1,4 +1,5 @@
 {
+  "description": "A client represents an organisation or service that sends communications.\n    Each client may be associated with a single APIM application, which is used to authenticate API requests,\n    and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh.",
   "properties": {
     "apimApplication": {
       "description": "ApimApplication",
@@ -17,11 +18,13 @@
       "type": "object"
     },
     "environment": {
+      "description": "The environment in which the configuration has effect",
       "examples": [
         "dev",
         "int",
         "prod"
       ],
+      "title": "Environment",
       "type": "string"
     },
     "featureFlags": {
@@ -61,15 +64,20 @@
     "name": {
       "type": "string"
     },
-    "quota": {
+    "pdsQuota": {
       "description": "ClientQuota",
       "properties": {
-        "tps": {
+        "maxRequestsPerDay": {
+          "description": "An optional maximum number of requests that can be made by the client in one day.",
+          "type": "number"
+        },
+        "maxRequestsPerSecond": {
+          "description": "The maximum number of requests that can be made by the client in one second (TPS or Transactions Per Second).",
           "type": "number"
         }
       },
       "required": [
-        "tps"
+        "maxRequestsPerSecond"
       ],
       "type": "object"
     },
