@@ -6,6 +6,7 @@ import {
 import { ClientInput } from "./input";
 import { eventSource } from "./config";
 import { $ClientId } from "@nhsdigital/nhs-notify-client-config-schemas/src/domain/client";
+import { version as schemaVersion } from "@nhsdigital/nhs-notify-client-config-schemas/package.json";
 
 export const buildEvent = (input: ClientInput): ClientPublishedEvent => {
   return $ClientPublishedEvent.parse({
@@ -18,8 +19,8 @@ export const buildEvent = (input: ClientInput): ClientPublishedEvent => {
     subject: input.clientId,
     type: "uk.nhs.notify.client-config.client-published.v1",
     dataschema:
-      "https://notify.nhs.uk/events/client-config/client-published-1.0.0.json",
-    dataschemaversion: "1.0.0",
+      `https://notify.nhs.uk/events/client-config/client-published-${schemaVersion}.json`,
+    dataschemaversion: schemaVersion,
     data: {
       id: $ClientId.parse(input.clientId),
       name: input.clientName,
