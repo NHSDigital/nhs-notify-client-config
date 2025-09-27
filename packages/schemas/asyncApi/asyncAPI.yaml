@@ -3,27 +3,27 @@ asyncapi: '3.0.0'
 info:
   title: Client Configuration
   version: 1.0.0-alpha
-  description: Client Config domain events
+  description: Client Configuration domain events
 defaultContentType: application/json
 
 channels:
   control-plane:
     messages:
-      clientConfigPublished:
-        $ref: '#/components/messages/clientConfigPublished'
+      client-published:
+        $ref: '#/components/messages/client-published'
 
 components:
   messages:
-    clientConfigPublished:
-      name: clientConfigPublished
-      title: Client Config Published
+    client-published:
+      name: client-published
+      title: Client Published
       summary: "A client configuration has been published for a given environment."
       contentType: application/json
       payload:
-        $ref: '#/components/schemas/ClientConfigPublishedEvent'
+        $ref: '#/components/schemas/client-published-event'
 
   schemas:
-    ClientConfigPublishedEvent:
+    client-published-event:
       allOf:
         - $ref: './cloud-events-envelope-1.0.yaml'
-        - $ref: './events/client-config-published-1.0.0.yaml'
+        - $ref: './events/client-published-1.0.0.yaml'
