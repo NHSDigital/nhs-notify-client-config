@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src/"
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./src/",
+    "esModuleInterop": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "resolveJsonModule": true
   },
   "exclude": [
     "node_modules"

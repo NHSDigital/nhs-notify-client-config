@@ -1,0 +1,120 @@
+{
+  "description": "A client represents an organisation or service that sends communications.\n    Each client may be associated with a single APIM application, which is used to authenticate API requests,\n    and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh.",
+  "properties": {
+    "apimApplication": {
+      "description": "ApimApplication",
+      "properties": {
+        "apimId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "apimId"
+      ],
+      "type": "object"
+    },
+    "environment": {
+      "description": "The environment in which the configuration has effect",
+      "examples": [
+        "dev",
+        "int",
+        "prod"
+      ],
+      "title": "Environment",
+      "type": "string"
+    },
+    "featureFlags": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "id": {
+      "type": "string"
+    },
+    "meshMailbox": {
+      "description": "MeshMailbox",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "mailboxId": {
+          "type": "string"
+        },
+        "workflowIdCompletedRequestItemsReport": {
+          "type": "string"
+        },
+        "workflowIdReceiveRequestAck": {
+          "type": "string"
+        },
+        "workflowIdSuffix": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "mailboxId"
+      ],
+      "type": "object"
+    },
+    "name": {
+      "type": "string"
+    },
+    "pdsQuota": {
+      "description": "ClientQuota",
+      "properties": {
+        "maxRequestsPerDay": {
+          "description": "An optional maximum number of requests that can be made by the client in one day.",
+          "type": "number"
+        },
+        "maxRequestsPerSecond": {
+          "description": "The maximum number of requests that can be made by the client in one second (TPS or Transactions Per Second).",
+          "type": "number"
+        }
+      },
+      "required": [
+        "maxRequestsPerSecond"
+      ],
+      "type": "object"
+    },
+    "rfrCodes": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "senderOdsCode": {
+      "type": "string"
+    },
+    "suppressionFilters": {
+      "items": {
+        "description": "SuppressionFilter",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "pattern": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "pattern"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "environment"
+  ],
+  "title": "Client",
+  "type": "object"
+}

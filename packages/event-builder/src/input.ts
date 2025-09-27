@@ -3,6 +3,7 @@ import { z } from "zod";
 export const $ClientInput = z.object({
   clientId: z.string(),
   clientName: z.string(),
+  environment: z.string(),
   apimId: z.string(),
 });
 
