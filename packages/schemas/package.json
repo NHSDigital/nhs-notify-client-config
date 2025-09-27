@@ -22,7 +22,7 @@
   "repository": "git@github.com:NHSDigital/nhs-notify-client-config.git",
   "scripts": {
     "build": "tsc",
-    "asyncapi": "mkdir -p ./dist/asyncApi && asyncapi bundle ./asyncApi/asyncAPI.yaml --output ./dist/asyncApi/asyncAPI.yaml",
+    "asyncapi": "mkdir -p ./dist/asyncapi && asyncapi bundle ./client-config/client-config.yaml --output ./dist/asyncapi/client-config.yaml",
     "dev": "ts-node src/index.ts",
     "json": "ts-node src/cli/generate-json.ts",
     "start": "node dist/index.js",

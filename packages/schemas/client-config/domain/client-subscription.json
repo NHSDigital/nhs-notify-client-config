@@ -37,8 +37,7 @@
       "description": "The type of events the client is subscribing to.\n    - messageStatus: events related to the status of individual messages (e.g. delivered, failed)\n    - channelStatus: events related to the status of communication channels (e.g. email, sms)",
       "enum": [
         "messageStatus",
-        "channelStatus",
-        ""
+        "channelStatus"
       ],
       "type": "string"
     }

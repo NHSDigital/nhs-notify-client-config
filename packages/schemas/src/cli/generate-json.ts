@@ -12,7 +12,7 @@ for (const [key, schema] of Object.entries({
   'client-subscription': $ClientSubscription,
 })) {
   const json = z.toJSONSchema(schema, {io: 'input', target: 'openapi-3.0', reused: 'ref'});
-  const file = `json/${key}-${version}.json`;
+  const file = `client-config/domain/${key}.json`;
   fs.writeFileSync(file, JSON.stringify(json, null, 2));
   console.info(`Wrote JSON schema for ${key} to ${file}`);
 }

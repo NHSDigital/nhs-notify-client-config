@@ -2,7 +2,7 @@
 asyncapi: '3.0.0'
 info:
   title: Client Configuration
-  version: 1.0.0-alpha
+  version: 1.0.0
   description: Client Configuration domain events
 defaultContentType: application/json
 
@@ -24,7 +24,10 @@ components:
       payload:
         allOf:
           - $ref: './cloud-events-envelope-1.0.yaml'
-          - $ref: './events/client-published-1.0.0.yaml'
+          - $ref: './events/client-published.yaml'
+      examples:
+        - payload:
+            $ref: './examples/client-published.json'
     campaign-published:
       name: campaign-published
       title: Campaign Published
@@ -33,7 +36,7 @@ components:
       payload:
         allOf:
           - $ref: './cloud-events-envelope-1.0.yaml'
-          - $ref: './events/campaign-published-1.0.0.yaml'
+          - $ref: './events/campaign-published.yaml'
     client-subscription-published:
       name: client-subscription-published
       title: Client Subscription Published
@@ -42,4 +45,4 @@ components:
       payload:
         allOf:
           - $ref: './cloud-events-envelope-1.0.yaml'
-          - $ref: './events/client-subscription-published-1.0.0.yaml'
+          - $ref: './events/client-subscription-published.yaml'

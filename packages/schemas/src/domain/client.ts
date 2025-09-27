@@ -26,4 +26,5 @@ export const $Client = ConfigBase('Client').extend({
     and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh.`
 });
 
+export const $ClientId = $Client.shape.id;
 export type Client = z.infer<typeof $Client>;

@@ -1,11 +1,11 @@
 type: "object"
-title: Client Subscription Published Event
+title: Client Published Event
 additionalProperties: false
 properties:
   data:
-    $ref: "../../json/client-subscription-1.0.0.json"
+    $ref: "../domain/client.json"
   dataschema:
-    pattern: "^https:\\/\\/notify\\.nhs\\.uk\\/events\\/client-config\\/client-subscription-published\\/1.\\d+\\.\\d+\\.json$"
+    pattern: "^https:\\/\\/notify\\.nhs\\.uk\\/events\\/client-config\\/client-published-1.\\d+\\.\\d+\\.json$"
     type: "string"
   dataschemaversion:
     pattern: "^1\\.\\d+\\.\\d+$"
@@ -14,7 +14,7 @@ properties:
     const: "control"
     type: "string"
   type:
-    const: "uk.nhs.notify.client-config.client-subscription-published.v1"
+    const: "uk.nhs.notify.client-config.client-published.v1"
     type: "string"
 required:
   - "data"
