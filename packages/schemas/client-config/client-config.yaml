@@ -8,11 +8,15 @@ defaultContentType: application/json
 
 channels:
   control-plane:
+    title: Control Plane
+    description: Events related to configuration changes
     messages:
       client-published:
         $ref: '#/components/messages/client-published'
       campagin-published:
         $ref: '#/components/messages/campaign-published'
+      client-subscription-published:
+        $ref: '#/components/messages/client-subscription-published'
 
 components:
   messages:
