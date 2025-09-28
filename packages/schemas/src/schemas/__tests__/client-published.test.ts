@@ -1,9 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
-import { $ClientPublishedEvent } from "src/schemas/client-published-event";
+import { $ClientPublishedEvent } from "../client-published-event";
 
 function readJson(filename: string): unknown {
-  const filePath = path.resolve(__dirname, "../testData/", filename);
+  const filePath = path.resolve(__dirname, "./testData/", filename);
 
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }

@@ -9,6 +9,9 @@ const config: Config = {
     "@nhsdigital/nhs-notify-client-config-schemas$":
       "<rootDir>/../../packages/schemas/src",
   },
+  transform: {
+    '^.+\\.ts$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.jest.json' }]
+  }
 };
 
 export default config;
