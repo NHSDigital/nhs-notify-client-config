@@ -5,10 +5,18 @@ import {$Client} from './client';
 import {$Environment, ConfigBase} from './common';
 import {$Queue} from "./queue";
 
-export const $Campaign = ConfigBase('Campaign').extend({
+export const $CampaignBase = ConfigBase('Campaign').extend({
   name: z.string(),
   environment: $Environment,
   clientId: idRef($Client),
+}).meta({
+  title: 'CampaignBase',
+  description:
+    `Base schema for campaigns, defining identifying fields.
+    Each campaign is associated with a single client.`,
+});
+
+export const $Campaign = $CampaignBase.extend({
   default: z.boolean().optional().meta({
     title: 'Default Campaign',
     description:

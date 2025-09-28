@@ -1,6 +1,5 @@
 type: "object"
 title: Campaign Published Event
-additionalProperties: false
 properties:
   data:
     $ref: "../domain/campaign.json"

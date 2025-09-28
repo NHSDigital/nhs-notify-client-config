@@ -7,9 +7,16 @@ import {$ClientQuota} from './client-quota';
 import {$Environment, ConfigBase} from './common';
 import {$FeatureFlag} from './feature-flag';
 
-export const $Client = ConfigBase('Client').extend({
+export const $ClientBase = ConfigBase('Client').extend({
   name: z.string(),
   environment: $Environment,
+}).meta({
+  title: 'ClientBase',
+  description:
+    `Base schema for clients, defining identifying fields.`,
+});
+
+export const $Client = $ClientBase.extend({
   senderOdsCode: z.string().optional(),
   pdsQuota: $ClientQuota.optional(),
   meshMailbox: $MeshMailbox.optional(),

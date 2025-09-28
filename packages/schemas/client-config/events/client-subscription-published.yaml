@@ -1,6 +1,5 @@
 type: "object"
 title: Client Subscription Published Event
-additionalProperties: false
 properties:
   data:
     $ref: "../domain/client-subscription.json"

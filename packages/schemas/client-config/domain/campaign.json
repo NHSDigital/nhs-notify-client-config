@@ -35,6 +35,8 @@
             "type": "object"
           },
           "id": {
+            "description": "Unique identifier for the Queue",
+            "title": "Queue ID",
             "type": "string"
           }
         },
@@ -48,6 +50,8 @@
       "type": "array"
     },
     "clientId": {
+      "description": "Unique identifier for the Client",
+      "title": "Client ID",
       "type": "string"
     },
     "default": {
@@ -73,6 +77,8 @@
           "type": "string"
         },
         "id": {
+          "description": "Unique identifier for the GovuknotifyAccount",
+          "title": "GovuknotifyAccount ID",
           "type": "string"
         },
         "name": {
@@ -86,6 +92,8 @@
       "type": "object"
     },
     "id": {
+      "description": "Unique identifier for the Campaign",
+      "title": "Campaign ID",
       "type": "string"
     },
     "name": {

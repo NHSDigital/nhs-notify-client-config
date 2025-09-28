@@ -1,10 +1,10 @@
 type: "object"
-title: Client Published Event
+title: Client Removed Event
 properties:
   data:
-    $ref: "../domain/client.json"
+    $ref: "../domain/client-base.json"
   dataschema:
-    pattern: "^https:\\/\\/notify\\.nhs\\.uk\\/events\\/client-config\\/client-published-1.\\d+\\.\\d+\\.json$"
+    pattern: "^https:\\/\\/notify\\.nhs\\.uk\\/events\\/client-config\\/client-removed-1.\\d+\\.\\d+\\.json$"
     type: "string"
   dataschemaversion:
     pattern: "^1\\.\\d+\\.\\d+$"
@@ -13,7 +13,7 @@ properties:
     const: "control"
     type: "string"
   type:
-    const: "uk.nhs.notify.client-config.client-published.v1"
+    const: "uk.nhs.notify.client-config.client-removed.v1"
     type: "string"
 required:
   - "data"

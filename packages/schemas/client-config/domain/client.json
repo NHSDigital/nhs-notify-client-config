@@ -29,17 +29,23 @@
     },
     "featureFlags": {
       "items": {
+        "description": "Unique identifier for the FeatureFlag",
+        "title": "FeatureFlag ID",
         "type": "string"
       },
       "type": "array"
     },
     "id": {
+      "description": "Unique identifier for the Client",
+      "title": "Client ID",
       "type": "string"
     },
     "meshMailbox": {
       "description": "MeshMailbox",
       "properties": {
         "id": {
+          "description": "Unique identifier for the MeshMailbox",
+          "title": "MeshMailbox ID",
           "type": "string"
         },
         "mailboxId": {
@@ -95,6 +101,8 @@
         "description": "SuppressionFilter",
         "properties": {
           "id": {
+            "description": "Unique identifier for the SuppressionFilter",
+            "title": "SuppressionFilter ID",
             "type": "string"
           },
           "pattern": {
