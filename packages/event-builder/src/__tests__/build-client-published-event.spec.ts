@@ -1,9 +1,8 @@
 import { $ClientPublishedEvent } from "@nhsdigital/nhs-notify-client-config-schemas/src/schemas/client-published-event";
-import { buildEvent } from "../event-builder";
 import { version as schemaVersion } from "@nhsdigital/nhs-notify-client-config-schemas/package.json";
+import buildEvent from "../event-builder";
 
 describe("test clientChangedEvent builder function", () => {
-
   const testInput = {
     clientId: "test-client-id",
     clientName: "Test Client",
@@ -28,14 +27,16 @@ describe("test clientChangedEvent builder function", () => {
     );
   });
 
-  it ("should use the schema package version to identify the event schema", () => {
+  it("should use the schema package version to identify the event schema", () => {
     const event = buildEvent(testInput);
 
     expect(event.dataschemaversion).toEqual(schemaVersion);
-    expect(event.dataschema).toEqual(expect.stringMatching(`client-published-${schemaVersion}\\.json$`));
+    expect(event.dataschema).toEqual(
+      expect.stringMatching(`client-published-${schemaVersion}\\.json$`),
+    );
   });
 
-  it ("should validate using the event schema", () => {
+  it("should validate using the event schema", () => {
     const event = buildEvent(testInput);
 
     expect(() => $ClientPublishedEvent.parse(event)).not.toThrow();

@@ -73,10 +73,6 @@
     "pdsQuota": {
       "description": "ClientQuota",
       "properties": {
-        "maxRequestsPerDay": {
-          "description": "An optional maximum number of requests that can be made by the client in one day.",
-          "type": "number"
-        },
         "maxRequestsPerSecond": {
           "description": "The maximum number of requests that can be made by the client in one second (TPS or Transactions Per Second).",
           "type": "number"

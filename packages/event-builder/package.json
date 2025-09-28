@@ -10,6 +10,9 @@
     "@tsconfig/node22": "^22.0.2",
     "@types/jest": "^30.0.0",
     "esbuild": "^0.25.9",
+    "eslint": "^9.36.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-unicorn": "^61.0.2",
     "jest": "^30.1.3",
     "jest-mock-extended": "^4.0.0",
     "typescript": "^5.8.2"
@@ -24,5 +27,15 @@
     "test:unit": "jest",
     "typecheck": "tsc --noEmit"
   },
-  "version": "0.0.1"
+  "eslintConfig": [
+    {
+      "ignores": [
+        "**/node_modules/**",
+        "**/dist/**",
+        "**/build/**"
+      ]
+    }
+  ],
+  "version": "0.0.1",
+  "type": "module"
 }

@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
+    "extends": "@tsconfig/node22/tsconfig.json",
     "forceConsistentCasingInFileNames": true,
+    "include": [
+      "src/**/*",
+      "./jest.config.ts"
+    ],
     "module": "commonjs",
     "outDir": "dist",
     "resolveJsonModule": true,
