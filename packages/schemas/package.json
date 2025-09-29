@@ -34,6 +34,7 @@
     "lint": "npm run lint:node && npm run lint:schema",
     "lint:node": "eslint .",
     "lint:fix": "eslint . --fix",
+    "prelint:schema": "npm run gen:json",
     "lint:schema": "spectral lint client-config/client-config.yaml"
   },
   "version": "1.0.0"
