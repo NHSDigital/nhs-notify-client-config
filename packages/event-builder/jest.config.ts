@@ -10,7 +10,7 @@ const config: Config = {
       "<rootDir>/../../packages/schemas/src",
   },
   transform: {
-    '^.+\\.ts$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.jest.json' }]
+    "^.+\\.ts$": ["ts-jest", { tsconfig: "<rootDir>/tsconfig.jest.json" }]
   }
 };
 
