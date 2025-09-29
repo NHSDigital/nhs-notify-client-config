@@ -15,7 +15,7 @@ describe("ClientPublishedEvent validations", () => {
     expect(() => $ClientPublishedEvent.parse(json)).not.toThrow();
   });
 
-  it("should throw error for clientChanged event with missing environment", () => {
+  it("should throw error for clientPublished event with missing environment", () => {
     const json = readJson("client-with-missing-environment.json");
 
     expect(() => $ClientPublishedEvent.parse(json)).toThrow();
