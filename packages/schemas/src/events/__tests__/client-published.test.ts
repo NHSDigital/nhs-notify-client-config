@@ -9,7 +9,7 @@ function readJson(filename: string): unknown {
 }
 
 describe("ClientPublishedEvent validations", () => {
-  it("should validate a clientChanged event with all required", () => {
+  it("should validate a clientPublished event with all required", () => {
     const json = readJson("client-valid.json");
 
     expect(() => $ClientPublishedEvent.parse(json)).not.toThrow();
