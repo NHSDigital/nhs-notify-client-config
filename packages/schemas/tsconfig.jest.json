@@ -4,6 +4,7 @@
   },
   "extends": "./tsconfig.json",
   "include": [
-    "src"
+    "src",
+    "jest.config.ts"
   ]
 }

@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "commonjs",
+    "module": "Node16",
     "outDir": "dist",
     "resolveJsonModule": true,
     "rootDir": "src",
@@ -13,7 +13,6 @@
   },
   "extends": "@tsconfig/node22/tsconfig.json",
   "include": [
-    "src/**/*",
-    "jest.config.ts"
+    "src/**/*"
   ]
 }
