@@ -1,6 +1,8 @@
 import { $ClientPublishedEvent } from "@nhsdigital/nhs-notify-client-config-schemas/src/events/client-published-event";
-import { version as schemaVersion } from "@nhsdigital/nhs-notify-client-config-schemas/package.json";
+import schemaPackage from "@nhsdigital/nhs-notify-client-config-schemas/package.json";
 import buildEvent from "../event-builder";
+
+const schemaVersion = schemaPackage.version;
 
 describe("test clientChangedEvent builder function", () => {
   const testInput = {

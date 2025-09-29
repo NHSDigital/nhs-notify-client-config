@@ -1,9 +1,9 @@
 {
-  "compilerOptions": {
-    "module": "commonjs"
-  },
+  "exclude": [
+    "./dist/"
+  ],
   "extends": "./tsconfig.json",
   "include": [
-    "src"
+    "."
   ]
 }

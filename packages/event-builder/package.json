@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@nhsdigital/nhs-notify-client-config-schemas": "1.0.0",
+    "@nhsdigital/nhs-notify-client-config-schemas": "*",
     "csv-parse": "^5.6.0",
     "zod": "^4.0.17"
   },
@@ -17,10 +17,10 @@
     "jest-mock-extended": "^4.0.0",
     "typescript": "^5.8.2"
   },
-  "name": "nhs-notify-client-config-event-builder",
+  "name": "@nhsdigital/nhs-notify-client-config-event-builder",
   "private": true,
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "jest",
