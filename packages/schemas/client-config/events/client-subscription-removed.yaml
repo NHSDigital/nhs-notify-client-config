@@ -1,0 +1,23 @@
+type: "object"
+title: Client Subscription Removed Event
+properties:
+  data:
+    $ref: "../domain/client-subscription-base.json"
+  dataschema:
+    pattern: "^https:\\/\\/notify\\.nhs\\.uk\\/events\\/client-config\\/client-subscription-removed-1.\\d+\\.\\d+\\.json$"
+    type: "string"
+  dataschemaversion:
+    pattern: "^1\\.\\d+\\.\\d+$"
+    type: "string"
+  plane:
+    const: "control"
+    type: "string"
+  type:
+    const: "uk.nhs.notify.client-config.client-subscription-removed.v1"
+    type: "string"
+required:
+  - "data"
+  - "dataschema"
+  - "dataschemaversion"
+  - "type"
+  - "plane"

@@ -1,0 +1,85 @@
+---
+asyncapi: '3.0.0'
+info:
+  title: Client Configuration
+  version: 1.0.0
+  description: Client Configuration domain events
+defaultContentType: application/json
+
+channels:
+  control-plane:
+    title: Control Plane
+    description: Events related to configuration changes
+    messages:
+      client-published:
+        $ref: '#/components/messages/client-published'
+      client-removed:
+        $ref: '#/components/messages/client-removed'
+      campaign-published:
+        $ref: '#/components/messages/campaign-published'
+      campaign-removed:
+        $ref: '#/components/messages/campaign-removed'
+      client-subscription-published:
+        $ref: '#/components/messages/client-subscription-published'
+      client-subscription-removed:
+        $ref: '#/components/messages/client-subscription-removed'
+
+components:
+  messages:
+    client-published:
+      name: client-published
+      title: Client Published
+      summary: "A client configuration has been published for a given environment."
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: './cloud-events-envelope-1.0.yaml'
+          - $ref: './events/client-published.yaml'
+      examples:
+        - payload:
+            $ref: './examples/client-published.json'
+    client-removed:
+      name: client-removed
+      title: Client Removed
+      summary: "A client configuration has been removed for a given environment."
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: './cloud-events-envelope-1.0.yaml'
+          - $ref: './events/client-removed.yaml'
+    campaign-published:
+      name: campaign-published
+      title: Campaign Published
+      summary: "A campaign configuration has been published for a given environment."
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: './cloud-events-envelope-1.0.yaml'
+          - $ref: './events/campaign-published.yaml'
+    campaign-removed:
+      name: campaign-removed
+      title: Campaign Removed
+      summary: "A campaign configuration has been removed for a given environment."
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: './cloud-events-envelope-1.0.yaml'
+          - $ref: './events/campaign-removed.yaml'
+    client-subscription-published:
+      name: client-subscription-published
+      title: Client Subscription Published
+      summary: "The configuration for a client subscription in a given environment has been published."
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: './cloud-events-envelope-1.0.yaml'
+          - $ref: './events/client-subscription-published.yaml'
+    client-subscription-removed:
+      name: client-subscription-removed
+      title: Client Subscription Removed
+      summary: "The configuration for a client subscription in a given environment has been removed."
+      contentType: application/json
+      payload:
+        allOf:
+          - $ref: './cloud-events-envelope-1.0.yaml'
+          - $ref: './events/client-subscription-removed.yaml'
