@@ -8,7 +8,7 @@ function readJson(filename: string): unknown {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
 
-describe("ClientChangedEvent validations", () => {
+describe("ClientPublishedEvent validations", () => {
   it("should validate a clientChanged event with all required", () => {
     const json = readJson("client-valid.json");
 
