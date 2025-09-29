@@ -27,15 +27,6 @@
     "test:unit": "jest",
     "typecheck": "tsc --noEmit"
   },
-  "eslintConfig": [
-    {
-      "ignores": [
-        "**/node_modules/**",
-        "**/dist/**",
-        "**/build/**"
-      ]
-    }
-  ],
   "version": "0.0.1",
   "type": "module"
 }
