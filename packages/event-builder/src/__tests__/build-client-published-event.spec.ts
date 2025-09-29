@@ -4,7 +4,7 @@ import buildEvent from "../event-builder";
 
 const schemaVersion = schemaPackage.version;
 
-describe("test clientChangedEvent builder function", () => {
+describe("test clientPublishedEvent builder function", () => {
   const testInput = {
     clientId: "test-client-id",
     clientName: "Test Client",
