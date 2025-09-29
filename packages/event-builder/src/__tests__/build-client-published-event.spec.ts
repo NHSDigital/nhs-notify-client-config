@@ -12,7 +12,7 @@ describe("test clientPublishedEvent builder function", () => {
     apimId: "test-apim-id",
   };
 
-  it("should successfully build a clientChangedEvent", () => {
+  it("should successfully build a clientPublishedEvent", () => {
     const event = buildEvent(testInput);
 
     expect(event).toHaveProperty(
