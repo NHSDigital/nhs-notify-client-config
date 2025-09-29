@@ -17,7 +17,7 @@ channels:
         $ref: '#/components/messages/client-removed'
       campaign-published:
         $ref: '#/components/messages/campaign-published'
-      campagin-removed:
+      campaign-removed:
         $ref: '#/components/messages/campaign-removed'
       client-subscription-published:
         $ref: '#/components/messages/client-subscription-published'
