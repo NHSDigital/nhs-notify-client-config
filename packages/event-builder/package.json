@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@nhsdigital/nhs-notify-client-config-schemas": "*",
-    "csv-parse": "^5.6.0",
+    "csv-parse": "^6.1.0",
     "zod": "^4.0.17"
   },
   "devDependencies": {
