@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@aws-sdk/client-sqs": "^3.888.0",
-    "@nhsdigital/nhs-notify-client-config-schemas": "1.0.0",
+    "@nhsdigital/nhs-notify-client-config-schemas": "*",
     "csv-parse": "^6.1.0",
     "yargs": "^17.7.2",
     "zod": "^4.0.17"
@@ -16,20 +16,24 @@
     "aws-sdk-client-mock": "^4.1.0",
     "aws-sdk-client-mock-jest": "^4.1.0",
     "esbuild": "^0.25.9",
+    "eslint": "^9.36.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-unicorn": "^61.0.2",
     "jest": "^30.1.3",
     "jest-mock-extended": "^4.0.0",
     "typescript": "^5.8.2"
   },
-  "name": "nhs-notify-client-config-event-builder",
+  "name": "@nhsdigital/nhs-notify-client-config-event-builder",
   "private": true,
   "scripts": {
-    "build": "tsc",
     "cli": "ts-node src/cli/index.ts",
+    "build": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "jest",
     "test:unit": "jest",
     "typecheck": "tsc --noEmit"
   },
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "type": "module"
 }

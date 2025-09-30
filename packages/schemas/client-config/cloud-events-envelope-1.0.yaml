@@ -1,0 +1,39 @@
+type: "object"
+title: "Cloud Event Envelope"
+additionalProperties: false
+description: "Common elements of the cloud events envelope"
+properties:
+  datacontenttype:
+    const: "application/json"
+    type: "string"
+  dataschema:
+    type: "string"
+  dataschemaversion:
+    pattern: "^\\d\\.\\d+\\.\\d+$"
+    type: "string"
+  id:
+    type: "string"
+  plane:
+    type: "string"
+  source:
+    type: "string"
+  specversion:
+    const: "1.0"
+    type: "string"
+  subject:
+    type: "string"
+  time:
+    type: "string"
+  type:
+    type: "string"
+required:
+  - "dataschema"
+  - "dataschemaversion"
+  - "type"
+  - "id"
+  - "source"
+  - "specversion"
+  - "subject"
+  - "time"
+  - "datacontenttype"
+  - "plane"
