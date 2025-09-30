@@ -32,7 +32,7 @@ Multiple rows can be added to process more than one client.
 From the root folder i.e `nhs-notify-client-config`, run:
 
 ```bash
-npm run --workspace=nhs-notify-client-config-event-builder cli -- create-client \
+npm run --workspace=@nhsdigital/nhs-notify-client-config-event-builder cli -- create-client \
   --csv-file <path to file> \
   --environment <<env>>
 ```
@@ -40,7 +40,7 @@ npm run --workspace=nhs-notify-client-config-event-builder cli -- create-client 
 ## Example
 
 ```bash
-npm run --workspace=nhs-notify-client-config-event-builder cli -- create-client \
+npm run --workspace=@nhsdigital/nhs-notify-client-config-event-builder cli -- create-client \
   --csv-file inputs/sample.csv \
   --environment de2-aiyu1
 ```
