@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 const $EventMetadataVersionInformation = z.strictObject({
   dataschema: z.string(),
@@ -12,10 +12,10 @@ export type EventMetadataVersionInformation = z.infer<
 export const $EventMetadata = $EventMetadataVersionInformation.extend({
   id: z.string(),
   source: z.string(),
-  specversion: z.literal('1.0'),
+  specversion: z.literal("1.0"),
   subject: z.string(),
   time: z.string(),
-  datacontenttype: z.literal('application/json'),
-  plane: z.literal('control'),
+  datacontenttype: z.literal("application/json"),
+  plane: z.literal("control"),
 });
 export type EventMetadata = z.infer<typeof $EventMetadata>;

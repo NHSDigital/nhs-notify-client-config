@@ -1,13 +1,17 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src/"
+    "baseUrl": ".",
+    "composite": true,
+    "jsx": "react",
+    "lib": [
+      "es2022",
+      "dom",
+      "esnext.asynciterable"
+    ],
+    "module": "commonjs",
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "target": "ES2022"
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "extends": "@tsconfig/node22/tsconfig.json",
-  "include": [
-    "src/**/*",
-    "./jest.config.ts"
-  ]
+  "extends": "../../tsconfig.base.json"
 }
