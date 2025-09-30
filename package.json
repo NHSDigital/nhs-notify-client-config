@@ -1,12 +1,29 @@
 {
+  "name": "nhs-notify-client-config",
+  "version": "1.0.0",
+  "scripts": {
+    "generate-dependencies": "npm run generate-dependencies --workspaces --if-present",
+    "build": "npm run --workspace frontend build --if-present",
+    "build-lambda": "npm run --workspaces build-lambda --if-present",
+    "dev": "npm run --workspace frontend dev --if-present",
+    "lint": "NODE_OPTIONS='--disable-warning=ExperimentalWarning' npm run --workspaces lint --if-present",
+    "lint:fix": "NODE_OPTIONS='--disable-warning=ExperimentalWarning' npm run --workspaces lint:fix --if-present",
+    "start": "npm run --workspace frontend start --if-present",
+    "test:unit": "npm run --workspaces test:unit --if-present",
+    "test:ui": "npm run build && npm -w tests/test-team run test:local-ui",
+    "typecheck": "npm run --workspaces typecheck --if-present"
+  },
+  "dependencies": {
+    "@stylistic/eslint-plugin": "^3.1.0"
+  },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^3.1.0",
     "@stylistic/eslint-plugin-ts": "^4.4.1",
     "@tsconfig/node22": "^22.0.2",
     "@types/jest": "^30.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.27.0",
-    "@typescript-eslint/parser": "^8.39.0",
-    "esbuild": "^0.25.8",
+    "@typescript-eslint/eslint-plugin": "^8.44.0",
+    "@typescript-eslint/parser": "^8.44.0",
+    "esbuild": "^0.25.9",
     "eslint": "^9.32.0",
     "eslint-config-airbnb-extended": "^2.1.2",
     "eslint-config-next": "^15.5.3",
@@ -32,27 +49,16 @@
     "ts-jest": "^29.3.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.3",
-    "typescript-eslint": "^8.35.1"
+    "typescript-eslint": "^8.44.0"
   },
-  "name": "nhs-notify-config",
   "overrides": {
     "pretty-format": {
       "react-is": "19.0.0"
     },
     "react": "^19.0.0"
   },
-  "scripts": {
-    "generate-dependencies": "npm run generate-dependencies --workspaces --if-present",
-    "lint": "npm run lint --workspaces",
-    "lint:fix": "npm run lint:fix --workspaces",
-    "start": "npm run start --workspace frontend",
-    "test:unit": "npm run test:unit --workspaces",
-    "typecheck": "npm run typecheck --workspaces"
-  },
-  "version": "1.0.0",
   "workspaces": [
-    "lambdas/example-lambda",
-    "packages/event-builder",
-    "packages/schemas"
+    "packages/*",
+    "frontend"
   ]
 }

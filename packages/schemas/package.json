@@ -3,7 +3,7 @@
   "dependencies": {
     "zod": "^4.0.5"
   },
-  "description": "Schemas for NHS Notify configuration",
+  "description": "Schemas for NHS Notify client configuration",
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/node": "^22.13.4",
@@ -13,11 +13,11 @@
     "typescript": "^5.7.3"
   },
   "main": "src/index.ts",
-  "name": "@nhsdigital/nhs-notify-config-schemas",
+  "name": "@nhsdigital/nhs-notify-client-config-schemas",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
-  "repository": "git@github.com:NHSDigital/nhs-notify-config.git",
+  "repository": "git@github.com:NHSDigital/nhs-notify-client-config.git",
   "scripts": {
     "build": "tsc",
     "dev": "ts-node src/index.ts",

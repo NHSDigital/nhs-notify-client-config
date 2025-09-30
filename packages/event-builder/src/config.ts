@@ -8,4 +8,4 @@ export const loadConfig = () => {
   return $Config.parse(process.env);
 };
 
-export const eventSource = "//notify.nhs.uk/app/nhs-notify-config-dev/main";
+export const eventSource = "//notify.nhs.uk/app/nhs-notify-client-config-dev/main";
