@@ -1,75 +1,74 @@
-import { hideBin } from 'yargs/helpers';
-import yargs from 'yargs/yargs';
-import { ClientChangedEvent } from '@nhsdigital/nhs-notify-client-config-schemas/src/schemas/client-changed-event';
-import { convertCSV } from '../csv-to-client-input';
-import { buildEvent } from '../event-builder'
-import { sendSQSBatchMessages } from '../send-event-to-queue';
+/* eslint-disable unicorn/no-process-exit */
 
-type PrintFormat = 'json' | 'table';
+import { hideBin } from "yargs/helpers";
+import yargs from "yargs/yargs";
+import { ClientPublishedEvent } from "@nhsdigital/nhs-notify-client-config-schemas/src/events/client-published-event";
+import convertCSV from "../csv-to-client-input";
+import buildEvent from "../event-builder";
+import sendSQSBatchMessages from "../send-event-to-queue";
+
+type PrintFormat = "json" | "table";
 type PrintFunction = (value: unknown) => void;
 
 function getPrinter(format: PrintFormat): PrintFunction {
-  /* eslint-disable no-console */
-  if (format === 'json') {
+  if (format === "json") {
     return (value) => console.log(JSON.stringify(value, null, 2));
   }
 
   return (value) => console.table(Array.isArray(value) ? value : [value]);
-  /* eslint-enable no-console */
 }
 
 async function main() {
   let print: PrintFunction;
+  let env: string;
 
-  function setGlobals(argv: { format: string, environment: string }) {
+  function setGlobals(argv: { format: string; environment: string }) {
     print = getPrinter(argv.format as PrintFormat);
-    process.env.ENVIRONMENT = argv.environment;
+    env = argv.environment;
   }
 
   await yargs(hideBin(process.argv))
-    .option('environment', {
-      type: 'string',
+    .option("environment", {
+      type: "string",
       global: true,
       demandOption: true,
     })
-    .option('format', {
-      type: 'string',
-      choices: ['json', 'table'],
-      default: 'json',
+    .option("format", {
+      type: "string",
+      choices: ["json", "table"],
+      default: "json",
       global: true,
       demandOption: false,
     })
     .middleware(setGlobals)
     .command(
-      'create-client',
-      'generates the client mutated event and saved onto a queue',
+      "create-client",
+      "generates the client mutated event and saved onto a queue",
       {
-        'csv-file': {
-          type: 'string',
+        "csv-file": {
+          type: "string",
           demandOption: true,
         },
       },
       async (argv) => {
-        const results: ClientChangedEvent[] = [];
+        const results: ClientPublishedEvent[] = [];
 
         try {
-          const clientsDetails = convertCSV(argv.csvFile);
+          const clientsDetails = convertCSV(argv.csvFile, env);
 
-          clientsDetails.forEach(client => {
+          for (const client of clientsDetails) {
             const event = buildEvent(client);
             results.push(event);
-          })
+          }
 
-          sendSQSBatchMessages(results)
-          .then(() => {
+          sendSQSBatchMessages(results, env).then(() => {
             print("Event(s) successfully sent to queue");
-          })
-
-        } catch (err) {
-          console.error((err as Error).message); // eslint-disable-line no-console
+          });
+        } catch (error) {
+          console.error((error as Error).message);
           process.exit(1);
         }
-      }
+      },
     )
     .demandCommand(1)
     .fail((msg, err) => {
@@ -81,8 +80,8 @@ async function main() {
 }
 
 if (require.main === module) {
-  main().catch((err) => {
-    console.error(err); // eslint-disable-line no-console
+  main().catch((error) => {
+    console.error(error);
     process.exitCode = 1;
   });
 }

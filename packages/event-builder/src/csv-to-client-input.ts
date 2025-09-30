@@ -1,66 +1,76 @@
-import fs from "fs";
+import fs from "node:fs";
 import { parse } from "csv-parse/sync";
-import { ClientInput } from './input'
+import { ClientInput } from "./input";
 
-type csvRow = {
-  'Client ID': string;
-  'Client Name': string;
-  'APIM ID': string;
+type CsvRow = {
+  "Client ID": string;
+  "Client Name": string;
+  "APIM ID": string;
 };
 
-const csvHeaders = [
-  "Client ID",
-  "Client Name",
-  "APIM ID"
-]
+const csvHeaders = ["Client ID", "Client Name", "APIM ID"];
 
-export const convertCSV = (filePath: string): ClientInput[] => {
-  const csvFile = fs.readFileSync(filePath, "utf-8");
+const validateRow = (input: CsvRow): boolean => {
+  return !Object.values(input).some((v) => v == null || v === "");
+};
 
-  if(!validateHeaders(csvFile, csvHeaders)) {
-    throw new Error("CSV headers do not match expected.");
-  }
-
-  return generateInputs(csvFile);
-}
-
-const generateInputs = (input: string): ClientInput[] => {
+const generateInputs = (input: string, env: string): ClientInput[] => {
   const clients: ClientInput[] = [];
 
-  const fileData: csvRow[] = parse(input, { columns: true, trim: true, skip_empty_lines: true });
+  const fileData: CsvRow[] = parse(input, {
+    columns: true,
+    trim: true,
+    skip_empty_lines: true,
+  });
 
-  if (fileData.length < 1) {
+  if (fileData.length === 0) {
     throw new Error("No client data provided.");
   }
 
-  fileData.forEach((row: csvRow) => {
-    if(!validateRow(row)) {
-      throw new Error(`Missing data in row for client ID: ${row["Client ID"]}.`)
+  for (const row of fileData) {
+    if (!validateRow(row)) {
+      throw new Error(
+        `Missing data in row for client ID: ${row["Client ID"]}.`,
+      );
     }
 
     clients.push({
       clientId: row["Client ID"],
       clientName: row["Client Name"],
-      apimId: row["APIM ID"]
+      apimId: row["APIM ID"],
+      environment: env,
     });
-  })
+  }
 
   return clients;
-}
-
-const validateRow = (input: csvRow): boolean => {
-  if (Object.values(input).some(v => v === undefined || v === "")) {
-    return false;
-  }
-  return true;
-}
+};
 
 const validateHeaders = (input: string, expectedCols: string[]): boolean => {
-  const [headers] = parse(input, { to_line: 1 }) as string[][];
+  const [headers] = parse(input, { to_line: 1 });
 
   const isMatch =
     headers.length === expectedCols.length &&
     headers.every((col, i) => col === expectedCols[i]);
 
   return isMatch;
-}
+};
+
+const convertCSV = (filePath: string, environment: string): ClientInput[] => {
+  try {
+    const csvFile = fs.readFileSync(filePath, "utf8");
+
+    if (!validateHeaders(csvFile, csvHeaders)) {
+      throw new Error("CSV headers do not match expected.");
+    }
+    return generateInputs(csvFile, environment);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new TypeError(
+        `Failed to process CSV file at ${filePath}: ${error.message}`,
+      );
+    }
+    throw error;
+  }
+};
+
+export default convertCSV;
