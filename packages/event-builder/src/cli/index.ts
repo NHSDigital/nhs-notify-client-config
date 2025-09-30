@@ -35,7 +35,7 @@ async function main() {
     .option('format', {
       type: 'string',
       choices: ['json', 'table'],
-      default: 'table',
+      default: 'json',
       global: true,
       demandOption: false,
     })
@@ -62,13 +62,7 @@ async function main() {
 
           sendSQSBatchMessages(results)
           .then(() => {
-            const outputs = results.map(r => ({
-              "Client": r.data.name,
-              "ID": r.data.id
-            }));
-
-            console.log("Event(s) successfully sent to queue");
-            print(outputs);
+            print("Event(s) successfully sent to queue");
           })
 
         } catch (err) {
