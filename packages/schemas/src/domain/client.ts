@@ -34,7 +34,7 @@ export const $Client = $ClientBase
         description: `Reason for removal codes (RFR codes) indicate
 why a recipient has been removed from their GP's registered patient list.
 
-This field is optional, but if provided must be an array of valid codes. The defualt behaviour is to suppress communications
+This field is optional, but if provided must be an array of valid codes. The default behaviour is to suppress communications to
 recipients with any RFR code, but this option can be used to allow recipients with certain codes to receive communications.
 
 See https://data.developer.nhs.uk/dms/mim/6.3.01/Vocabulary/NHAISRemovalReasonCode.htm for information on possible codes.
