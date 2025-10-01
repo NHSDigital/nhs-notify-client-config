@@ -85,7 +85,7 @@
     },
     "rfrCodes": {
       "title": "Reason for Removal Codes",
-      "description": "Reason for removal codes (RFR codes) indicate\nwhy a recipient has been removed from their GP's registered patient list.\n\nThis field is optional, but if provided must be an array of valid codes. The defualt behaviour is to suppress communications\nrecipients with any RFR code, but this option can be used to allow recipients with certain codes to receive communications.\n\nSee https://data.developer.nhs.uk/dms/mim/6.3.01/Vocabulary/NHAISRemovalReasonCode.htm for information on possible codes.\n\nPDS currently only provides a subset of 'Exit' codes, including those for Deceased patients.\n* DEA - Death\n* EMB - Embarkation\n* SCT - Transferred to Scotland\n* NIT - Transferred to Northern Ireland\n* TRA - Temporary resident not returned\n* ORR - Other reason\n",
+      "description": "Reason for removal codes (RFR codes) indicate\nwhy a recipient has been removed from their GP's registered patient list.\n\nThis field is optional, but if provided must be an array of valid codes. The default behaviour is to suppress communications to\nrecipients with any RFR code, but this option can be used to allow recipients with certain codes to receive communications.\n\nSee https://data.developer.nhs.uk/dms/mim/6.3.01/Vocabulary/NHAISRemovalReasonCode.htm for information on possible codes.\n\nPDS currently only provides a subset of 'Exit' codes, including those for Deceased patients.\n* DEA - Death\n* EMB - Embarkation\n* SCT - Transferred to Scotland\n* NIT - Transferred to Northern Ireland\n* TRA - Temporary resident not returned\n* ORR - Other reason\n",
       "type": "array",
       "items": {
         "type": "string",
