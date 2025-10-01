@@ -21,9 +21,9 @@
   },
   "repository": "git@github.com:NHSDigital/nhs-notify-client-config.git",
   "scripts": {
-    "pregen:json": "rm -rf ./client-config/json",
-    "gen:json": "ts-node src/cli/generate-json.ts",
-    "pregen:asyncapi": "npm run gen:json",
+    "pregen:jsonschema": "rm -rf ./client-config/json",
+    "gen:jsonschema": "ts-node src/cli/generate-json.ts",
+    "pregen:asyncapi": "npm run gen:jsonschema",
     "gen:asyncapi": "mkdir -p ./dist/asyncapi && asyncapi bundle ./client-config/client-config.yaml --output ./dist/asyncapi/client-config.yaml",
     "prebuild": "rm -rf dist && npm run gen:asyncapi",
     "build": "tsc",
@@ -34,7 +34,7 @@
     "lint": "npm run lint:node && npm run lint:schema",
     "lint:node": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prelint:schema": "npm run gen:json",
+    "prelint:schema": "npm run gen:jsonschema",
     "lint:schema": "spectral lint client-config/client-config.yaml"
   },
   "version": "1.0.0"

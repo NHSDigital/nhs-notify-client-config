@@ -1,0 +1,145 @@
+{
+  "description": "A client represents an organisation or service that sends communications.\n    Each client may be associated with a single APIM application, which is used to authenticate API requests,\n    and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh.",
+  "properties": {
+    "apimApplication": {
+      "description": "ApimApplication",
+      "properties": {
+        "apimId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "apimId"
+      ],
+      "type": "object"
+    },
+    "environment": {
+      "description": "The environment in which the configuration has effect",
+      "examples": [
+        "dev",
+        "int",
+        "prod"
+      ],
+      "title": "Environment",
+      "type": "string"
+    },
+    "featureFlags": {
+      "items": {
+        "description": "Reference to a FeatureFlag by its unique identifier",
+        "title": "FeatureFlag ID Reference",
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "id": {
+      "description": "Unique identifier for the Client",
+      "title": "Client ID",
+      "type": "string"
+    },
+    "meshMailbox": {
+      "description": "A Mesh Mailbox associated with a client",
+      "properties": {
+        "mailboxId": {
+          "type": "string"
+        },
+        "workflowIdCompletedRequestItemsReport": {
+          "type": "string"
+        },
+        "workflowIdReceiveRequestAck": {
+          "type": "string"
+        },
+        "workflowIdSuffix": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "mailboxId"
+      ],
+      "title": "MeshMailbox",
+      "type": "object"
+    },
+    "name": {
+      "type": "string"
+    },
+    "pdsQuota": {
+      "properties": {
+        "maxRequestsPerSecond": {
+          "description": "The maximum number of requests that can be made by the client in one second (TPS or Transactions Per Second).",
+          "type": "number"
+        }
+      },
+      "required": [
+        "maxRequestsPerSecond"
+      ],
+      "title": "ClientQuota",
+      "type": "object"
+    },
+    "rfrCodes": {
+      "items": {
+        "enum": [
+          "DEA",
+          "EMB",
+          "SCT",
+          "NIT",
+          "TRA",
+          "ORR",
+          "AFL",
+          "AFN",
+          "CAN",
+          "CGA",
+          "DIS",
+          "LDN",
+          "OPA",
+          "RDI",
+          "RDR",
+          "RFI",
+          "RPR",
+          "SDL",
+          "SDN"
+        ],
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "senderOdsCode": {
+      "type": "string"
+    },
+    "suppressionFilters": {
+      "items": {
+        "description": "A suppression filter pattern to exclude communications to certain contact details.",
+        "properties": {
+          "id": {
+            "description": "Unique identifier for the SuppressionFilter",
+            "title": "SuppressionFilter ID",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "pattern": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "pattern"
+        ],
+        "title": "SuppressionFilter",
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "environment"
+  ],
+  "title": "Client",
+  "type": "object"
+}
