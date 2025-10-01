@@ -29,8 +29,12 @@ export const $Client = $ClientBase
     rfrCodes: z.array(z.enum(Object.keys(rfrCoding))).optional().meta({
       title: "Reason for Removal Codes",
       description:
-        `When sending a communication to a recipient, the reason for removal codes (RFR codes) indicate
+        `Reason for removal codes (RFR codes) indicate
 why a recipient has been removed from their GP's registered patient list.
+
+This field is optional, but if provided must be an array of valid codes. The defualt behaviour is to suppress communicaitons
+recipients with any RFR code, but this option can be used to allow recipients with certain codes to receive communications.
+
 See https://data.developer.nhs.uk/dms/mim/6.3.01/Vocabulary/NHAISRemovalReasonCode.htm for information on possible codes.
 
 PDS currently only provides a subset of 'Exit' codes, including those for Deceased patients.
