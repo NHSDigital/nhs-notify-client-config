@@ -263,7 +263,7 @@ jobs:
 
       - name: "Re-generate schemas"
         run: |
-          npm install
+          npm ci --workspace packages/schemas
           npm --workspace packages/schemas run gen:jsonschema
 
       - name: Check for schema changes
