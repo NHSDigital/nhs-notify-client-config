@@ -13,7 +13,11 @@ repos:
       - id: mixed-line-ending
       - id: pretty-format-json
         args: ['--autofix']
-        exclude: '(^|/)package(-lock)?\.json$'
+        exclude: |
+          (?x)^(
+            package-lock.json|
+            packages/schemas/client-config/domain/.*\.json
+          )$
     # -   id: ...
   - repo: local
     hooks:

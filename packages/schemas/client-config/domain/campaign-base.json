@@ -1,27 +1,29 @@
 {
+  "title": "CampaignBase",
   "description": "Base schema for campaigns, defining identifying fields.\n    Each campaign is associated with a single client.",
+  "type": "object",
   "properties": {
-    "clientId": {
-      "description": "Reference to a A client represents an organisation or service that sends communications.\n    Each client may be associated with a single APIM application, which is used to authenticate API requests,\n    and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh. by its unique identifier",
-      "title": "A client represents an organisation or service that sends communications.\n    Each client may be associated with a single APIM application, which is used to authenticate API requests,\n    and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh. ID Reference",
+    "id": {
+      "title": "Campaign ID",
+      "description": "Unique identifier for the Campaign",
+      "type": "string"
+    },
+    "name": {
       "type": "string"
     },
     "environment": {
+      "title": "Environment",
       "description": "The environment in which the configuration has effect",
       "examples": [
         "dev",
         "int",
         "prod"
       ],
-      "title": "Environment",
       "type": "string"
     },
-    "id": {
-      "description": "Unique identifier for the Campaign",
-      "title": "Campaign ID",
-      "type": "string"
-    },
-    "name": {
+    "clientId": {
+      "title": "A client represents an organisation or service that sends communications.\n    Each client may be associated with a single APIM application, which is used to authenticate API requests,\n    and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh. ID Reference",
+      "description": "Reference to a A client represents an organisation or service that sends communications.\n    Each client may be associated with a single APIM application, which is used to authenticate API requests,\n    and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh. by its unique identifier",
       "type": "string"
     }
   },
@@ -30,7 +32,5 @@
     "name",
     "environment",
     "clientId"
-  ],
-  "title": "CampaignBase",
-  "type": "object"
+  ]
 }

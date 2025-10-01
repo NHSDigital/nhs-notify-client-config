@@ -1,71 +1,32 @@
 {
+  "title": "Client",
   "description": "A client represents an organisation or service that sends communications.\n    Each client may be associated with a single APIM application, which is used to authenticate API requests,\n    and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh.",
+  "type": "object",
   "properties": {
-    "apimApplication": {
-      "description": "ApimApplication",
-      "properties": {
-        "apimId": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "apimId"
-      ],
-      "type": "object"
+    "id": {
+      "title": "Client ID",
+      "description": "Unique identifier for the Client",
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
     },
     "environment": {
+      "title": "Environment",
       "description": "The environment in which the configuration has effect",
       "examples": [
         "dev",
         "int",
         "prod"
       ],
-      "title": "Environment",
       "type": "string"
     },
-    "featureFlags": {
-      "items": {
-        "description": "Reference to a FeatureFlag by its unique identifier",
-        "title": "FeatureFlag ID Reference",
-        "type": "string"
-      },
-      "type": "array"
-    },
-    "id": {
-      "description": "Unique identifier for the Client",
-      "title": "Client ID",
-      "type": "string"
-    },
-    "meshMailbox": {
-      "description": "A Mesh Mailbox associated with a client",
-      "properties": {
-        "mailboxId": {
-          "type": "string"
-        },
-        "workflowIdCompletedRequestItemsReport": {
-          "type": "string"
-        },
-        "workflowIdReceiveRequestAck": {
-          "type": "string"
-        },
-        "workflowIdSuffix": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "mailboxId"
-      ],
-      "title": "MeshMailbox",
-      "type": "object"
-    },
-    "name": {
+    "senderOdsCode": {
       "type": "string"
     },
     "pdsQuota": {
+      "title": "ClientQuota",
+      "type": "object",
       "properties": {
         "maxRequestsPerSecond": {
           "description": "The maximum number of requests that can be made by the client in one second (TPS or Transactions Per Second).",
@@ -74,12 +35,58 @@
       },
       "required": [
         "maxRequestsPerSecond"
-      ],
-      "title": "ClientQuota",
-      "type": "object"
+      ]
+    },
+    "meshMailbox": {
+      "title": "MeshMailbox",
+      "description": "A Mesh Mailbox associated with a client",
+      "type": "object",
+      "properties": {
+        "mailboxId": {
+          "type": "string"
+        },
+        "workflowIdSuffix": {
+          "type": "string"
+        },
+        "workflowIdReceiveRequestAck": {
+          "type": "string"
+        },
+        "workflowIdCompletedRequestItemsReport": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "mailboxId"
+      ]
+    },
+    "apimApplication": {
+      "description": "ApimApplication",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "apimId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "apimId"
+      ]
+    },
+    "featureFlags": {
+      "type": "array",
+      "items": {
+        "title": "FeatureFlag ID Reference",
+        "description": "Reference to a FeatureFlag by its unique identifier",
+        "type": "string"
+      }
     },
     "rfrCodes": {
+      "type": "array",
       "items": {
+        "type": "string",
         "enum": [
           "DEA",
           "EMB",
@@ -100,21 +107,19 @@
           "RPR",
           "SDL",
           "SDN"
-        ],
-        "type": "string"
-      },
-      "type": "array"
-    },
-    "senderOdsCode": {
-      "type": "string"
+        ]
+      }
     },
     "suppressionFilters": {
+      "type": "array",
       "items": {
+        "title": "SuppressionFilter",
         "description": "A suppression filter pattern to exclude communications to certain contact details.",
+        "type": "object",
         "properties": {
           "id": {
-            "description": "Unique identifier for the SuppressionFilter",
             "title": "SuppressionFilter ID",
+            "description": "Unique identifier for the SuppressionFilter",
             "type": "string"
           },
           "name": {
@@ -128,18 +133,13 @@
           "id",
           "name",
           "pattern"
-        ],
-        "title": "SuppressionFilter",
-        "type": "object"
-      },
-      "type": "array"
+        ]
+      }
     }
   },
   "required": [
     "id",
     "name",
     "environment"
-  ],
-  "title": "Client",
-  "type": "object"
+  ]
 }

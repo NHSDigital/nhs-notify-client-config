@@ -1,71 +1,79 @@
 {
+  "title": "Campaign",
   "description": "A campaign represents a discrete set of communications for a client.\n    Messages sent as part of a campaign can be tracked and reported on together, and are isolated from each other for dispatch throttling purposes.\n    For example, a client might have separate campaigns for appointment reminders, health check invitations, and test results.\n    Each campaign is optionally associated with a single GOV.UK Notify account.",
+  "type": "object",
   "properties": {
-    "clientId": {
-      "description": "Reference to a A client represents an organisation or service that sends communications.\n    Each client may be associated with a single APIM application, which is used to authenticate API requests,\n    and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh. by its unique identifier",
-      "title": "A client represents an organisation or service that sends communications.\n    Each client may be associated with a single APIM application, which is used to authenticate API requests,\n    and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh. ID Reference",
+    "id": {
+      "title": "Campaign ID",
+      "description": "Unique identifier for the Campaign",
       "type": "string"
     },
-    "default": {
-      "description": "Indicates whether this campaign is the default for a client (i.e. not specific to a purpose).\n      Each client can have only one default campaign per environment.\n      It will be used for any messages sent without a specific campaign, such as those using global routing configurations.",
-      "title": "Default Campaign",
-      "type": "boolean"
+    "name": {
+      "type": "string"
     },
     "environment": {
+      "title": "Environment",
       "description": "The environment in which the configuration has effect",
       "examples": [
         "dev",
         "int",
         "prod"
       ],
-      "title": "Environment",
       "type": "string"
     },
+    "clientId": {
+      "title": "A client represents an organisation or service that sends communications.\n    Each client may be associated with a single APIM application, which is used to authenticate API requests,\n    and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh. ID Reference",
+      "description": "Reference to a A client represents an organisation or service that sends communications.\n    Each client may be associated with a single APIM application, which is used to authenticate API requests,\n    and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh. by its unique identifier",
+      "type": "string"
+    },
+    "default": {
+      "title": "Default Campaign",
+      "description": "Indicates whether this campaign is the default for a client (i.e. not specific to a purpose).\n      Each client can have only one default campaign per environment.\n      It will be used for any messages sent without a specific campaign, such as those using global routing configurations.",
+      "type": "boolean"
+    },
     "govuknotifyAccount": {
+      "title": "GovuknotifyAccount",
+      "type": "object",
       "properties": {
-        "apiKey": {
-          "description": "The API key for the GOV.UK Notify account.\n      This will not be present in events, but may be fetched from the client config domain via API call.",
+        "name": {
           "type": "string"
         },
-        "name": {
+        "apiKey": {
+          "description": "The API key for the GOV.UK Notify account.\n      This will not be present in events, but may be fetched from the client config domain via API call.",
           "type": "string"
         }
       },
       "required": [
         "name"
-      ],
-      "title": "GovuknotifyAccount",
-      "type": "object"
-    },
-    "id": {
-      "description": "Unique identifier for the Campaign",
-      "title": "Campaign ID",
-      "type": "string"
-    },
-    "name": {
-      "type": "string"
+      ]
     },
     "queues": {
       "description": "Each channel (e.g. email, sms) that this campaign will use to send messages has an associated queue.\n    Each queue may also have associated throttling limits to control the rate of message dispatch.",
+      "minItems": 1,
+      "type": "array",
       "items": {
+        "title": "Queue",
+        "type": "object",
         "properties": {
+          "id": {
+            "title": "Queue ID",
+            "description": "Unique identifier for the Queue",
+            "type": "string"
+          },
           "channel": {
+            "title": "Channel",
             "description": "A channel with which a message can be sent",
+            "type": "string",
             "enum": [
               "NHSAPP",
               "SMS",
               "EMAIL",
               "LETTER"
-            ],
-            "title": "Channel",
-            "type": "string"
-          },
-          "id": {
-            "description": "Unique identifier for the Queue",
-            "title": "Queue ID",
-            "type": "string"
+            ]
           },
           "queueQuota": {
+            "title": "ClientQuota",
+            "type": "object",
             "properties": {
               "maxRequestsPerSecond": {
                 "description": "The maximum number of requests that can be made by the client in one second (TPS or Transactions Per Second).",
@@ -74,20 +82,14 @@
             },
             "required": [
               "maxRequestsPerSecond"
-            ],
-            "title": "ClientQuota",
-            "type": "object"
+            ]
           }
         },
         "required": [
           "id",
           "channel"
-        ],
-        "title": "Queue",
-        "type": "object"
-      },
-      "minItems": 1,
-      "type": "array"
+        ]
+      }
     }
   },
   "required": [
@@ -96,7 +98,5 @@
     "environment",
     "clientId",
     "queues"
-  ],
-  "title": "Campaign",
-  "type": "object"
+  ]
 }
