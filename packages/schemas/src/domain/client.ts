@@ -1,11 +1,11 @@
-import {z} from "zod";
-import {$MeshMailbox} from "./mesh-mailbox";
-import {$ApimApplication} from "./apim-application";
-import {$SuppressionFilter} from "./suppression-filter";
-import {$ClientQuota} from "./client-quota";
-import {$Environment, ConfigBase} from "./common";
-import {$FeatureFlag} from "./feature-flag";
-import {idRef} from "../helpers/id-ref";
+import { z } from "zod";
+import { $MeshMailbox } from "./mesh-mailbox";
+import { $ApimApplication } from "./apim-application";
+import { $SuppressionFilter } from "./suppression-filter";
+import { $ClientQuota } from "./client-quota";
+import { $Environment, ConfigBase } from "./common";
+import { $FeatureFlag } from "./feature-flag";
+import { idRef } from "../helpers/id-ref";
 import rfrCoding from "./rfr-coding";
 
 export const $ClientBase = ConfigBase("Client")
@@ -26,10 +26,12 @@ export const $Client = $ClientBase
     apimApplication: $ApimApplication.optional(),
 
     featureFlags: z.array(idRef($FeatureFlag)).optional(),
-    rfrCodes: z.array(z.enum(Object.keys(rfrCoding))).optional().meta({
-      title: "Reason for Removal Codes",
-      description:
-        `Reason for removal codes (RFR codes) indicate
+    rfrCodes: z
+      .array(z.enum(Object.keys(rfrCoding)))
+      .optional()
+      .meta({
+        title: "Reason for Removal Codes",
+        description: `Reason for removal codes (RFR codes) indicate
 why a recipient has been removed from their GP's registered patient list.
 
 This field is optional, but if provided must be an array of valid codes. The defualt behaviour is to suppress communicaitons
@@ -45,7 +47,7 @@ PDS currently only provides a subset of 'Exit' codes, including those for Deceas
 * TRA - Temporary resident not returned
 * ORR - Other reason
 `,
-    }),
+      }),
     suppressionFilters: z.array($SuppressionFilter).optional(),
   })
   .meta({
