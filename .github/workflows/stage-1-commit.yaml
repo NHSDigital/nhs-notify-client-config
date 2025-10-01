@@ -251,12 +251,16 @@ jobs:
       - name: "Checkout code"
         uses: actions/checkout@v4
 
-      - name: "Restore node_modules from cache"
-        uses: ./.github/actions/node-modules-cache
+      - name: "Cache node_modules"
+        uses: actions/cache@v2
         with:
-          node_version: "${{ inputs.nodejs_version }}"
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-node-${{ inputs.nodejs_version }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ inputs.nodejs_version }}-
 
-      - name: Re-generate schemas
+      - name: "Re-generate schemas"
         run: npm --workspace packages/schemas run gen:jsonschema
 
       - name: Check for schema changes
