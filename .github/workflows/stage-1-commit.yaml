@@ -251,6 +251,7 @@ jobs:
       - name: "Checkout code"
         uses: actions/checkout@v4
 
+      # Simplified caching - template management has more complex caching of installed modules from another build step
       - name: "Cache node_modules"
         uses: actions/cache@v4
         with:
@@ -261,7 +262,9 @@ jobs:
             ${{ runner.os }}-node-${{ inputs.nodejs_version }}-
 
       - name: "Re-generate schemas"
-        run: npm --workspace packages/schemas run gen:jsonschema
+        run: |
+          npm install
+          npm --workspace packages/schemas run gen:jsonschema
 
       - name: Check for schema changes
         run: git diff --quiet packages/schemas/client-config
