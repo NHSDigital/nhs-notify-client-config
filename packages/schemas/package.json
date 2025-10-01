@@ -5,7 +5,7 @@
   },
   "description": "Schemas for NHS Notify client configuration",
   "devDependencies": {
-    "@asyncapi/cli": "^2.16.7",
+    "@asyncapi/cli": "^3.5.2",
     "@stoplight/spectral-cli": "^6.15.0",
     "@types/jest": "^30.0.0",
     "@types/node": "^22.13.4",
