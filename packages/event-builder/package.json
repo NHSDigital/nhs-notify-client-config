@@ -3,7 +3,7 @@
     "@aws-sdk/client-sqs": "^3.888.0",
     "@nhsdigital/nhs-notify-client-config-schemas": "*",
     "csv-parse": "^6.1.0",
-    "yargs": "^17.7.2",
+    "yargs": "^18.0.0",
     "zod": "^4.0.17"
   },
   "devDependencies": {
