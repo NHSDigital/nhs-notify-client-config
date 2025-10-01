@@ -6,8 +6,8 @@ import {
 import { $ClientId } from "@nhsdigital/nhs-notify-client-config-schemas/src/domain/client";
 import schemaPackage from "@nhsdigital/nhs-notify-client-config-schemas/package.json";
 import { ClientInput } from "./input";
-import { eventSource } from "./config";
 
+const eventSource = "//notify.nhs.uk/app/nhs-notify-client-config-dev/main";
 const schemaVersion = schemaPackage.version;
 
 const buildEvent = (input: ClientInput): ClientPublishedEvent => {
