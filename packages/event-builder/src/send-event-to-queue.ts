@@ -35,7 +35,7 @@ const sendSQSBatchMessages = async <T extends EventMetadata>(
         Id: randomUUID(),
         MessageBody: JSON.stringify(item),
         MessageGroupId: item.subject,
-        MessageDeduplicationId: item.subject,
+        MessageDeduplicationId: item.id,
       })),
     });
 
