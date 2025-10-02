@@ -1,0 +1,59 @@
+{
+  "title": "ClientSubscription",
+  "description": "A client subscription indicates which events a client should be sent callbacks for.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "title": "ClientSubscription ID",
+      "description": "Unique identifier for the ClientSubscription",
+      "type": "string"
+    },
+    "clientId": {
+      "title": "A client represents an organisation or service that sends communications.\n    Each client may be associated with a single APIM application, which is used to authenticate API requests,\n    and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh. ID Reference",
+      "description": "Reference to a A client represents an organisation or service that sends communications.\n    Each client may be associated with a single APIM application, which is used to authenticate API requests,\n    and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh. by its unique identifier",
+      "type": "string"
+    },
+    "environment": {
+      "title": "Environment",
+      "description": "The environment in which the configuration has effect",
+      "examples": [
+        "dev",
+        "int",
+        "prod"
+      ],
+      "type": "string"
+    },
+    "type": {
+      "description": "The type of events the client is subscribing to.\n    - messageStatus: events related to the status of individual messages (e.g. delivered, failed)\n    - channelStatus: events related to the status of communication channels (e.g. email, sms)",
+      "type": "string",
+      "enum": [
+        "messageStatus",
+        "channelStatus"
+      ]
+    },
+    "callbackUrl": {
+      "description": "The URL to which event callbacks should be sent.",
+      "type": "string",
+      "format": "uri"
+    },
+    "callbackSecret": {
+      "description": "Secret used to sign event payloads sent to the callbackUrl.\n      This will not be published as part of an event, but can be fetched directly from the client configuration domain via API call",
+      "type": "string"
+    },
+    "subscribedEvents": {
+      "description": "List of event types the client is subscribed to.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "clientId",
+    "environment",
+    "type",
+    "callbackUrl",
+    "subscribedEvents"
+  ]
+}

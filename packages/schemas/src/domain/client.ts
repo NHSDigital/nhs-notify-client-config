@@ -26,7 +26,28 @@ export const $Client = $ClientBase
     apimApplication: $ApimApplication.optional(),
 
     featureFlags: z.array(idRef($FeatureFlag)).optional(),
-    rfrCodes: z.array(z.enum(Object.keys(rfrCoding))).optional(),
+    rfrCodes: z
+      .array(z.enum(Object.keys(rfrCoding)))
+      .optional()
+      .meta({
+        title: "Reason for Removal Codes",
+        description: `Reason for removal codes (RFR codes) indicate
+why a recipient has been removed from their GP's registered patient list.
+
+This field is optional, but if provided must be an array of valid codes. The default behaviour is to suppress communications to
+recipients with any RFR code, but this option can be used to allow recipients with certain codes to receive communications.
+
+See https://data.developer.nhs.uk/dms/mim/6.3.01/Vocabulary/NHAISRemovalReasonCode.htm for information on possible codes.
+
+PDS currently only provides a subset of 'Exit' codes, including those for Deceased patients.
+* DEA - Death
+* EMB - Embarkation
+* SCT - Transferred to Scotland
+* NIT - Transferred to Northern Ireland
+* TRA - Temporary resident not returned
+* ORR - Other reason
+`,
+      }),
     suppressionFilters: z.array($SuppressionFilter).optional(),
   })
   .meta({
