@@ -42,10 +42,10 @@ export function idRef<
   const targetEntityName = entityName || schema.description || "Unknown";
 
   // Create a new schema with the same type and validation as the ID field
-  const resultSchema = idFieldSchema.clone();
-
-  // Add metadata to indicate this is an ID reference
-  (resultSchema as any).__idRef = targetEntityName;
+  const resultSchema = idFieldSchema.clone().meta({
+    title: `${targetEntityName} ID Reference`,
+    description: `Reference to a ${targetEntityName} by its unique identifier`,
+  });
 
   return resultSchema as T["shape"][K];
 }

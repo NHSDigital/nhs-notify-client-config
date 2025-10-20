@@ -1,0 +1,147 @@
+{
+  "title": "Client",
+  "description": "A client represents an organisation or service that sends communications.\n    Each client may be associated with a single APIM application, which is used to authenticate API requests,\n    and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "title": "Client ID",
+      "description": "Unique identifier for the Client",
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "environment": {
+      "title": "Environment",
+      "description": "The environment in which the configuration has effect",
+      "examples": [
+        "dev",
+        "int",
+        "prod"
+      ],
+      "type": "string"
+    },
+    "senderOdsCode": {
+      "type": "string"
+    },
+    "pdsQuota": {
+      "title": "ClientQuota",
+      "type": "object",
+      "properties": {
+        "maxRequestsPerSecond": {
+          "description": "The maximum number of requests that can be made by the client in one second (TPS or Transactions Per Second).",
+          "type": "number"
+        }
+      },
+      "required": [
+        "maxRequestsPerSecond"
+      ]
+    },
+    "meshMailbox": {
+      "title": "MeshMailbox",
+      "description": "A Mesh Mailbox associated with a client",
+      "type": "object",
+      "properties": {
+        "mailboxId": {
+          "type": "string"
+        },
+        "workflowIdSuffix": {
+          "type": "string"
+        },
+        "workflowIdReceiveRequestAck": {
+          "type": "string"
+        },
+        "workflowIdCompletedRequestItemsReport": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "mailboxId"
+      ]
+    },
+    "apimApplication": {
+      "description": "ApimApplication",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "apimId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "apimId"
+      ]
+    },
+    "featureFlags": {
+      "type": "array",
+      "items": {
+        "title": "FeatureFlag ID Reference",
+        "description": "Reference to a FeatureFlag by its unique identifier",
+        "type": "string"
+      }
+    },
+    "rfrCodes": {
+      "title": "Reason for Removal Codes",
+      "description": "Reason for removal codes (RFR codes) indicate\nwhy a recipient has been removed from their GP's registered patient list.\n\nThis field is optional, but if provided must be an array of valid codes. The default behaviour is to suppress communications to\nrecipients with any RFR code, but this option can be used to allow recipients with certain codes to receive communications.\n\nSee https://data.developer.nhs.uk/dms/mim/6.3.01/Vocabulary/NHAISRemovalReasonCode.htm for information on possible codes.\n\nPDS currently only provides a subset of 'Exit' codes, including those for Deceased patients.\n* DEA - Death\n* EMB - Embarkation\n* SCT - Transferred to Scotland\n* NIT - Transferred to Northern Ireland\n* TRA - Temporary resident not returned\n* ORR - Other reason\n",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "DEA",
+          "EMB",
+          "SCT",
+          "NIT",
+          "TRA",
+          "ORR",
+          "AFL",
+          "AFN",
+          "CAN",
+          "CGA",
+          "DIS",
+          "LDN",
+          "OPA",
+          "RDI",
+          "RDR",
+          "RFI",
+          "RPR",
+          "SDL",
+          "SDN"
+        ]
+      }
+    },
+    "suppressionFilters": {
+      "type": "array",
+      "items": {
+        "title": "SuppressionFilter",
+        "description": "A suppression filter pattern to exclude communications to certain contact details.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "SuppressionFilter ID",
+            "description": "Unique identifier for the SuppressionFilter",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "pattern": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "pattern"
+        ]
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "environment"
+  ]
+}

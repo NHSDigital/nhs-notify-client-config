@@ -3,8 +3,19 @@ nhs-notify-repository-template/
 
 # Files and Folders in this repository to ignore
 .editorconfig
+.github/ISSUE_TEMPLATE
 .github/CODEOWNERS
 .gitleaksignore
+Makefile
+.github/actions/build-docs
+.github/workflows/*.disabled
+*/examples/
+eslint.config.mjs
+lambdas/example-lambda/
+package-lock.json
+package.json
+scripts/terraform/terraform.mk
+src/.vscode/
 .vscode/
 /Makefile
 CHANGELOG.md

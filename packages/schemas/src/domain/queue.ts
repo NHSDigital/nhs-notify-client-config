@@ -1,12 +1,15 @@
-import { z } from 'zod';
-import { $ChannelType } from './channel';
-import { idRef } from '../helpers/id-ref';
-import { $Campaign } from './campaign';
-import { ConfigBase } from './common';
+import { z } from "zod";
+import { $ClientQuota } from "./client-quota";
+import { $Channel } from "./channel";
+import { ConfigBase } from "./common";
 
-export const $Queue = ConfigBase('Queue').extend({
-  campaignId: idRef($Campaign).optional(),
-  channelType: $ChannelType,
-}).describe('Queue');
+export const $Queue = ConfigBase("Queue")
+  .extend({
+    channel: $Channel,
+    queueQuota: $ClientQuota.optional(),
+  })
+  .meta({
+    title: "Queue",
+  });
 
 export type Queue = z.infer<typeof $Queue>;

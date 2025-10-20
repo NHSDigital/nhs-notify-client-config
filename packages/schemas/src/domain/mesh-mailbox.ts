@@ -1,11 +1,15 @@
-import { z } from 'zod';
-import { ConfigBase } from './common';
+import { z } from "zod";
 
-export const $MeshMailbox = ConfigBase('MeshMailbox').extend({
-  mailboxId: z.string(),
-  workflowIdSuffix: z.string().optional(),
-  workflowIdReceiveRequestAck: z.string().optional(),
-  workflowIdCompletedRequestItemsReport: z.string().optional(),
-}).describe('MeshMailbox');
+export const $MeshMailbox = z
+  .object({
+    mailboxId: z.string(),
+    workflowIdSuffix: z.string().optional(),
+    workflowIdReceiveRequestAck: z.string().optional(),
+    workflowIdCompletedRequestItemsReport: z.string().optional(),
+  })
+  .meta({
+    title: "MeshMailbox",
+    description: `A Mesh Mailbox associated with a client`,
+  });
 
 export type MeshMailbox = z.infer<typeof $MeshMailbox>;

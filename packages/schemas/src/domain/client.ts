@@ -1,32 +1,61 @@
-import { z } from 'zod';
-import { idRef } from '../helpers/id-ref';
-import { $MeshMailbox } from './mesh-mailbox';
-import { $ApimApplication } from './apim-application';
-import { $SuppressionFilter } from './suppression-filter';
-import { $ClientQuota } from './client-quota';
-import { ConfigBase } from './common';
-import { $FeatureFlag } from './feature-flag';
+import { z } from "zod";
+import { $MeshMailbox } from "./mesh-mailbox";
+import { $ApimApplication } from "./apim-application";
+import { $SuppressionFilter } from "./suppression-filter";
+import { $ClientQuota } from "./client-quota";
+import { $Environment, ConfigBase } from "./common";
+import { $FeatureFlag } from "./feature-flag";
+import { idRef } from "../helpers/id-ref";
+import rfrCoding from "./rfr-coding";
 
-export const $Client = ConfigBase('Client').extend({
-  name: z.string(),
-  senderOdsCode: z.string().optional(),
-  quota: $ClientQuota.optional(),
-  meshMailbox: $MeshMailbox.optional(),
-  apimApplication: $ApimApplication.optional(),
+export const $ClientBase = ConfigBase("Client")
+  .extend({
+    name: z.string(),
+    environment: $Environment,
+  })
+  .meta({
+    title: "ClientBase",
+    description: `Base schema for clients, defining identifying fields.`,
+  });
 
-  featureFlags: z.array(idRef($FeatureFlag)),
-  rfrCodes: z.array(z.string()),
-  suppressionFilters: z.array($SuppressionFilter),
-})
-.strict()
-.describe('Client');
+export const $Client = $ClientBase
+  .extend({
+    senderOdsCode: z.string().optional(),
+    pdsQuota: $ClientQuota.optional(),
+    meshMailbox: $MeshMailbox.optional(),
+    apimApplication: $ApimApplication.optional(),
 
-export const $ClientWithAPIM = $Client.extend({
-  apimApplication: $ApimApplication
-});
+    featureFlags: z.array(idRef($FeatureFlag)).optional(),
+    rfrCodes: z
+      .array(z.enum(Object.keys(rfrCoding)))
+      .optional()
+      .meta({
+        title: "Reason for Removal Codes",
+        description: `Reason for removal codes (RFR codes) indicate
+why a recipient has been removed from their GP's registered patient list.
 
-export const $ClientWithMESH = $Client.extend({
-  meshMailbox: $MeshMailbox
-});
+This field is optional, but if provided must be an array of valid codes. The default behaviour is to suppress communications to
+recipients with any RFR code, but this option can be used to allow recipients with certain codes to receive communications.
 
+See https://data.developer.nhs.uk/dms/mim/6.3.01/Vocabulary/NHAISRemovalReasonCode.htm for information on possible codes.
+
+PDS currently only provides a subset of 'Exit' codes, including those for Deceased patients.
+* DEA - Death
+* EMB - Embarkation
+* SCT - Transferred to Scotland
+* NIT - Transferred to Northern Ireland
+* TRA - Temporary resident not returned
+* ORR - Other reason
+`,
+      }),
+    suppressionFilters: z.array($SuppressionFilter).optional(),
+  })
+  .meta({
+    title: "Client",
+    description: `A client represents an organisation or service that sends communications.
+    Each client may be associated with a single APIM application, which is used to authenticate API requests,
+    and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh.`,
+  });
+
+export const $ClientId = $Client.shape.id;
 export type Client = z.infer<typeof $Client>;

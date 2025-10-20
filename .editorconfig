@@ -29,3 +29,6 @@ trim_trailing_whitespace = unset
 indent_style = unset
 indent_size = unset
 generated_code = true
+
+[/packages/schemas/client-config/domain/**.json]
+insert_final_newline = false

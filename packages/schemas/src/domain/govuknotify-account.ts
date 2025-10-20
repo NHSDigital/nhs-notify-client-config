@@ -1,10 +1,18 @@
-import { z } from 'zod';
-import { ConfigBase } from './common';
+import { z } from "zod";
 
-export const $GovuknotifyAccount = ConfigBase('GovuknotifyAccount').extend({
-  name: z.string(),
-  // apiKey: z.string().optional(), // We don't want to pass the API key around in the event, but need a way to fetch it when needed
-  default: z.boolean(),
-}).describe('GovuknotifyAccount');
+export const $GovuknotifyAccount = z
+  .object({
+    name: z.string(),
+    apiKey: z
+      .string()
+      .optional()
+      .meta({
+        description: `The API key for the GOV.UK Notify account.
+      This will not be present in events, but may be fetched from the client config domain via API call.`,
+      }),
+  })
+  .meta({
+    title: "GovuknotifyAccount",
+  });
 
 export type GovuknotifyAccount = z.infer<typeof $GovuknotifyAccount>;

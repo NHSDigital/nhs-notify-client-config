@@ -1,6 +1,5 @@
 auditability
 auditable
-[A-Z]+s
 Bitwarden
 bot
 [Cc]onfig
@@ -19,6 +18,7 @@ idempotence
 Jira
 OAuth
 Octokit
+onboarding
 [Oo]nboarding
 Podman
 Python

@@ -216,19 +216,19 @@ export default defineConfig([
     },
   },
   {
-    files: ['**/utils/**', 'tests/test-team/**'],
+    files: ['**/utils/**', '**/helpers/**', 'tests/test-team/**'],
     rules: {
       'import-x/prefer-default-export': 0,
     },
   },
-  {
-    plugins: {
-      'no-relative-import-paths': noRelativeImportPaths,
-    },
-    rules: {
-      'no-relative-import-paths/no-relative-import-paths': 2,
-    },
-  },
+  // {
+  //   plugins: {
+  //     'no-relative-import-paths': noRelativeImportPaths,
+  //   },
+  //   rules: {
+  //     'no-relative-import-paths/no-relative-import-paths': 2,
+  //   },
+  // },
   {
     files: ['scripts/**'],
     rules: {
@@ -236,6 +236,12 @@ export default defineConfig([
         'error',
         { devDependencies: true },
       ],
+    },
+  },
+  {
+    files: ['**/cli/**'],
+    rules: {
+      'no-console': 0,
     },
   },
 

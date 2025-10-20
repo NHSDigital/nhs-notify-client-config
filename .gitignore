@@ -16,6 +16,8 @@ version.json
 node_modules
 .node-version
 */node_modules
+.next
+*/.next
 /.pnp
 .pnp.js
 /build

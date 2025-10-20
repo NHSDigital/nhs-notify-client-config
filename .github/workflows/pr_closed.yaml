@@ -1,0 +1,63 @@
+name: PR Closed
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  check-merge-or-workflow-dispatch:
+    runs-on: ubuntu-latest
+    outputs:
+      deploy: ${{ steps.check.outputs.deploy }}
+    steps:
+      - name: Check if PR was merged or wor§kflow is triggered by workflow_dispatch
+        id: check
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "deploy=true" >> $GITHUB_OUTPUT
+            echo "Job triggered by workflow_dispatch - running 'deploy-main'"
+          elif [[ "${{ github.event_name }}" == "pull_request" && "${{ github.event.pull_request.merged }}" == "true" ]]; then
+            echo "deploy=true" >> $GITHUB_OUTPUT
+            echo "Job triggered by Merged PR - running 'deploy-main'"
+          else
+            echo "deploy=false" >> $GITHUB_OUTPUT
+            echo "Job not triggered by workflow_dispatch or Merged PR - Skipping 'deploy-main'"
+          fi
+
+  deploy-main:
+    needs: check-merge-or-workflow-dispatch
+    name: Deploy changes to main in dev AWS account
+    runs-on: ubuntu-latest
+    if: needs.check-merge-or-workflow-dispatch.outputs.deploy == 'true'
+
+    strategy:
+      max-parallel: 1
+      matrix:
+        component: [ccapp]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Updating Main Environment
+        env:
+          PR_TRIGGER_PAT: ${{ secrets.PR_TRIGGER_PAT }}
+        run: |
+          bash .github/scripts/dispatch_internal_repo_workflow.sh \
+            --releaseVersion "main" \
+            --targetWorkflow "dispatch-deploy-static-notify-client-config-env.yaml" \
+            --targetEnvironment "main" \
+            --targetAccountGroup "nhs-notify-client-config-dev" \
+            --targetComponent "${{ matrix.component }}" \
+            --terraformAction "apply"

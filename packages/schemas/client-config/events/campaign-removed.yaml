@@ -1,0 +1,23 @@
+type: "object"
+title: Campaign Removed Event
+properties:
+  data:
+    $ref: "../domain/campaign-base.json"
+  dataschema:
+    pattern: "^https:\\/\\/notify\\.nhs\\.uk\\/events\\/client-config\\/campaign-removed-1.\\d+\\.\\d+\\.json$"
+    type: "string"
+  dataschemaversion:
+    pattern: "^1\\.\\d+\\.\\d+$"
+    type: "string"
+  plane:
+    const: "control"
+    type: "string"
+  type:
+    const: "uk.nhs.notify.client-config.campaign-removed.v1"
+    type: "string"
+required:
+  - "data"
+  - "dataschema"
+  - "dataschemaversion"
+  - "type"
+  - "plane"

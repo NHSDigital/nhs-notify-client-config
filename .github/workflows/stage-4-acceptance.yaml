@@ -27,10 +27,17 @@ on:
         description: "Terraform version, set by the CI/CD pipeline workflow"
         required: true
         type: string
+      pr_number:
+        required: true
+        type: string
       version:
         description: "Version of the software, set by the CI/CD pipeline workflow"
         required: true
         type: string
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   environment-set-up:
