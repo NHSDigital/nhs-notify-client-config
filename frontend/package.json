@@ -3,7 +3,7 @@
     "@aws-amplify/adapter-nextjs": "^1.6.9",
     "aws-amplify": "^6.15.6",
     "next": "^15.3.2",
-    "react": "^19.0.0",
+    "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
@@ -13,7 +13,7 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.8.1",
-    "@types/react": "19.0.8",
+    "@types/react": "19.2.0",
     "@types/react-dom": "19.2.0",
     "jest": "^30.1.3",
     "jest-environment-jsdom": "^30.1.2",
@@ -30,7 +30,7 @@
   },
   "name": "nhs-notify-client-config-frontend",
   "overrides": {
-    "react": "^19.0.0"
+    "react": "^19.2.0"
   },
   "private": true,
   "scripts": {
