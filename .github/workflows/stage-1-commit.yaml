@@ -223,7 +223,7 @@ jobs:
         run: |
           git fetch origin main
 
-          if git diff --quiet origin/main...HEAD -- packages/schemas; then
+          if git diff --quiet origin/main...HEAD -- packages/events; then
             echo "No changes in event schemas package"
             echo "changed=false" >> $GITHUB_OUTPUT
           else
@@ -231,7 +231,7 @@ jobs:
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
-          if content=$(git show origin/main:packages/schemas/package.json 2>/dev/null); then
+          if content=$(git show origin/main:packages/events/package.json 2>/dev/null); then
             version=$(jq -r .version <<< $content);
           else
             version=null;
@@ -263,11 +263,11 @@ jobs:
 
       - name: "Re-generate schemas"
         run: |
-          npm ci --workspace packages/schemas
-          npm --workspace packages/schemas run gen:jsonschema
+          npm ci --workspace packages/events
+          npm --workspace packages/events run gen:jsonschema
 
       - name: Check for schema changes
-        run: git diff --quiet packages/schemas/client-config
+        run: git diff --quiet packages/events/schemas
 
   check-schema-version-change:
     name: Check event schema version has been updated
@@ -287,7 +287,7 @@ jobs:
           main_version="${{ needs.detect-event-schema-package-changes.outputs.main_version }}"
           echo "Main version: ${{ needs.detect-event-schema-package-changes.outputs.main_version }}"
 
-          local_version=$(jq -r '.version' packages/schemas/package.json)
+          local_version=$(jq -r '.version' packages/events/package.json)
           echo "Local version: $local_version"
 
           if ! is_valid_increment "$main_version" "$local_version" ; then
