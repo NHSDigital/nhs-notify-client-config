@@ -1,0 +1,59 @@
+{
+  "description": "A client subscription indicates which events a client should be sent callbacks for.",
+  "properties": {
+    "callbackSecret": {
+      "description": "Secret used to sign event payloads sent to the callbackUrl.\n      This will not be published as part of an event, but can be fetched directly from the client configuration domain via API call",
+      "type": "string"
+    },
+    "callbackUrl": {
+      "description": "The URL to which event callbacks should be sent.",
+      "format": "uri",
+      "type": "string"
+    },
+    "clientId": {
+      "description": "Reference to a A client represents an organisation or service that sends communications.\n    Each client may be associated with a single APIM application, which is used to authenticate API requests,\n    and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh. by its unique identifier",
+      "title": "A client represents an organisation or service that sends communications.\n    Each client may be associated with a single APIM application, which is used to authenticate API requests,\n    and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh. ID Reference",
+      "type": "string"
+    },
+    "environment": {
+      "description": "The environment in which the configuration has effect",
+      "examples": [
+        "dev",
+        "int",
+        "prod"
+      ],
+      "title": "Environment",
+      "type": "string"
+    },
+    "id": {
+      "description": "Unique identifier for the ClientSubscription",
+      "title": "ClientSubscription ID",
+      "type": "string"
+    },
+    "subscribedEvents": {
+      "description": "List of event types the client is subscribed to.",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "type": {
+      "description": "The type of events the client is subscribing to.\n    - messageStatus: events related to the status of individual messages (e.g. delivered, failed)\n    - channelStatus: events related to the status of communication channels (e.g. email, sms)",
+      "enum": [
+        "messageStatus",
+        "channelStatus"
+      ],
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "clientId",
+    "environment",
+    "type",
+    "callbackUrl",
+    "subscribedEvents"
+  ],
+  "title": "ClientSubscription",
+  "type": "object"
+}

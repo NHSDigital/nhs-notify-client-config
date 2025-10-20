@@ -1,5 +1,5 @@
-import { $ClientPublishedEvent } from "@nhsdigital/nhs-notify-client-config-schemas/src/events/client-published-event";
-import schemaPackage from "@nhsdigital/nhs-notify-client-config-schemas/package.json";
+import { $ClientPublishedEvent } from "@nhsdigital/nhs-notify-events-client-config/src/events/client-published-event";
+import schemaPackage from "@nhsdigital/nhs-notify-events-client-config/package.json";
 import buildEvent from "../event-builder";
 
 const schemaVersion = schemaPackage.version;

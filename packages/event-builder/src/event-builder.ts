@@ -2,9 +2,9 @@ import { randomUUID } from "node:crypto";
 import {
   $ClientPublishedEvent,
   ClientPublishedEvent,
-} from "@nhsdigital/nhs-notify-client-config-schemas/src/events/client-published-event";
-import { $ClientId } from "@nhsdigital/nhs-notify-client-config-schemas/src/domain/client";
-import schemaPackage from "@nhsdigital/nhs-notify-client-config-schemas/package.json";
+} from "@nhsdigital/nhs-notify-events-client-config/src/events/client-published-event";
+import { $ClientId } from "@nhsdigital/nhs-notify-events-client-config/src/domain/client";
+import schemaPackage from "@nhsdigital/nhs-notify-events-client-config/package.json";
 import { ClientInput } from "./input";
 
 const eventSource = "//notify.nhs.uk/app/nhs-notify-client-config-dev/main";

@@ -10,7 +10,7 @@ const config: Config = {
   ],
   moduleFileExtensions: ["ts", "js", "json", "node"],
   moduleNameMapper: {
-    "@nhsdigital/nhs-notify-client-config-schemas$":
+    "@nhsdigital/nhs-notify-events-client-config$":
       "<rootDir>/../../packages/schemas/src",
   },
   transform: {
