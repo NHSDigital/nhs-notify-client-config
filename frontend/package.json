@@ -1,20 +1,4 @@
 {
-  "name": "nhs-notify-client-config-frontend",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix",
-    "test:unit": "jest",
-    "test:coverage": "jest --coverage",
-    "app:start": "pm2 start npm -- start",
-    "app:wait": "wait-on -l http://localhost:3000/auth",
-    "app:stop": "pm2 kill",
-    "typecheck": "tsc --noEmit"
-  },
   "dependencies": {
     "@aws-amplify/adapter-nextjs": "^1.6.9",
     "aws-amplify": "^6.15.6",
@@ -37,12 +21,30 @@
     "jest-mock-extended": "^4.0.0",
     "pm2": "^6.0.13",
     "sass": "^1.86.0",
-    "ts-jest": "^29.3.0"
+    "ts-jest": "^29.4.0"
   },
+  "eslintConfig": {
+    "extends": [
+      "next/core-web-vitals"
+    ]
+  },
+  "name": "nhs-notify-client-config-frontend",
   "overrides": {
     "react": "^19.0.0"
   },
-  "eslintConfig": {
-    "extends": ["next/core-web-vitals"]
-  }
+  "private": true,
+  "scripts": {
+    "app:start": "pm2 start npm -- start",
+    "app:stop": "pm2 kill",
+    "app:wait": "wait-on -l http://localhost:3000/auth",
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "start": "next start",
+    "test:coverage": "jest --coverage",
+    "test:unit": "jest",
+    "typecheck": "tsc --noEmit"
+  },
+  "version": "0.1.0"
 }
