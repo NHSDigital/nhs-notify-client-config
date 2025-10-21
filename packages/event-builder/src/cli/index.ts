@@ -2,7 +2,7 @@
 
 import { hideBin } from "yargs/helpers";
 import yargs from "yargs/yargs";
-import { ClientPublishedEvent } from "@nhsdigital/nhs-notify-client-config-schemas/src/events/client-published-event";
+import { ClientPublishedEvent } from "@nhsdigital/nhs-notify-events-client-config/src/events/client-published-event";
 import convertCSV from "../csv-to-client-input";
 import buildEvent from "../event-builder";
 import sendSQSBatchMessages from "../send-event-to-queue";

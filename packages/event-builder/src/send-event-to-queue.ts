@@ -4,7 +4,7 @@ import {
   SQSClient,
   SendMessageBatchCommand,
 } from "@aws-sdk/client-sqs";
-import { EventMetadata } from "@nhsdigital/nhs-notify-client-config-schemas/src/events/base-metadata-schemas";
+import { EventMetadata } from "@nhsdigital/nhs-notify-events-client-config/src/events/base-metadata-schemas";
 
 const region: string = process.env.AWS_REGION || "eu-west-2";
 
