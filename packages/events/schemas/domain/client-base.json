@@ -1,22 +1,24 @@
 {
+  "title": "ClientBase",
   "description": "Base schema for clients, defining identifying fields.",
+  "type": "object",
   "properties": {
+    "id": {
+      "title": "Client ID",
+      "description": "Unique identifier for the Client",
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
     "environment": {
+      "title": "Environment",
       "description": "The environment in which the configuration has effect",
       "examples": [
         "dev",
         "int",
         "prod"
       ],
-      "title": "Environment",
-      "type": "string"
-    },
-    "id": {
-      "description": "Unique identifier for the Client",
-      "title": "Client ID",
-      "type": "string"
-    },
-    "name": {
       "type": "string"
     }
   },
@@ -24,7 +26,5 @@
     "id",
     "name",
     "environment"
-  ],
-  "title": "ClientBase",
-  "type": "object"
+  ]
 }
