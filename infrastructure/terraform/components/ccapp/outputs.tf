@@ -1,8 +1,8 @@
 output "amplify" {
   value = {
-    id                           = aws_amplify_app.main.id
-    domain_name                  = local.root_domain_name
-    branch_name                  = var.branch_name
+    id          = aws_amplify_app.main.id
+    domain_name = local.root_domain_name
+    branch_name = var.branch_name
   }
 }
 
