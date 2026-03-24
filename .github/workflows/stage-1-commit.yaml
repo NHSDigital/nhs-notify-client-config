@@ -148,21 +148,22 @@ jobs:
         uses: actions/checkout@v5
       - name: "Lint Terraform"
         uses: ./.github/actions/lint-terraform
-  trivy:
-    name: "Trivy Scan"
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    needs: detect-terraform-changes
-    if: needs.detect-terraform-changes.outputs.terraform_changed == 'true'
-    steps:
-      - name: "Checkout code"
-        uses: actions/checkout@v5
-      - name: "Setup ASDF"
-        uses: asdf-vm/actions/setup@v4
-      - name: "Perform Setup"
-        uses: ./.github/actions/setup
-      - name: "Trivy Scan"
-        uses: ./.github/actions/trivy
+  #TODO - Re-visit Trivy usage https://nhsd-jira.digital.nhs.uk/browse/CCM-15549
+  # trivy:
+  #   name: "Trivy Scan"
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 5
+  #   needs: detect-terraform-changes
+  #   if: needs.detect-terraform-changes.outputs.terraform_changed == 'true'
+  #   steps:
+  #     - name: "Checkout code"
+  #       uses: actions/checkout@v5
+  #     - name: "Setup ASDF"
+  #       uses: asdf-vm/actions/setup@v4
+  #     - name: "Perform Setup"
+  #       uses: ./.github/actions/setup
+  #     - name: "Trivy Scan"
+  #       uses: ./.github/actions/trivy
   count-lines-of-code:
     name: "Count lines of code"
     runs-on: ubuntu-latest
