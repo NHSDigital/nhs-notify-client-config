@@ -43,8 +43,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
-        with:
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5        with:
           fetch-depth: 0 # Full history is needed to scan all commits
       - name: "Scan secrets"
         uses: ./.github/actions/scan-secrets
@@ -54,8 +53,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
-        with:
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5        with:
           fetch-depth: 0 # Full history is needed to compare branches
       - name: "Check file format"
         uses: ./.github/actions/check-file-format
@@ -65,8 +63,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
-        with:
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5        with:
           fetch-depth: 0 # Full history is needed to compare branches
       - name: "Check Markdown format"
         uses: ./.github/actions/check-markdown-format
@@ -77,8 +74,7 @@ jobs:
     if: needs.detect-terraform-changes.outputs.terraform_changed == 'true'
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-        with:
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6        with:
           fetch-depth: 0 # Full history is needed to compare branches
       - name: "Check to see if Terraform Docs are up-to-date"
         run: |
@@ -98,8 +94,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
-        with:
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5        with:
           fetch-depth: 0 # Full history is needed to compare branches
       - name: "Check English usage"
         uses: ./.github/actions/check-english-usage
@@ -109,8 +104,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-        with:
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6        with:
           fetch-depth: 0 # Full history is needed to compare branches
       - name: "Check TODO usage"
         uses: ./.github/actions/check-todo-usage
@@ -144,8 +138,7 @@ jobs:
     if: needs.detect-terraform-changes.outputs.terraform_changed == 'true'
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
-      - name: "Lint Terraform"
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5      - name: "Lint Terraform"
         uses: ./.github/actions/lint-terraform
   #TODO - Re-visit Trivy usage https://nhsd-jira.digital.nhs.uk/browse/CCM-15549
   # trivy:
@@ -156,7 +149,7 @@ jobs:
   #   if: needs.detect-terraform-changes.outputs.terraform_changed == 'true'
   #   steps:
   #     - name: "Checkout code"
-  #       uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+  #       uses: actions/checkout@v5
   #     - name: "Setup ASDF"
   #       uses: asdf-vm/actions/setup@v4
   #     - name: "Perform Setup"
@@ -172,8 +165,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
-      - name: "Count lines of code"
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5      - name: "Count lines of code"
         uses: ./.github/actions/create-lines-of-code-report
         with:
           build_datetime: "${{ inputs.build_datetime }}"
@@ -191,8 +183,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
-      - name: "Scan dependencies"
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5      - name: "Scan dependencies"
         uses: ./.github/actions/scan-dependencies
         with:
           build_datetime: "${{ inputs.build_datetime }}"
@@ -214,8 +205,7 @@ jobs:
 
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-        with:
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6        with:
           fetch-depth: 0
 
       - name: Detect package changes and current version
@@ -249,11 +239,10 @@ jobs:
       contents: read
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       # Simplified caching - template management has more complex caching of installed modules from another build step
       - name: "Cache node_modules"
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4        with:
           path: |
             **/node_modules
           key: ${{ runner.os }}-node-${{ inputs.nodejs_version }}-${{ hashFiles('**/package-lock.json') }}
@@ -277,7 +266,7 @@ jobs:
       contents: read
     steps:
       - name: Checkout code
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Check schema versions
         run: |
           source scripts/is_valid_increment.sh
