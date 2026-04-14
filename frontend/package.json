@@ -19,7 +19,6 @@
     "jest-environment-jsdom": "^30.1.2",
     "jest-html-reporter": "^4.3.0",
     "jest-mock-extended": "^4.0.0",
-    "pm2": "^6.0.13",
     "sass": "^1.86.0",
     "ts-jest": "^29.4.0"
   },
@@ -31,8 +30,8 @@
   "name": "nhs-notify-client-config-frontend",
   "private": true,
   "scripts": {
-    "app:start": "pm2 start npm -- start",
-    "app:stop": "pm2 kill",
+    "app:start": "npm run start > /tmp/nhs-notify-frontend.log 2>&1 & echo $! > /tmp/nhs-notify-frontend.pid",
+    "app:stop": "if [ -f /tmp/nhs-notify-frontend.pid ]; then kill $(cat /tmp/nhs-notify-frontend.pid) || true; rm -f /tmp/nhs-notify-frontend.pid; fi",
     "app:wait": "wait-on -l http://localhost:3000/auth",
     "build": "next build",
     "dev": "next dev",
