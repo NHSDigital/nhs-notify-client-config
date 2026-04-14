@@ -31,3 +31,4 @@ scripts/tests/
 docs/
 infrastructure/terraform/components/
 scripts/**/examples/
+containers/example-app/

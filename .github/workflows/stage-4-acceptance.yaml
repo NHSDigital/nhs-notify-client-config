@@ -27,17 +27,10 @@ on:
         description: "Terraform version, set by the CI/CD pipeline workflow"
         required: true
         type: string
-      pr_number:
-        required: true
-        type: string
       version:
         description: "Version of the software, set by the CI/CD pipeline workflow"
         required: true
         type: string
-
-permissions:
-  id-token: write
-  contents: read
 
 jobs:
   environment-set-up:
@@ -46,7 +39,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: "Create infractructure"
         run: |
           echo "Creating infractructure..."
@@ -63,7 +56,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: "Run contract test"
         run: |
           make test-contract
@@ -77,7 +70,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: "Run security test"
         run: |
           make test-security
@@ -91,7 +84,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: "Run UI test"
         run: |
           make test-ui
@@ -105,7 +98,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: "Run UI performance test"
         run: |
           make test-ui-performance
@@ -119,7 +112,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: "Run integration test"
         run: |
           make test-integration
@@ -133,7 +126,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: "Run accessibility test"
         run: |
           make test-accessibility
@@ -147,7 +140,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: "Run load tests"
         run: |
           make test-load
@@ -171,7 +164,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: "Tear down environment"
         run: |
           echo "Tearing down environment..."
