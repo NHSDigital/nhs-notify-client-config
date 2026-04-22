@@ -11,75 +11,75 @@ channels:
     title: Control Plane
     description: Events related to configuration changes
     messages:
-      client-published:
-        $ref: '#/components/messages/client-published'
-      client-removed:
-        $ref: '#/components/messages/client-removed'
-      campaign-published:
-        $ref: '#/components/messages/campaign-published'
-      campaign-removed:
-        $ref: '#/components/messages/campaign-removed'
-      client-subscription-published:
-        $ref: '#/components/messages/client-subscription-published'
-      client-subscription-removed:
-        $ref: '#/components/messages/client-subscription-removed'
+      client-int:
+        $ref: '#/components/messages/client-int'
+      client-prod:
+        $ref: '#/components/messages/client-prod'
+      client-disabled:
+        $ref: '#/components/messages/client-disabled'
+      campaign-int:
+        $ref: '#/components/messages/campaign-int'
+      campaign-prod:
+        $ref: '#/components/messages/campaign-prod'
+      campaign-disabled:
+        $ref: '#/components/messages/campaign-disabled'
 
 components:
   messages:
-    client-published:
-      name: client-published
-      title: Client Published
-      summary: "A client configuration has been published for a given environment."
+    client-int:
+      name: client-int
+      title: Client INT
+      summary: "A client configuration targeted at INT has been published."
       contentType: application/json
       payload:
         allOf:
           - $ref: './cloud-events-envelope-1.0.yaml'
-          - $ref: './events/client-published.yaml'
+          - $ref: './events/client-int.yaml'
       examples:
         - payload:
-            $ref: './examples/client-published.json'
-    client-removed:
-      name: client-removed
-      title: Client Removed
-      summary: "A client configuration has been removed for a given environment."
+            $ref: './examples/client-int.json'
+    client-prod:
+      name: client-prod
+      title: Client PROD
+      summary: "A client configuration targeted at PROD has been published."
       contentType: application/json
       payload:
         allOf:
           - $ref: './cloud-events-envelope-1.0.yaml'
-          - $ref: './events/client-removed.yaml'
-    campaign-published:
-      name: campaign-published
-      title: Campaign Published
-      summary: "A campaign configuration has been published for a given environment."
+          - $ref: './events/client-prod.yaml'
+    client-disabled:
+      name: client-disabled
+      title: Client Disabled
+      summary: "A client configuration has been disabled in all environments."
       contentType: application/json
       payload:
         allOf:
           - $ref: './cloud-events-envelope-1.0.yaml'
-          - $ref: './events/campaign-published.yaml'
-    campaign-removed:
-      name: campaign-removed
-      title: Campaign Removed
-      summary: "A campaign configuration has been removed for a given environment."
+          - $ref: './events/client-disabled.yaml'
+    campaign-int:
+      name: campaign-int
+      title: Campaign INT
+      summary: "A campaign configuration targeted at INT has been published."
       contentType: application/json
       payload:
         allOf:
           - $ref: './cloud-events-envelope-1.0.yaml'
-          - $ref: './events/campaign-removed.yaml'
-    client-subscription-published:
-      name: client-subscription-published
-      title: Client Subscription Published
-      summary: "The configuration for a client subscription in a given environment has been published."
+          - $ref: './events/campaign-int.yaml'
+    campaign-prod:
+      name: campaign-prod
+      title: Campaign PROD
+      summary: "A campaign configuration targeted at PROD has been published."
       contentType: application/json
       payload:
         allOf:
           - $ref: './cloud-events-envelope-1.0.yaml'
-          - $ref: './events/client-subscription-published.yaml'
-    client-subscription-removed:
-      name: client-subscription-removed
-      title: Client Subscription Removed
-      summary: "The configuration for a client subscription in a given environment has been removed."
+          - $ref: './events/campaign-prod.yaml'
+    campaign-disabled:
+      name: campaign-disabled
+      title: Campaign Disabled
+      summary: "A campaign configuration has been disabled in all environments."
       contentType: application/json
       payload:
         allOf:
           - $ref: './cloud-events-envelope-1.0.yaml'
-          - $ref: './events/client-subscription-removed.yaml'
+          - $ref: './events/campaign-disabled.yaml'

@@ -1,0 +1,24 @@
+{
+  "data": {
+    "id": "00f3b388-bbe9-41c9-9e76-052d37ee8988",
+    "messageRequestsApimApplications": [
+      {
+        "applicationId": "prod-apim-app-id",
+        "environment": "PROD"
+      }
+    ],
+    "name": "Test Client",
+    "slug": "test-client",
+    "status": "INT"
+  },
+  "datacontenttype": "application/json",
+  "dataschema": "https://notify.nhs.uk/events/client-config/client-int-1.0.0.json",
+  "dataschemaversion": "1.0.0",
+  "id": "23f1f09c-a555-4d9b-8405-0b33490bc922",
+  "plane": "control",
+  "source": "//notify.nhs.uk/app/nhs-notify-client-config-dev/main",
+  "specversion": "1.0",
+  "subject": "00f3b388-bbe9-41c9-9e76-052d37ee8988",
+  "time": "2025-08-28T08:47:00.000Z",
+  "type": "uk.nhs.notify.client-config.client.int.v1"
+}

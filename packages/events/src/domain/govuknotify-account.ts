@@ -1,18 +1,24 @@
 import { z } from "zod";
+import { $Environment, $ParameterStorePath } from "./common";
 
 export const $GovuknotifyAccount = z
   .object({
-    name: z.string(),
-    apiKey: z
-      .string()
-      .optional()
-      .meta({
-        description: `The API key for the GOV.UK Notify account.
-      This will not be present in events, but may be fetched from the client config domain via API call.`,
-      }),
+    environment: $Environment,
+    apiKeyParameterPath: $ParameterStorePath.meta({
+      title: "GOV.UK Notify API Key Parameter Store Path",
+      description:
+        "AWS Systems Manager Parameter Store path containing the GOV.UK Notify API key for the target environment.",
+      examples: ["/nhs-notify/client-config/gun/example/api-key"],
+    }),
+    senderId: z.string().optional().meta({
+      description:
+        "Optional GOV.UK Notify sender identifier for the target environment.",
+    }),
   })
   .meta({
     title: "GovuknotifyAccount",
+    description:
+      "Environment-scoped GOV.UK Notify configuration for a campaign.",
   });
 
 export type GovuknotifyAccount = z.infer<typeof $GovuknotifyAccount>;

@@ -1,6 +1,6 @@
 {
   "title": "Client",
-  "description": "A client represents an organisation or service that sends communications.\n    Each client may be associated with a single APIM application, which is used to authenticate API requests,\n    and a single Mesh mailbox, which is used to send and receive batch requests and daily reports via Mesh.",
+  "description": "A client represents an organisation or service that sends communications.\n    Client records are promoted through DRAFT, INT, PROD, and DISABLED states, while environment-specific operational settings and global routing queues are embedded as child configuration collections.",
   "type": "object",
   "properties": {
     "id": {
@@ -11,15 +11,25 @@
     "name": {
       "type": "string"
     },
-    "environment": {
-      "title": "Environment",
-      "description": "The environment in which the configuration has effect",
+    "slug": {
+      "title": "Client Slug",
+      "description": "Human-readable identifier for the client, used alongside the UUID client ID.",
       "examples": [
-        "dev",
-        "int",
-        "prod"
+        "test-client"
       ],
-      "type": "string"
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "status": {
+      "title": "EnvironmentStatus",
+      "description": "Indicates whether the configuration is in draft, enabled in INT, enabled in PROD, or disabled in all environments. `PROD` implies the configuration has also been promoted through INT.",
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "INT",
+        "PROD",
+        "DISABLED"
+      ]
     },
     "senderOdsCode": {
       "type": "string"
@@ -32,48 +42,281 @@
           "description": "The maximum number of requests that can be made by the client in one second (TPS or Transactions Per Second).",
           "type": "number"
         }
-      },
-      "required": [
-        "maxRequestsPerSecond"
-      ]
+      }
     },
-    "meshMailbox": {
-      "title": "MeshMailbox",
-      "description": "A Mesh Mailbox associated with a client",
-      "type": "object",
-      "properties": {
-        "mailboxId": {
-          "type": "string"
+    "messageRequestsMeshMailboxes": {
+      "description": "Environment-scoped MESH mailbox settings for message request workflows.",
+      "type": "array",
+      "items": {
+        "title": "MessageRequestsMeshMailbox",
+        "description": "Environment-scoped MESH mailbox configuration used for message request traffic.",
+        "type": "object",
+        "properties": {
+          "environment": {
+            "$ref": "#/definitions/__schema0"
+          },
+          "mailboxId": {
+            "$ref": "#/definitions/__schema1"
+          },
+          "workflowIdPrefix": {
+            "description": "Workflow identifier prefix used for message request exchanges in the target environment.",
+            "type": "string"
+          }
         },
-        "workflowIdSuffix": {
-          "type": "string"
-        },
-        "workflowIdReceiveRequestAck": {
-          "type": "string"
-        },
-        "workflowIdCompletedRequestItemsReport": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "mailboxId"
-      ]
+        "required": [
+          "environment",
+          "mailboxId",
+          "workflowIdPrefix"
+        ]
+      }
     },
-    "apimApplication": {
-      "description": "ApimApplication",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
+    "digitalLettersMeshMailboxes": {
+      "description": "Environment-scoped Digital Letters MESH mailbox settings.",
+      "type": "array",
+      "items": {
+        "title": "DigitalLettersMeshMailbox",
+        "description": "Environment-scoped MESH mailbox configuration used for Digital Letters integrations.",
+        "type": "object",
+        "properties": {
+          "environment": {
+            "$ref": "#/definitions/__schema0"
+          },
+          "mailboxId": {
+            "$ref": "#/definitions/__schema1"
+          }
         },
-        "apimId": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "apimId"
-      ]
+        "required": [
+          "environment",
+          "mailboxId"
+        ]
+      }
+    },
+    "messageRequestsApimApplications": {
+      "description": "Environment-scoped APIM application identifiers for message request traffic.",
+      "type": "array",
+      "items": {
+        "title": "ApimApplication",
+        "description": "Environment-scoped APIM application configuration.",
+        "type": "object",
+        "properties": {
+          "environment": {
+            "$ref": "#/definitions/__schema0"
+          },
+          "applicationId": {
+            "description": "APIM application identifier used to authenticate requests in the target environment.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "environment",
+          "applicationId"
+        ]
+      }
+    },
+    "clientSubscriptions": {
+      "description": "Environment-scoped callback subscription settings for the client.",
+      "type": "array",
+      "items": {
+        "title": "ClientSubscription",
+        "description": "Environment-scoped callback configuration for client subscription events.",
+        "type": "object",
+        "properties": {
+          "environment": {
+            "$ref": "#/definitions/__schema0"
+          },
+          "callbackUrl": {
+            "description": "The URL to which event callbacks should be sent.",
+            "type": "string",
+            "format": "uri"
+          },
+          "callbackApiTokenParameterPath": {
+            "title": "Callback API Token Parameter Store Path",
+            "description": "AWS Systems Manager Parameter Store path containing the callback API token used when invoking the client subscription endpoint.",
+            "examples": [
+              "/nhs-notify/client-config/subscriptions/example/callback-api-token"
+            ],
+            "type": "string"
+          },
+          "messageStatuses": {
+            "description": "Set of overall message statuses to subscribe to, as documented on https://notify.nhs.uk/using-nhs-notify/message-channel-supplier-status.",
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "title": "MessageStatus",
+              "description": "Message statuses documented by NHS Notify for overall message progress across all attempted channels.",
+              "type": "string",
+              "enum": [
+                "pending_enrichment",
+                "enriched",
+                "sending",
+                "delivered",
+                "failed"
+              ]
+            }
+          },
+          "channelStatuses": {
+            "description": "Set of channel statuses to subscribe to, as documented on https://notify.nhs.uk/using-nhs-notify/message-channel-supplier-status.",
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "title": "ChannelStatus",
+              "description": "Channel statuses documented by NHS Notify for the progress of an individual channel in a message plan.",
+              "type": "string",
+              "enum": [
+                "created",
+                "skipped",
+                "sending",
+                "delivered",
+                "failed"
+              ]
+            }
+          },
+          "supplierStatuses": {
+            "description": "Set of supplier statuses to subscribe to, as documented on https://notify.nhs.uk/using-nhs-notify/message-channel-supplier-status.",
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "title": "SupplierStatus",
+              "description": "Supplier statuses documented by NHS Notify for detailed supplier-specific outcomes across channels.",
+              "type": "string",
+              "enum": [
+                "accepted",
+                "cancelled",
+                "delivered",
+                "notification attempted",
+                "notified",
+                "pending_virus_check",
+                "permanent_failure",
+                "read",
+                "received",
+                "rejected",
+                "technical_failure",
+                "temporary_failure",
+                "unnotified",
+                "validation_failed",
+                "virus_scan_failed"
+              ]
+            }
+          }
+        },
+        "required": [
+          "environment",
+          "callbackUrl"
+        ]
+      }
+    },
+    "globalQueues": {
+      "description": "Queues configured directly on the client for global routing scenarios that are not tied to a campaign.",
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "title": "Queue",
+        "description": "Campaign queue configuration for a single channel, including per-queue throttling limits and active schedule windows.",
+        "type": "object",
+        "properties": {
+          "channel": {
+            "title": "Channel",
+            "description": "A channel with which a message can be sent",
+            "type": "string",
+            "enum": [
+              "NHSAPP",
+              "SMS",
+              "EMAIL",
+              "LETTER"
+            ]
+          },
+          "maxRequestsPerSecond": {
+            "description": "Maximum number of requests that may be dispatched per second while the queue throttling rules are active.",
+            "type": "number",
+            "minimum": 0
+          },
+          "maxRequestsPerPeriod": {
+            "description": "Maximum number of requests that may be dispatched during a single quota period while the queue throttling rules are active.",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "periodSeconds": {
+            "description": "Length of the quota period, in seconds, used with maxRequestsPerPeriod.",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "periodOffset": {
+            "description": "Offset in seconds applied to the start of each quota period calculation.",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "schedule": {
+            "description": "Schedule periods during which queue throttling is active. The quota applies whenever the current time falls within any defined schedule period.",
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "title": "QueueSchedulePeriod",
+              "description": "A scheduled time window during which queue throttling is active. Multiple schedule periods may overlap.",
+              "type": "object",
+              "properties": {
+                "daysOfWeek": {
+                  "description": "Days of the week on which this queue schedule period is active.",
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "title": "DayOfWeek",
+                    "description": "Day of the week on which a queue schedule period applies.",
+                    "type": "string",
+                    "enum": [
+                      "MONDAY",
+                      "TUESDAY",
+                      "WEDNESDAY",
+                      "THURSDAY",
+                      "FRIDAY",
+                      "SATURDAY",
+                      "SUNDAY"
+                    ]
+                  }
+                },
+                "startTime": {
+                  "title": "Start Time",
+                  "description": "Inclusive start time for the active schedule period, in HH:MM 24-hour format.",
+                  "examples": [
+                    "08:00"
+                  ],
+                  "allOf": [
+                    {
+                      "$ref": "#/definitions/__schema2"
+                    }
+                  ]
+                },
+                "endTime": {
+                  "title": "End Time",
+                  "description": "Exclusive end time for the active schedule period, in HH:MM 24-hour format.",
+                  "examples": [
+                    "18:00"
+                  ],
+                  "allOf": [
+                    {
+                      "$ref": "#/definitions/__schema2"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "daysOfWeek",
+                "startTime",
+                "endTime"
+              ]
+            }
+          },
+          "queueNamePrefixOverride": {
+            "description": "Optional prefix override used when generating the queue name for this campaign channel.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "channel"
+        ]
+      }
     },
     "featureFlags": {
       "type": "array",
@@ -142,6 +385,36 @@
   "required": [
     "id",
     "name",
-    "environment"
-  ]
+    "slug",
+    "status"
+  ],
+  "definitions": {
+    "__schema0": {
+      "title": "Environment",
+      "description": "The target environment for an environment-scoped configuration entry.",
+      "examples": [
+        "INT",
+        "PROD"
+      ],
+      "type": "string",
+      "enum": [
+        "INT",
+        "PROD"
+      ]
+    },
+    "__schema1": {
+      "description": "MESH mailbox identifier for the target environment.",
+      "type": "string"
+    },
+    "__schema2": {
+      "title": "TimeOfDay",
+      "description": "24-hour time in HH:MM format.",
+      "examples": [
+        "09:00",
+        "17:30"
+      ],
+      "type": "string",
+      "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+    }
+  }
 }
