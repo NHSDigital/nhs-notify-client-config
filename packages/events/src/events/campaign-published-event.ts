@@ -46,7 +46,11 @@ function createCampaignEventSchema(
 ) {
   return $EventMetadata
     .extend({
-      type: z.literal(`uk.nhs.notify.client-config.campaign.${status}.v1`),
+      type: z.literal(
+        status === "disabled"
+          ? `uk.nhs.notify.client-config.campaign.disabled.v1`
+          : `uk.nhs.notify.client-config.campaign.published.${status}.v1`,
+      ),
       dataschema: z.string().regex(getCampaignEventDataschemaPattern(status)),
       dataschemaversion: z.string().regex(/^1\.\d+\.\d+$/),
     })

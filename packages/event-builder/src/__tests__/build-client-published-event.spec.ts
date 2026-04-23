@@ -44,7 +44,7 @@ describe("buildClientEvent", () => {
     const events = buildClientEvent({ ...baseClient, status: "INT" });
 
     expect(events).toHaveLength(1);
-    expect(events[0].type).toBe("uk.nhs.notify.client-config.client.int.v1");
+    expect(events[0].type).toBe("uk.nhs.notify.client-config.client.published.int.v1");
     expect(events[0].data.status).toBe("INT");
     expect(events[0].dataschema).toMatch(
       new RegExp(`client-int-${schemaVersion}\\.json$`),
@@ -74,9 +74,9 @@ describe("buildClientEvent", () => {
     expect(events).toHaveLength(2);
 
     const [intEvent, prodEvent] = events;
-    expect(intEvent.type).toBe("uk.nhs.notify.client-config.client.int.v1");
+    expect(intEvent.type).toBe("uk.nhs.notify.client-config.client.published.int.v1");
     expect(intEvent.data.status).toBe("INT");
-    expect(prodEvent.type).toBe("uk.nhs.notify.client-config.client.prod.v1");
+    expect(prodEvent.type).toBe("uk.nhs.notify.client-config.client.published.prod.v1");
     expect(prodEvent.data.status).toBe("PROD");
   });
 
@@ -143,7 +143,7 @@ describe("buildCampaignEvent", () => {
     const events = buildCampaignEvent({ ...baseCampaign, status: "INT" });
 
     expect(events).toHaveLength(1);
-    expect(events[0].type).toBe("uk.nhs.notify.client-config.campaign.int.v1");
+    expect(events[0].type).toBe("uk.nhs.notify.client-config.campaign.published.int.v1");
     expect(events[0].data.status).toBe("INT");
     expect(() => $CampaignIntEvent.parse(events[0])).not.toThrow();
   });
@@ -153,10 +153,10 @@ describe("buildCampaignEvent", () => {
 
     expect(events).toHaveLength(2);
     const [intEvent, prodEvent] = events;
-    expect(intEvent.type).toBe("uk.nhs.notify.client-config.campaign.int.v1");
+    expect(intEvent.type).toBe("uk.nhs.notify.client-config.campaign.published.int.v1");
     expect(intEvent.data.status).toBe("INT");
     expect(prodEvent.type).toBe(
-      "uk.nhs.notify.client-config.campaign.prod.v1",
+      "uk.nhs.notify.client-config.campaign.published.prod.v1",
     );
     expect(prodEvent.data.status).toBe("PROD");
   });

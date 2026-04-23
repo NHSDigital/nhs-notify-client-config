@@ -120,7 +120,7 @@ export function buildClientEvent(client: Client): ClientEvent[] {
         $ClientIntEvent.parse(
           buildEnvelope(
             parsed.id,
-            "uk.nhs.notify.client-config.client.int.v1",
+            "uk.nhs.notify.client-config.client.published.int.v1",
             `https://notify.nhs.uk/events/client-config/client-int-${schemaVersion}.json`,
             clientForEnvironment(parsed, "INT"),
           ),
@@ -132,7 +132,7 @@ export function buildClientEvent(client: Client): ClientEvent[] {
         $ClientIntEvent.parse(
           buildEnvelope(
             parsed.id,
-            "uk.nhs.notify.client-config.client.int.v1",
+            "uk.nhs.notify.client-config.client.published.int.v1",
             `https://notify.nhs.uk/events/client-config/client-int-${schemaVersion}.json`,
             clientForEnvironment(parsed, "INT"),
           ),
@@ -140,7 +140,7 @@ export function buildClientEvent(client: Client): ClientEvent[] {
         $ClientProdEvent.parse(
           buildEnvelope(
             parsed.id,
-            "uk.nhs.notify.client-config.client.prod.v1",
+            "uk.nhs.notify.client-config.client.published.prod.v1",
             `https://notify.nhs.uk/events/client-config/client-prod-${schemaVersion}.json`,
             clientForEnvironment(parsed, "PROD"),
           ),
@@ -185,7 +185,7 @@ export function buildCampaignEvent(campaign: Campaign): CampaignEvent[] {
         $CampaignIntEvent.parse(
           buildEnvelope(
             parsed.id,
-            "uk.nhs.notify.client-config.campaign.int.v1",
+            "uk.nhs.notify.client-config.campaign.published.int.v1",
             `https://notify.nhs.uk/events/client-config/campaign-int-${schemaVersion}.json`,
             campaignForEnvironment(parsed, "INT"),
           ),
@@ -197,7 +197,7 @@ export function buildCampaignEvent(campaign: Campaign): CampaignEvent[] {
         $CampaignIntEvent.parse(
           buildEnvelope(
             parsed.id,
-            "uk.nhs.notify.client-config.campaign.int.v1",
+            "uk.nhs.notify.client-config.campaign.published.int.v1",
             `https://notify.nhs.uk/events/client-config/campaign-int-${schemaVersion}.json`,
             campaignForEnvironment(parsed, "INT"),
           ),
@@ -205,7 +205,7 @@ export function buildCampaignEvent(campaign: Campaign): CampaignEvent[] {
         $CampaignProdEvent.parse(
           buildEnvelope(
             parsed.id,
-            "uk.nhs.notify.client-config.campaign.prod.v1",
+            "uk.nhs.notify.client-config.campaign.published.prod.v1",
             `https://notify.nhs.uk/events/client-config/campaign-prod-${schemaVersion}.json`,
             campaignForEnvironment(parsed, "PROD"),
           ),

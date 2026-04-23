@@ -53,7 +53,11 @@ function createClientEventSchema(
 ) {
   return $EventMetadata
     .extend({
-      type: z.literal(`uk.nhs.notify.client-config.client.${status}.v1`),
+      type: z.literal(
+        status === "disabled"
+          ? `uk.nhs.notify.client-config.client.disabled.v1`
+          : `uk.nhs.notify.client-config.client.published.${status}.v1`,
+      ),
       dataschema: z.string().regex(getClientEventDataschemaPattern(status)),
       dataschemaversion: z.string().regex(/^1\.\d+\.\d+$/),
     })

@@ -11,42 +11,42 @@ channels:
     title: Control Plane
     description: Events related to configuration changes
     messages:
-      client-int:
-        $ref: '#/components/messages/client-int'
-      client-prod:
-        $ref: '#/components/messages/client-prod'
+      client-published-int:
+        $ref: '#/components/messages/client-published-int'
+      client-published-prod:
+        $ref: '#/components/messages/client-published-prod'
       client-disabled:
         $ref: '#/components/messages/client-disabled'
-      campaign-int:
-        $ref: '#/components/messages/campaign-int'
-      campaign-prod:
-        $ref: '#/components/messages/campaign-prod'
+      campaign-published-int:
+        $ref: '#/components/messages/campaign-published-int'
+      campaign-published-prod:
+        $ref: '#/components/messages/campaign-published-prod'
       campaign-disabled:
         $ref: '#/components/messages/campaign-disabled'
 
 components:
   messages:
-    client-int:
-      name: client-int
+    client-published-int:
+      name: client-published-int
       title: Client INT
       summary: "A client configuration targeted at INT has been published."
       contentType: application/json
       payload:
         allOf:
           - $ref: './cloud-events-envelope-1.0.yaml'
-          - $ref: './events/client-int.yaml'
+          - $ref: './events/client-published-int.yaml'
       examples:
         - payload:
             $ref: './examples/client-int.json'
-    client-prod:
-      name: client-prod
+    client-published-prod:
+      name: client-published-prod
       title: Client PROD
       summary: "A client configuration targeted at PROD has been published."
       contentType: application/json
       payload:
         allOf:
           - $ref: './cloud-events-envelope-1.0.yaml'
-          - $ref: './events/client-prod.yaml'
+          - $ref: './events/client-published-prod.yaml'
     client-disabled:
       name: client-disabled
       title: Client Disabled
@@ -56,24 +56,24 @@ components:
         allOf:
           - $ref: './cloud-events-envelope-1.0.yaml'
           - $ref: './events/client-disabled.yaml'
-    campaign-int:
-      name: campaign-int
+    campaign-published-int:
+      name: campaign-published-int
       title: Campaign INT
       summary: "A campaign configuration targeted at INT has been published."
       contentType: application/json
       payload:
         allOf:
           - $ref: './cloud-events-envelope-1.0.yaml'
-          - $ref: './events/campaign-int.yaml'
-    campaign-prod:
-      name: campaign-prod
+          - $ref: './events/campaign-published-int.yaml'
+    campaign-published-prod:
+      name: campaign-published-prod
       title: Campaign PROD
       summary: "A campaign configuration targeted at PROD has been published."
       contentType: application/json
       payload:
         allOf:
           - $ref: './cloud-events-envelope-1.0.yaml'
-          - $ref: './events/campaign-prod.yaml'
+          - $ref: './events/campaign-published-prod.yaml'
     campaign-disabled:
       name: campaign-disabled
       title: Campaign Disabled
