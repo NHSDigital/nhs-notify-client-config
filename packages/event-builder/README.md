@@ -1,52 +1,53 @@
 # About
 
-CLI and helper library for building client-config CloudEvents.
+Helper library for building client-config CloudEvents.
 
-## Global Options
+This package is responsible for constructing client-config events from validated
+domain objects. Event publishing is handled elsewhere.
 
-- `--environment` – The queue environment to send events to (e.g. `de2-aiyu1`, `int`). Required.
-- `--format` – Print output in `json` or `table` format. Default is `json`.
+## Event generation rules
 
-## Commands
+### Clients
 
-### `publish-clients`
-
-Reads a JSON file containing one or more `Client` domain objects and publishes the appropriate CloudEvents to the queue.
-
-Event generation rules:
-
-| Client `status` | Events published |
-| --------------- | -------------------------------- |
+| Client `status` | Events built |
+| --------------- | ------------ |
 | `DRAFT` | None |
-| `INT` | One `client.int` event (INT-scoped config only) |
-| `PROD` | `client.int` event (INT-scoped) **+** `client.prod` event (PROD-scoped) |
+| `INT` | One `client.published.int` event with INT-scoped config only |
+| `PROD` | One `client.published.int` event with INT-scoped config **and** one `client.published.prod` event with PROD-scoped config |
 | `DISABLED` | One `client.disabled` event |
 
-For `PROD`-status clients, environment-scoped collections (`messageRequestsApimApplications`, `clientSubscriptions`, `messageRequestsMeshMailboxes`, `digitalLettersMeshMailboxes`) are automatically filtered so each event only contains entries for its target environment.
+For `PROD`-status clients, environment-scoped collections
+(`messageRequestsApimApplications`, `clientSubscriptions`,
+`messageRequestsMeshMailboxes`, `digitalLettersMeshMailboxes`) are filtered so
+each event only contains entries for its target environment.
 
-#### Options
+### Campaigns
 
-`--json-file`: path to a JSON file containing a single `Client` object or an array of `Client` objects.
+| Campaign `status` | Events built |
+| ----------------- | ------------ |
+| `DRAFT` | None |
+| `INT` | One `campaign.published.int` event with INT-scoped config only |
+| `PROD` | One `campaign.published.int` event with INT-scoped config **and** one `campaign.published.prod` event with PROD-scoped config |
+| `DISABLED` | One `campaign.disabled` event |
 
-#### Usage
+For `PROD`-status campaigns, `govukNotifyConfigurations` is filtered so each
+event only contains entries for its target environment.
 
-```bash
-npm run --workspace=@nhsdigital/nhs-notify-client-config-event-builder cli -- publish-clients \
-  --json-file <path/to/clients.json> \
-  --environment <queue-env>
+## Library usage
+
+Import the builders from `src/event-builder`:
+
+```typescript
+import { buildCampaignEvent, buildClientEvent } from "./src/event-builder";
+
+const clientEvents = buildClientEvent(client);
+const campaignEvents = buildCampaignEvent(campaign);
 ```
 
-#### Example
+Both helpers return arrays because a single domain object can build zero, one,
+or two events depending on its status.
 
-```bash
-npm run --workspace=@nhsdigital/nhs-notify-client-config-event-builder cli -- publish-clients \
-  --json-file inputs/clients.json \
-  --environment de2-aiyu1
-```
-
-#### Input format
-
-Single client:
+### Example input
 
 ```json
 {
@@ -60,36 +61,3 @@ Single client:
   ]
 }
 ```
-
-Array of clients:
-
-```json
-[
-  { "id": "...", "name": "Client A", "slug": "client-a", "status": "INT", ... },
-  { "id": "...", "name": "Client B", "slug": "client-b", "status": "PROD", ... }
-]
-```
-
-## Library usage
-
-This package also exports helpers for working directly with domain objects:
-
-```typescript
-import { buildClientEvent, buildCampaignEvent } from "./src/event-builder";
-
-// Returns ClientEvent[] (0, 1 or 2 events depending on status)
-const events = buildClientEvent(client);
-
-// Returns CampaignEvent[] (0, 1 or 2 events depending on status)
-const campaignEvents = buildCampaignEvent(campaign);
-```
-
-## Bundling for release
-
-To build a self-contained CJS bundle for use in GitHub Actions:
-
-```bash
-npm run bundle:release --workspace @nhsdigital/nhs-notify-client-config-event-builder
-```
-
-The bundle is written to `packages/event-builder/artifacts/event-builder-bundle/index.cjs`.
