@@ -44,9 +44,6 @@
   "overrides": {
     "fast-xml-parser": "5.5.7",
     "js-yaml": "4.1.1",
-    "pretty-format": {
-      "react-is": "19.0.0"
-    },
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },

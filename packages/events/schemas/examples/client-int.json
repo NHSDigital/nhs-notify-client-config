@@ -2,14 +2,14 @@
   "data": {
     "clientSubscriptions": [
       {
-        "callbackApiTokenParameterPath": "/nhs-notify/client-config/subscriptions/test/int/callback-token",
-        "callbackUrl": "https://example.com/int/callback",
+        "callbackApiTokenParameterPath": "/nhs-notify/client-config/subscriptions/example/int/callback-token",
+        "callbackUrl": "https://example.nhs.uk/client/int/callback",
         "channelStatuses": [
           "delivered"
         ],
         "environment": "INT",
         "messageStatuses": [
-          "pending_enrichment",
+          "enriched",
           "failed"
         ],
         "supplierStatuses": [

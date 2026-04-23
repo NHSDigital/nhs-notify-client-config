@@ -44,6 +44,8 @@ jobs:
         uses: ./.github/actions/build-docs
         with:
           version: "${{ inputs.version }}"
+
+
   artefact-1:
     name: "Artefact 1"
     runs-on: ubuntu-latest

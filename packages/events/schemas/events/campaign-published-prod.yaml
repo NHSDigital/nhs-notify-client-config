@@ -1,10 +1,10 @@
 type: "object"
-title: Client Subscription Removed Event
+title: Campaign PROD Event
 properties:
   data:
-    $ref: "../domain/client-subscription-base.json"
+    $ref: "../domain/campaign.json"
   dataschema:
-    pattern: "^https:\\/\\/notify\\.nhs\\.uk\\/events\\/client-config\\/client-subscription-removed-1.\\d+\\.\\d+\\.json$"
+    pattern: "^https:\\/\\/notify\\.nhs\\.uk\\/events\\/client-config\\/campaign-prod-1.\\d+\\.\\d+\\.json$"
     type: "string"
   dataschemaversion:
     pattern: "^1\\.\\d+\\.\\d+$"
@@ -13,7 +13,7 @@ properties:
     const: "control"
     type: "string"
   type:
-    const: "uk.nhs.notify.client-config.client-subscription-removed.v1"
+    const: "uk.nhs.notify.client-config.campaign.published.prod.v1"
     type: "string"
 required:
   - "data"

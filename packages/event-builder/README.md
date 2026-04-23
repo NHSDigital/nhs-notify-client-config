@@ -1,46 +1,63 @@
 # About
 
-CLI tool for client configuration using events.
+Helper library for building client-config CloudEvents.
 
-## Global Options
+This package is responsible for constructing client-config events from validated
+domain objects. Event publishing is handled elsewhere.
 
-- --environment - The name of the environment to run the command on e.g 'de2-', 'int'. Required.
-- --format - print data in JSON or tabular format. Default is JSON.
+## Event generation rules
 
-## Client Config Commands
+### Clients
 
-- Create Client
+| Client `status` | Events built |
+| --------------- | ------------ |
+| `DRAFT` | None |
+| `INT` | One `client.published.int` event with INT-scoped config only |
+| `PROD` | One `client.published.int` event with INT-scoped config **and** one `client.published.prod` event with PROD-scoped config |
+| `DISABLED` | One `client.disabled` event |
 
-## Create Client
+For `PROD`-status clients, environment-scoped collections
+(`messageRequestsApimApplications`, `clientSubscriptions`,
+`messageRequestsMeshMailboxes`, `digitalLettersMeshMailboxes`) are filtered so
+each event only contains entries for its target environment.
 
-- creates client using the most minimal client details required and defaults.
+### Campaigns
 
-### Options
+| Campaign `status` | Events built |
+| ----------------- | ------------ |
+| `DRAFT` | None |
+| `INT` | One `campaign.published.int` event with INT-scoped config only |
+| `PROD` | One `campaign.published.int` event with INT-scoped config **and** one `campaign.published.prod` event with PROD-scoped config |
+| `DISABLED` | One `campaign.disabled` event |
 
-`--csv-file`: the path to the CSV file containing client details
+For `PROD`-status campaigns, `govukNotifyConfigurations` is filtered so each
+event only contains entries for its target environment.
 
-**Note:** All headers in the CSV file must be provided with values:
+## Library usage
 
-- `Client ID` - the ID of the client you want to create. This can be generated with an online UUID generator.
-- `Client Name` - the name of the client.
-- `APIM ID` - the APIM Application ID for the client.
+Import the builders from `src/event-builder`:
 
-Multiple rows can be added to process more than one client.
+```typescript
+import { buildCampaignEvent, buildClientEvent } from "./src/event-builder";
 
-### Usage
-
-From the root folder i.e `nhs-notify-client-config`, run:
-
-```bash
-npm run --workspace=@nhsdigital/nhs-notify-client-config-event-builder cli -- create-client \
-  --csv-file <path to file> \
-  --environment <<env>>
+const clientEvents = buildClientEvent(client);
+const campaignEvents = buildCampaignEvent(campaign);
 ```
 
-## Example
+Both helpers return arrays because a single domain object can build zero, one,
+or two events depending on its status.
 
-```bash
-npm run --workspace=@nhsdigital/nhs-notify-client-config-event-builder cli -- create-client \
-  --csv-file inputs/sample.csv \
-  --environment de2-aiyu1
+### Example input
+
+```json
+{
+  "id": "00f3b388-bbe9-41c9-9e76-052d37ee8988",
+  "name": "Test Client",
+  "slug": "test-client",
+  "status": "PROD",
+  "messageRequestsApimApplications": [
+    { "environment": "INT", "applicationId": "int-apim-app-id" },
+    { "environment": "PROD", "applicationId": "prod-apim-app-id" }
+  ]
+}
 ```

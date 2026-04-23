@@ -1,0 +1,80 @@
+{
+  "data": {
+    "clientSubscriptions": [
+      {
+        "callbackApiTokenParameterPath": "/nhs-notify/client-config/subscriptions/test/prod/callback-token",
+        "callbackUrl": "https://example.com/prod/callback",
+        "channelStatuses": [
+          "created",
+          "failed"
+        ],
+        "environment": "PROD",
+        "messageStatuses": [
+          "delivered"
+        ],
+        "supplierStatuses": [
+          "notification attempted",
+          "technical_failure"
+        ]
+      }
+    ],
+    "digitalLettersMeshMailboxes": [
+      {
+        "environment": "PROD",
+        "mailboxId": "PRODDL01"
+      }
+    ],
+    "featureFlags": [],
+    "globalQueues": [
+      {
+        "channel": "SMS",
+        "maxRequestsPerPeriod": 250000,
+        "maxRequestsPerSecond": 200,
+        "periodOffset": 0,
+        "periodSeconds": 86400,
+        "schedule": [
+          {
+            "daysOfWeek": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY",
+              "SUNDAY"
+            ],
+            "endTime": "23:59",
+            "startTime": "00:00"
+          }
+        ]
+      }
+    ],
+    "id": "00f3b388-bbe9-41c9-9e76-052d37ee8988",
+    "messageRequestsApimApplications": [
+      {
+        "applicationId": "prod-apim-app-id",
+        "environment": "PROD"
+      }
+    ],
+    "messageRequestsMeshMailboxes": [
+      {
+        "environment": "PROD",
+        "mailboxId": "PRODMSG01",
+        "workflowIdPrefix": "PROD-WORKFLOW"
+      }
+    ],
+    "name": "Test Client",
+    "slug": "test-client",
+    "status": "PROD"
+  },
+  "datacontenttype": "application/json",
+  "dataschema": "https://notify.nhs.uk/events/client-config/client-prod-1.0.0.json",
+  "dataschemaversion": "1.0.0",
+  "id": "23f1f09c-a555-4d9b-8405-0b33490bc921",
+  "plane": "control",
+  "source": "//notify.nhs.uk/app/nhs-notify-client-config-dev/main",
+  "specversion": "1.0",
+  "subject": "00f3b388-bbe9-41c9-9e76-052d37ee8988",
+  "time": "2025-08-28T08:46:00.000Z",
+  "type": "uk.nhs.notify.client-config.client.published.prod.v1"
+}

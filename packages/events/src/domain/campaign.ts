@@ -3,22 +3,25 @@ import { $Queue } from "./queue";
 import { idRef } from "../helpers/id-ref";
 import { $GovuknotifyAccount } from "./govuknotify-account";
 import { $Client } from "./client";
-import { $Environment, ConfigBase } from "./common";
+import {
+  $EnvironmentStatus,
+  $Slug,
+  ConfigBase,
+  validateUniqueEnvironments,
+  validateUniqueStringValues,
+} from "./common";
 
-export const $CampaignBase = ConfigBase("Campaign")
+export const $Campaign = ConfigBase("Campaign")
   .extend({
     name: z.string(),
-    environment: $Environment,
-    clientId: idRef($Client),
-  })
-  .meta({
-    title: "CampaignBase",
-    description: `Base schema for campaigns, defining identifying fields.
-    Each campaign is associated with a single client.`,
-  });
-
-export const $Campaign = $CampaignBase
-  .extend({
+    slug: $Slug.meta({
+      title: "Campaign Slug",
+      description:
+        "Client-unique human-readable identifier used to distinguish campaigns for the same client.",
+      examples: ["appointment-reminders"],
+    }),
+    status: $EnvironmentStatus,
+    clientId: idRef($Client, undefined, "Client"),
     default: z
       .boolean()
       .optional()
@@ -28,7 +31,10 @@ export const $Campaign = $CampaignBase
       Each client can have only one default campaign per environment.
       It will be used for any messages sent without a specific campaign, such as those using global routing configurations.`,
       }),
-    govuknotifyAccount: $GovuknotifyAccount.optional(),
+    govukNotifyConfigurations: z.array($GovuknotifyAccount).optional().meta({
+      description:
+        "Environment-scoped GOV.UK Notify account settings used by the campaign.",
+    }),
     queues: z
       .array($Queue)
       .nonempty()
@@ -37,12 +43,29 @@ export const $Campaign = $CampaignBase
     Each queue may also have associated throttling limits to control the rate of message dispatch.`,
       }),
   })
+  .superRefine((campaign, ctx) => {
+    validateUniqueStringValues(
+      campaign.queues,
+      ctx,
+      "queues",
+      ({ channel }) => channel,
+      "channel",
+    );
+
+    if (campaign.govukNotifyConfigurations) {
+      validateUniqueEnvironments(
+        campaign.govukNotifyConfigurations,
+        ctx,
+        "govukNotifyConfigurations",
+      );
+    }
+  })
   .meta({
     title: "Campaign",
     description: `A campaign represents a discrete set of communications for a client.
     Messages sent as part of a campaign can be tracked and reported on together, and are isolated from each other for dispatch throttling purposes.
     For example, a client might have separate campaigns for appointment reminders, health check invitations, and test results.
-    Each campaign is optionally associated with a single GOV.UK Notify account.`,
+    Queue configuration is aggregated per channel, and GOV.UK Notify integration settings are embedded per environment.`,
   });
 
 export type Campaign = z.infer<typeof $Campaign>;

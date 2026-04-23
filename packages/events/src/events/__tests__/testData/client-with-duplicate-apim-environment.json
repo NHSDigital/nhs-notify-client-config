@@ -1,0 +1,16 @@
+{
+  "id": "00f3b388-bbe9-41c9-9e76-052d37ee8988",
+  "messageRequestsApimApplications": [
+    {
+      "applicationId": "first-int-apim-app-id",
+      "environment": "INT"
+    },
+    {
+      "applicationId": "second-int-apim-app-id",
+      "environment": "INT"
+    }
+  ],
+  "name": "Test Client",
+  "slug": "test-client",
+  "status": "PROD"
+}
