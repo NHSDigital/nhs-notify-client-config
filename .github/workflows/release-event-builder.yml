@@ -1,0 +1,46 @@
+name: Release event-builder bundle
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  bundle-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      - name: Read Node version
+        id: versions
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "node=$(grep '^nodejs\s' .tool-versions | awk '{print $2}')" >> "$GITHUB_OUTPUT"
+
+      - name: Bundle event-builder
+        id: bundle
+        uses: ./.github/actions/bundle-event-builder
+        with:
+          node-version: "${{ steps.versions.outputs.node }}"
+          run-typecheck: "true"
+
+      - name: Upload release asset
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release upload "${{ github.event.release.tag_name }}" "${{ steps.bundle.outputs.tarball-path }}" --clobber
+
+      - name: Upload bundle as workflow artifact
+        if: github.event_name != 'release'
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: event-builder-bundle
+          path: "${{ steps.bundle.outputs.tarball-path }}"

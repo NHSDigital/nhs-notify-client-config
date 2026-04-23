@@ -44,6 +44,28 @@ jobs:
         uses: ./.github/actions/build-docs
         with:
           version: "${{ inputs.version }}"
+
+  event-builder-bundle:
+    name: "Bundle event-builder CLI"
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      - name: "Bundle event-builder"
+        id: bundle
+        uses: ./.github/actions/bundle-event-builder
+        with:
+          node-version: "${{ inputs.nodejs_version }}"
+          run-typecheck: "false"
+
+      - name: "Upload bundle as workflow artifact"
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v5
+        with:
+          name: event-builder-bundle
+          path: "${{ steps.bundle.outputs.tarball-path }}"
+
   artefact-1:
     name: "Artefact 1"
     runs-on: ubuntu-latest
